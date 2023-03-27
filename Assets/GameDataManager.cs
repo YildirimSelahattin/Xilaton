@@ -9,7 +9,7 @@ public class GameDataManager : MonoBehaviour
     public TextAsset JSONText;
     public static GameDataManager Instance;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (Instance == null)
         {

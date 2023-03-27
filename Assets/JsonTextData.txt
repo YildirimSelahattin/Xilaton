@@ -8,8 +8,9 @@
     "r","s","i","g","w","e",
     "d","e","n","u","e","a",
     "r","a","e","n","n","r",
-    "g","z","w","o","u","t"
-    ]}
+    "g","z","w","o","u","t"],
+    "starSpotIndexes":[1,2,3],
+    "wordsCanBeFoundArray":["water","rain","new","rate","enemy","yard","draw"]}
     ]
 }
 

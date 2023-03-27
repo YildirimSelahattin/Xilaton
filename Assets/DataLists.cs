@@ -10,6 +10,7 @@ public class DataLists
     {
         public string[] gridValueIndexes;
         public int[] starSpotIndexes;
+        public string[] wordsCanBeFoundArray;
     }
 
     public GeneralDataStructure[] deckArray;

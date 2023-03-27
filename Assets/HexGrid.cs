@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using System.IO;
+using System.Linq;
 
 public class HexGrid : MonoBehaviour
 {
@@ -44,12 +45,18 @@ public class HexGrid : MonoBehaviour
 
     private void LoadEnglishWords()
     {
-        string path = Path.Combine(Application.dataPath, "words.txt");
-        string[] words = File.ReadAllLines(path);
+        /*
+         *  string path = Path.Combine(Application.dataPath, "words.txt");
+         string[] words = File.ReadAllLines(path);
 
-        foreach (string word in words)
+         foreach (string word in words)
+         {
+             englishWords.Add(word.ToUpper()); // Harfler büyük olduğu için kelimeleri büyük harfe çeviriyoruz
+         }
+         * */
+        foreach ( string word in GameDataManager.Instance.data.deckArray[0].wordsCanBeFoundArray)
         {
-            englishWords.Add(word.ToUpper()); // Harfler büyük olduğu için kelimeleri büyük harfe çeviriyoruz
+            englishWords.Add(word); 
         }
     }
 
@@ -76,6 +83,7 @@ public class HexGrid : MonoBehaviour
         {
             for (int y = 0; y < gridHeight; y++)
             {
+                int index = (x * gridHeight) + y;
                 float xPos = x * hexWidth * 0.75f;
                 float yPos = y * hexHeight;
 
@@ -91,8 +99,12 @@ public class HexGrid : MonoBehaviour
                 //int letterIndex = Random.Range(0, letters.Length);
                 TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
                 //textMeshPro.text = letters[letterIndex];
-                Debug.Log((x * gridWidth) + y);
-                textMeshPro.text = GameDataManager.Instance.data.deckArray[0].gridValueIndexes[(x * gridHeight) + y];
+                Debug.Log(GameDataManager.Instance.data.deckArray[0].gridValueIndexes[index]);
+                textMeshPro.text = GameDataManager.Instance.data.deckArray[0].gridValueIndexes[index];
+                if (GameDataManager.Instance.data.deckArray[0].starSpotIndexes.Contains(index))
+                {
+                    textMeshPro.color = Color.blue;
+                }
             }
         }
     }
@@ -151,7 +163,6 @@ public class HexGrid : MonoBehaviour
             touchedHexes.Add(touchedHex);
             originalColors.Add(touchedSpriteRenderer.color);
             touchedSpriteRenderer.color = touchColor;
-
             prevTouchedHex = touchedHex;
         }
     }
