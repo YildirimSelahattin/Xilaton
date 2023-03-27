@@ -10,7 +10,9 @@
     "r","a","e","n","n","r",
     "g","z","w","o","u","t"],
     "starSpotIndexes":[1,2,3],
-    "wordsCanBeFoundArray":["water","rain","new","rate","enemy","yard","draw"]}
+    "wordsCanBeFoundArray":["water","rain","new","rate","enemy","yard","draw"],
+    "gridHeight":6,
+    "gridWidth":9}
     ]
 }
 

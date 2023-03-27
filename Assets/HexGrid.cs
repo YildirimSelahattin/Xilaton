@@ -35,6 +35,8 @@ public class HexGrid : MonoBehaviour
         hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
         CreateGrid();
         transform.position = new Vector3(-1.9f, -3, 0);
+        gridHeight = GameDataManager.Instance.data.deckArray[0].gridHeight;
+        gridWidth = GameDataManager.Instance.data.deckArray[0].gridWidth;
         LoadEnglishWords();
     }
 
