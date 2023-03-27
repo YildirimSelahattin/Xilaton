@@ -88,9 +88,11 @@ public class HexGrid : MonoBehaviour
                 hex.transform.parent = this.transform;
                 hex.name = "Hex_" + x + "_" + y;
                 // CreateGrid() fonksiyonundaki altıgen yaratma döngüsü içinde şunları ekleyin:
-                int letterIndex = Random.Range(0, letters.Length);
+                //int letterIndex = Random.Range(0, letters.Length);
                 TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
-                textMeshPro.text = letters[letterIndex];
+                //textMeshPro.text = letters[letterIndex];
+                Debug.Log((x * gridWidth) + y);
+                textMeshPro.text = GameDataManager.Instance.data.deckArray[0].gridValueIndexes[(x * gridHeight) + y];
             }
         }
     }
