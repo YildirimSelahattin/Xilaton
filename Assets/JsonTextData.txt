@@ -13,8 +13,8 @@
     "g","z","w","o","u","t"],
     "starSpotIndexes":[1,2,3],
     "wordsCanBeFoundArray":["water","rain","new","rate","enemy","yard","draw"],
-    "startPoint":0,
-    "stopPoint":0,
+    "startPoint":5,
+    "stopPoint":50,
     "gridHeight":6,
     "gridWidth":9
     },
