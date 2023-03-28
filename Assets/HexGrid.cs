@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro; 
 using UnityEngine.EventSystems;
 using System.IO;
+using System.Linq;
 
 public class HexGrid : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class HexGrid : MonoBehaviour
         LoadEnglishWords();
         hexWidth = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
         hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+        gridWidth = GameDataManager.Instance.data.deckArray[0].gridWidth;
+        gridHeight = GameDataManager.Instance.data.deckArray[0].gridHeight;
         CreateGrid();
         transform.position = new Vector3(-1.9f, -3, 0);
     }
@@ -124,6 +127,7 @@ public class HexGrid : MonoBehaviour
         {
             for (int y = 0; y < gridHeight; y++)
             {
+                int index = (x * gridHeight) + y;
                 float xPos = x * hexWidth * 0.75f;
                 float yPos = y * hexHeight;
                 
@@ -136,21 +140,21 @@ public class HexGrid : MonoBehaviour
                 GameObject hex = Instantiate(hexPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
                 hex.transform.parent = this.transform;
                 hex.name = "Hex_" + x + "_" + y;
-                int letterIndex = Random.Range(0, letters.Length);
                 TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
-                textMeshPro.text = letters[letterIndex];
+                textMeshPro.text = GameDataManager.Instance.data.deckArray[0].gridValueIndexes[index];
+                if (GameDataManager.Instance.data.deckArray[0].starSpotIndexes.Contains(index))
+                {
+                    textMeshPro.color = Color.blue;
+                }
             }
         }
     }
     
     private void LoadEnglishWords()
     {
-        string path = Path.Combine(Application.dataPath, "words.txt");
-        string[] words = File.ReadAllLines(path);
-
-        foreach (string word in words)
+        foreach (string word in GameDataManager.Instance.data.deckArray[0].wordsCanBeFoundArray)
         {
-            englishWords.Add(word.ToUpper()); // Harfler büyük olduğu için kelimeleri büyük harfe çeviriyoruz
+            englishWords.Add(word); // Harfler büyük olduğu için kelimeleri büyük harfe çeviriyoruz
         }
     }
     
