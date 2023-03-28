@@ -13,6 +13,8 @@
     "g","z","w","o","u","t"],
     "starSpotIndexes":[1,2,3],
     "wordsCanBeFoundArray":["water","rain","new","rate","enemy","yard","draw"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":6,
     "gridWidth":9
     },
@@ -21,37 +23,45 @@
     "gridValueIndexes":["","m","o","","","m"],
     "starSpotIndexes":[1,2,5],
     "wordsCanBeFoundArray":["mom"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":2,
     "gridWidth":3
     },
 
     {
-    "gridValueIndexes":["r","a",""
+    "gridValueIndexes":["r","a","",
     "","d","",
     "r","a",""],
     "starSpotIndexes":[1,4,5],
     "wordsCanBeFoundArray":["radar"],
     "gridHeight":3,
+    "startPoint":0,
+    "stopPoint":0,
     "gridWidth":3
     },
 
 
     {
-    "gridValueIndexes":["","c","c"
+    "gridValueIndexes":["","c","c",
     "e","a","a",
     "","r","r"],
     "starSpotIndexes":[3,4,5],
     "wordsCanBeFoundArray":["car","racer"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":3,
     "gridWidth":3
     },
 
     {
-    "gridValueIndexes":["","s","k","i"
-    "t","i","s","r"
+    "gridValueIndexes":["","s","k","i",
+    "t","i","s","r",
     "","r","h","t"],
     "starSpotIndexes":[3,4,6],
     "wordsCanBeFoundArray":["skirt","tshirt"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":4,
     "gridWidth":3
     },
@@ -62,9 +72,11 @@
     "a","o","x",
     "l","f","i",
     "l","l","n",
-    "","o","g",],
+    "","o","g"],
     "starSpotIndexes":[6,9,12],
     "wordsCanBeFoundArray":["boxing","golf","football"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":3,
     "gridWidth":6
     },
@@ -78,13 +90,15 @@
     "g","ý","e",
     "e","v","u"],
     "starSpotIndexes":[6,9,12],
-    "wordsCanBeFoundArray":["orange","mango","olýve"],
+    "wordsCanBeFoundArray":["orange","mango","olive"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":3,
     "gridWidth":7
     },
 
      {
-    "gridValueIndexes":["l","l","p","z"
+    "gridValueIndexes":["l","l","p","z",
     "b","o","u","i",
     "s","t","g","i",
     "w","e","a","r",
@@ -94,12 +108,14 @@
     "f","t","l","e"],
     "starSpotIndexes":[20],
     "wordsCanBeFoundArray":["pig","gull","giraffe","rabbit","lobster","turtle"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":4,
     "gridWidth":8
     },
 
     {
-    "gridValueIndexes":["g","r","e","s"
+   "gridValueIndexes":["g","r","e","s",
     "l","h","e","w",
     "a","n","t","d",
     "d","e","e","s",
@@ -109,6 +125,8 @@
     "v","t","a","i"],
     "starSpotIndexes":[4],
     "wordsCanBeFoundArray":["sweden","netherlands","somalia","namibia"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":4,
     "gridWidth":8
     },
@@ -124,11 +142,11 @@
     "c","h","a","s","a"],
     "starSpotIndexes":[4],
     "wordsCanBeFoundArray":["sweden","netherlands","somalia","namibia"],
+    "startPoint":0,
+    "stopPoint":0,
     "gridHeight":4,
     "gridWidth":8
     }
-
-
 
     ]
 }

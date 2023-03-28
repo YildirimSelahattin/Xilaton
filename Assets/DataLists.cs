@@ -11,6 +11,8 @@ public class DataLists
         public string[] gridValueIndexes;
         public int[] starSpotIndexes;
         public string[] wordsCanBeFoundArray;
+        public int startPoint;
+        public int stopPoint;
         public int gridHeight;
         public int gridWidth;
 
