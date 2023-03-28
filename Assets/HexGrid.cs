@@ -24,7 +24,7 @@ public class HexGrid : MonoBehaviour
     private string touchedLetters = ""; // Touched letters string
     
     private HashSet<string> englishWords = new HashSet<string>(); // Kelimeleri saklamak için
-
+    public List<GameObject> gridList;
     void Start()
     {
         LoadEnglishWords();
@@ -148,12 +148,17 @@ public class HexGrid : MonoBehaviour
                 hex.name = "Hex_" + x + "_" + y;
                 TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
                 textMeshPro.text = GameDataManager.Instance.data.deckArray[0].gridValueIndexes[index];
+                hex.GetComponent<HexCell>().SetIndex(0);
+                gridList.Add(hex);
                 if (GameDataManager.Instance.data.deckArray[0].starSpotIndexes.Contains(index))
                 {
                     textMeshPro.color = Color.blue;
                 }
             }
         }
+
+        gridList[GameDataManager.Instance.data.deckArray[0].startPoint].GetComponent<HexCell>().SetIndex(2);//value of start point is 2 
+        gridList[GameDataManager.Instance.data.deckArray[0].stopPoint].GetComponent<HexCell>().SetIndex(3);//value of end point is 3;
     }
     
     private void LoadEnglishWords()
