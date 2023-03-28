@@ -5,9 +5,12 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class HexGrid : MonoBehaviour
 {
+    public GameObject winPanel;
+
     public GameObject hexPrefab;
     public int gridWidth = 10;
     public int gridHeight = 10;
@@ -21,7 +24,7 @@ public class HexGrid : MonoBehaviour
     private List<GameObject> touchedHexes = new List<GameObject>(); // Touched hexagons list
 
     private GameObject prevTouchedHex; // Onceki dokunulan altigeni saklamak icin
-    private string touchedLetters = ""; // Touched letters string
+    private string touchedLetters = "asdasd"; // Touched letters string
     
     private HashSet<string> englishWords = new HashSet<string>(); // Kelimeleri saklamak için
     public List<GameObject> gridList;
@@ -48,30 +51,38 @@ public class HexGrid : MonoBehaviour
                 worldTouchPosition.z = 0;
 
                 GameObject touchedHex = GetHexAtPosition(worldTouchPosition);
-
-                if (touchedHex != null)
+                
+                if (touchedHex != null )
                 {
+                    int cellIndex = touchedHex.GetComponent<HexCell>().GetIndex();
                     if (touch.phase == TouchPhase.Began)
                     {
                         touchedLetters = ""; // Clear the string when the touch begins
-                    }
-
-                    if (touchedHex != prevTouchedHex)
-                    {
-                        TextMeshPro touchedTextMeshPro = touchedHex.GetComponentInChildren<TextMeshPro>();
-
-                        if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Began)
+                        if (cellIndex == 2)
                         {
-                            touchedLetters += touchedTextMeshPro.text; // Add the letter to the string
-                            Debug.Log("Current string: " + touchedLetters);
+                            touchedLetters += touchedHex.GetComponentInChildren<TextMeshPro>().text; // Clear the string when the touch begins
                         }
-
-                        SpriteRenderer touchedSpriteRenderer = touchedHex.GetComponent<SpriteRenderer>();
-                        touchedHexes.Add(touchedHex);
-                        touchedSpriteRenderer.color = touchColor;
-
-                        prevTouchedHex = touchedHex;
                     }
+                    else
+                    {
+                        if (touchedHex != prevTouchedHex)
+                        {
+                            TextMeshPro touchedTextMeshPro = touchedHex.GetComponentInChildren<TextMeshPro>();
+
+                            if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Began)
+                            {
+                                touchedLetters += touchedTextMeshPro.text; // Add the letter to the string
+                                Debug.Log("Current string: " + touchedLetters);
+                            }
+
+                            SpriteRenderer touchedSpriteRenderer = touchedHex.GetComponent<SpriteRenderer>();
+                            touchedHexes.Add(touchedHex);
+                            touchedSpriteRenderer.color = touchColor;
+
+                            prevTouchedHex = touchedHex;
+                        }
+                    }
+                    
                 }
             }
 
@@ -83,7 +94,16 @@ public class HexGrid : MonoBehaviour
 
                     // Set the index of the last touched hexagon to 2
                     HexCell lastHexCell = prevTouchedHex.GetComponent<HexCell>();
-                    lastHexCell.SetIndex(2);
+                    int lastIndex = lastHexCell.GetIndex();
+                    
+                    if (lastIndex == 3)
+                    {
+                        winPanel.SetActive(true);
+                    }
+                    else
+                    {
+                        lastHexCell.SetIndex(2);
+                    }
 
                     // Set the index of all other touched hexagons to 1
                     foreach (GameObject touchedHex in touchedHexes)
@@ -156,7 +176,6 @@ public class HexGrid : MonoBehaviour
                 }
             }
         }
-
         gridList[GameDataManager.Instance.data.deckArray[0].startPoint].GetComponent<HexCell>().SetIndex(2);//value of start point is 2 
         gridList[GameDataManager.Instance.data.deckArray[0].stopPoint].GetComponent<HexCell>().SetIndex(3);//value of end point is 3;
     }
