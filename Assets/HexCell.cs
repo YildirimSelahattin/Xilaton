@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HexCell : MonoBehaviour
@@ -12,5 +13,19 @@ public class HexCell : MonoBehaviour
     public int GetIndex()
     {
         return index;
+    }
+
+    private void Update()
+    {
+        if (index == 1)
+        {
+            Destroy(gameObject);
+        }
+
+        if (index == 2)
+        {
+            SpriteRenderer gridCellSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            gridCellSpriteRenderer.color = Color.yellow;
+        }
     }
 }

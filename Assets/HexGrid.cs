@@ -15,16 +15,15 @@ public class HexGrid : MonoBehaviour
     private float hexWidth;
     private float hexHeight;
     
-    public string[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}; // Harfleri tanımlayın.
+    public string[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     
-    public Color touchColor = Color.red; // Dokunulan altıgenin rengini belirleyin.
+    public Color touchColor = Color.red; // Dokunulan altıgenin rengi.
     private List<GameObject> touchedHexes = new List<GameObject>(); // Touched hexagons list
-    private List<Color> originalColors = new List<Color>(); // Original colors list
-    
-    private GameObject prevTouchedHex; // Önceki dokunulan altıgeni saklamak için.
+
+    private GameObject prevTouchedHex; // Onceki dokunulan altigeni saklamak icin
     private string touchedLetters = ""; // Touched letters string
     
-    private HashSet<string> englishWords = new HashSet<string>(); // İngilizce kelimeleri saklamak için
+    private HashSet<string> englishWords = new HashSet<string>(); // Kelimeleri saklamak için
 
     void Start()
     {
@@ -69,7 +68,6 @@ public class HexGrid : MonoBehaviour
 
                         SpriteRenderer touchedSpriteRenderer = touchedHex.GetComponent<SpriteRenderer>();
                         touchedHexes.Add(touchedHex);
-                        originalColors.Add(touchedSpriteRenderer.color);
                         touchedSpriteRenderer.color = touchColor;
 
                         prevTouchedHex = touchedHex;
@@ -83,11 +81,18 @@ public class HexGrid : MonoBehaviour
                 {
                     Debug.Log("It's a valid English word: " + touchedLetters);
 
-                    // Set the index of all touched hexagons to 1
+                    // Set the index of the last touched hexagon to 2
+                    HexCell lastHexCell = prevTouchedHex.GetComponent<HexCell>();
+                    lastHexCell.SetIndex(2);
+
+                    // Set the index of all other touched hexagons to 1
                     foreach (GameObject touchedHex in touchedHexes)
                     {
-                        HexCell hexCell = touchedHex.GetComponent<HexCell>();
-                        hexCell.SetIndex(1);
+                        if (touchedHex != prevTouchedHex)
+                        {
+                            HexCell hexCell = touchedHex.GetComponent<HexCell>();
+                            hexCell.SetIndex(1);
+                        }
                     }
                 }
                 else
@@ -97,19 +102,16 @@ public class HexGrid : MonoBehaviour
                     for (int i = 0; i < touchedHexes.Count; i++)
                     {
                         SpriteRenderer touchedSpriteRenderer = touchedHexes[i].GetComponent<SpriteRenderer>();
-                        touchedSpriteRenderer.color = originalColors[i];
+                        touchedSpriteRenderer.color = Color.white;
                     }
                 }
-
+        
                 // Clear the lists for the next touch event
                 touchedHexes.Clear();
-                originalColors.Clear();
             }
         }
     }
-
-
-
+    
     GameObject GetHexAtPosition(Vector3 position)
     {
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero);
