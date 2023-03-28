@@ -82,6 +82,13 @@ public class HexGrid : MonoBehaviour
                 if (englishWords.Contains(touchedLetters))
                 {
                     Debug.Log("It's a valid English word: " + touchedLetters);
+
+                    // Set the index of all touched hexagons to 1
+                    foreach (GameObject touchedHex in touchedHexes)
+                    {
+                        HexCell hexCell = touchedHex.GetComponent<HexCell>();
+                        hexCell.SetIndex(1);
+                    }
                 }
                 else
                 {
@@ -98,7 +105,6 @@ public class HexGrid : MonoBehaviour
                 touchedHexes.Clear();
                 originalColors.Clear();
             }
-
         }
     }
 
@@ -117,7 +123,6 @@ public class HexGrid : MonoBehaviour
                 return touchedObject;
             }
         }
-
         return null;
     }
 
@@ -130,7 +135,6 @@ public class HexGrid : MonoBehaviour
                 int index = (x * gridHeight) + y;
                 float xPos = x * hexWidth * 0.75f;
                 float yPos = y * hexHeight;
-                
 
                 if (x % 2 == 1)
                 {
@@ -157,5 +161,4 @@ public class HexGrid : MonoBehaviour
             englishWords.Add(word); // Harfler büyük olduğu için kelimeleri büyük harfe çeviriyoruz
         }
     }
-    
 }

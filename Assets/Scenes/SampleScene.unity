@@ -305,15 +305,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hexPrefab: {fileID: 3120872014597406882, guid: 74d90e2e67e7a0a46a0098c6459c4e9e, type: 3}
-  gridWidth: 9
-  gridHeight: 6
+  gridWidth: 10
+  gridHeight: 10
   letters:
-  - B
-  - E
-  - D
   - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+  - H
+  - I
+  - J
   touchColor: {r: 0, g: 0.69076276, b: 1, a: 1}
-  lastLetterColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!4 &1161414292
 Transform:
   m_ObjectHideFlags: 0
