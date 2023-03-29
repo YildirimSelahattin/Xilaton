@@ -23,5 +23,7 @@ public class LevelButtonManager : MonoBehaviour
     {
         HexGrid.Instance.CreateLevelByIndex(levelIndex);
         UIManager.Instance.levelSelectionPanel.SetActive(false);
+        UIManager.Instance.inGameScreen.SetActive(true);
+
     }
 }

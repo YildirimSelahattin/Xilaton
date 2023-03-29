@@ -647,7 +647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &655909953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -900,6 +900,8 @@ MonoBehaviour:
   levelSelectionPanel: {fileID: 1539621983}
   startScreen: {fileID: 411166686}
   winPanel: {fileID: 475736333}
+  inGameScreen: {fileID: 655909952}
+  levelText: {fileID: 1549127749}
   levelIndex: 1
 --- !u!4 &1466895317
 Transform:
@@ -1183,7 +1185,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4703600232106452669, guid: 6548303a25a21554ab3fcac2855bce49, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4703600232323061146, guid: 6548303a25a21554ab3fcac2855bce49, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
