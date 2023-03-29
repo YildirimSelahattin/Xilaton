@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,11 +9,16 @@ public class UIManager : MonoBehaviour
     public GameObject levelSelectionPanel;
     public GameObject startScreen;
     public static UIManager Instance;
+    public static bool goStartPage = true;
     void Start()
     {
         if(Instance == null)
         {
             Instance = this;
+        }
+        if(goStartPage == true)
+        {
+            startScreen.SetActive(true);
         }
     }
 
@@ -31,5 +37,13 @@ public class UIManager : MonoBehaviour
     {
         HexGrid.Instance.CreateLevelByIndex(GameDataManager.Instance.levelToLoad);
         startScreen.SetActive(false);
+    }
+
+    public void OnNextLevelButtonClicked()
+    {
+        GameDataManager.Instance.levelToLoad++;
+        HexGrid.loadDeckDirectly = true;
+        UIManager.goStartPage = false;
+        SceneManager.LoadScene(0);
     }
 }

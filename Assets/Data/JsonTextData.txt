@@ -11,7 +11,7 @@
     "A","I","M","Y","A","R","D","R","K"
     ],
     "starSpotIndexes":[1,2,3],
-    "wordsCanBeFoundArray":["WATER","RAIN","NEW","RATE","ENEMY","YARD","DRAW"],
+    "wordsCanBeFoundArray":["WATER","RAIN","NEW","RATE","ENEMY","YARD","DRAW","NERD"],
     "startPoint":0,
     "stopPoint":35,
     "gridHeight":6,
@@ -79,15 +79,15 @@
     },
 
     {
-    "gridValueIndexes":["M","A","N","D","R","A","N","E",
+    "gridValueIndexes":["M","A","N","R","A","N","E",
     "B","A","G","O","L","G","V",
-    "","C","","D","","L",""],
+    "","C","","D","","I",""],
     "starSpotIndexes":[6,9,12],
     "wordsCanBeFoundArray":["ORANGE","MANGO","OLIVE"],
     "startPoint":0,
     "stopPoint":6,
     "gridHeight":3,
-    "gridWidth":8
+    "gridWidth":7
     },
 
      {
@@ -116,21 +116,9 @@
     "stopPoint":14,
     "gridHeight":5,
     "gridWidth":8
-    },
+    }
 
-    {
-   "gridValueIndexes":["E","D","E","F","M","I","B","G",
-    "S","W","N","A","B","I","A","M",
-    "M","A","A","E","O","M","A","I",
-    "E","B","I","D","R","S","D","L",
-    "E","W","T","H","E","L","A","N"],
-    "starSpotIndexes":[32],
-    "wordsCanBeFoundArray":["SWEDEN","NETHERLANDS","SOMALIA","NAMIBIA"],
-    "startPoint":8,
-    "stopPoint":14,
-    "gridHeight":5,
-    "gridWidth":8
-    },
+ 
     
 
     ]

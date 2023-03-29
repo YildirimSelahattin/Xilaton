@@ -35,7 +35,7 @@ public class HexGrid : MonoBehaviour
     
     public static HexGrid Instance;
     Camera cam;
-    
+    public static bool loadDeckDirectly;
     void Start()
     {
         if (Instance == null)
@@ -43,6 +43,12 @@ public class HexGrid : MonoBehaviour
             Instance = this;
         }
         cam = Camera.main;
+        if(loadDeckDirectly == true)
+        {
+            CreateLevelByIndex(GameDataManager.Instance.levelToLoad);
+            isGettingTouch = true;
+            loadDeckDirectly = false;
+        }
     }
 
     void Update()
@@ -142,7 +148,7 @@ public class HexGrid : MonoBehaviour
     {
         //jsonda leveller 0 dan baslıyor
         levelNumber--;
-        LoadEnglishWords();
+        LoadEnglishWords(levelNumber);
         hexWidth = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
         hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
         gridWidth = GameDataManager.Instance.data.deckArray[levelNumber].gridWidth;
@@ -214,9 +220,9 @@ public class HexGrid : MonoBehaviour
         gridList[GameDataManager.Instance.data.deckArray[levelNumber].stopPoint].GetComponent<HexCell>().SetIndex(3);//value of end point is 3;
     }
 
-    private void LoadEnglishWords()
+    private void LoadEnglishWords(int levelNumber)
     {
-        foreach (string word in GameDataManager.Instance.data.deckArray[0].wordsCanBeFoundArray)
+        foreach (string word in GameDataManager.Instance.data.deckArray[levelNumber].wordsCanBeFoundArray)
         {
             englishWords.Add(word); // Harfler büyük olduğu için kelimeleri büyük harfe çeviriyoruz
         }
