@@ -42,7 +42,6 @@ public class UIManager : MonoBehaviour
     {
         levelSelectionPanel.SetActive(true);
         startScreen.SetActive(false);
-        inGameScreen.SetActive(true);
     }
 
     public void OnStartButtonClicked()
