@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public int levelIndex = 1;
     public static bool goStartPage = true;
     public TextMeshProUGUI comboText;
+    public TextMeshProUGUI themeText;
     
     void Start()
     {
@@ -33,6 +34,7 @@ public class UIManager : MonoBehaviour
             inGameScreen.SetActive(true);
         }
         levelText.text ="LEVEL " +  GameDataManager.Instance.levelToLoad.ToString();
+        themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
     }
     
     public void OnLevelsButtonClicked()
@@ -45,6 +47,7 @@ public class UIManager : MonoBehaviour
     public void OnStartButtonClicked()
     {
         HexGrid.Instance.CreateLevelByIndex(GameDataManager.Instance.levelToLoad);
+        
         startScreen.SetActive(false);
         inGameScreen.SetActive(true);
     }

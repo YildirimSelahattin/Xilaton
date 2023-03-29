@@ -182,13 +182,14 @@ public class HexGrid : MonoBehaviour
 
     public IEnumerator CorrectFeel()
     {
-        cam.backgroundColor = Color.green;
-        yield return new WaitForSeconds(0.3f);
+        cam.backgroundColor = new Color(153, 255, 110);
+        yield return new WaitForSeconds(0.2f);
         cam.backgroundColor = new Color(233, 233, 233);
     }
 
     public void CreateLevelByIndex(int levelNumber)
     {
+        
         //jsonda leveller 0 dan baslıyor
         levelNumber--;
         LoadEnglishWords(levelNumber);
@@ -199,6 +200,7 @@ public class HexGrid : MonoBehaviour
         isGettingTouch = true;//start getting player touch
         CreateGrid(levelNumber);
         //transform.position = new Vector3(-1.9f, -3, 0);
+       
         
     }
     GameObject GetHexAtPosition(Vector3 position)

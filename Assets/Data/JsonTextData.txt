@@ -1,132 +1,136 @@
 {
-"deckArray":[
-
-    {
-    "gridValueIndexes":[
-    "W","A","T","I","F","E", "A","R","T",
-    "Y","M","O","E","R","W","E","N","U",
-    "A","K","T","A","A","G","U","N","O",
-    "T","E","N","S","A","I","N","E","W",
-    "M","S","E","A","U","S","E","A","Z",
-    "A","I","M","Y","A","R","D","R","K"
-    ],
-    "starSpotIndexes":[1,2,3],
-    "wordsCanBeFoundArray":["WATER","RAIN","NEW","RATE","ENEMY","YARD","DRAW","NERD"],
-    "startPoint":0,
-    "stopPoint":35,
-    "gridHeight":6,
-    "gridWidth":9
-    },
-
-    {
-    "gridValueIndexes":["M","O","M"],
-    "starSpotIndexes":[1],
-    "wordsCanBeFoundArray":["MOM"],
-    "startPoint":0,
-    "stopPoint":2,
-    "gridHeight":1,
-    "gridWidth":3
-    },
-
-    {
-    "gridValueIndexes":
-    ["A","D","A",
-    "R","","R"],
-    "starSpotIndexes":[1],
-    "wordsCanBeFoundArray":["RADAR"],
-    "startPoint":3,
-    "stopPoint":5,
-    "gridHeight":2,
-    "gridWidth":3
-    },
-
-
-    {
-    "gridValueIndexes":
-    ["C","A","R",
-    "C","A","R",
-    "","E",""],
-    "starSpotIndexes":[1],
-    "wordsCanBeFoundArray":["CAR","RACER"],
-    "startPoint":0,
-    "stopPoint":5,
-    "gridHeight":3,
-    "gridWidth":3
-    },
-
-    {
-    "gridValueIndexes":
-    ["I","R","T",
-    "K","S","H",
-    "S","I","R",
-    "","T",""],
-    "starSpotIndexes":[3],
-    "wordsCanBeFoundArray":["SKIRT","TSHIRT"],
-    "startPoint":6,
-    "stopPoint":10,
-    "gridHeight":4,
-    "gridWidth":3
-    },
-
-    {
-    "gridValueIndexes":
-    ["B","O","X","I","N",
-    "O","F","L","O","G",
-    "O","B","A","L","L",
-    "","T","","D",""],
-    "starSpotIndexes":[6,9,12],
-    "wordsCanBeFoundArray":["BOXING","GOLF","FOOTBALL"],
-    "startPoint":0,
-    "stopPoint":14,
-    "gridHeight":4,
-    "gridWidth":5
-    },
-
-    {
-    "gridValueIndexes":
-    ["M","A","N","R","A","N","E",
-    "B","A","G","O","L","G","V",
-    "","C","","D","","I",""],
-    "starSpotIndexes":[6,9,12],
-    "wordsCanBeFoundArray":["ORANGE","MANGO","OLIVE"],
-    "startPoint":0,
-    "stopPoint":6,
-    "gridHeight":3,
-    "gridWidth":7
-    },
-
-     {
-    "gridValueIndexes":
-    ["P","I","G","I","R","A","F","A","Y",
-    "O","U","L","A","F","E","L","E","O",
-    "B","L","R","D","B","T","R","A","X",
-    "S","T","E","A","B","I","T","U","Q"],
-    "starSpotIndexes":[25],
-    "wordsCanBeFoundArray":["PIG","GULL","GIRAFFE","RABBIT","LOBSTER","TURTLE"],
-    "startPoint":0,
-    "stopPoint":14,
-    "gridHeight":4,
-    "gridWidth":9
-    },
-
-    {
-   "gridValueIndexes":
-   ["E","D","E","F","M","I","B","G","A",
-    "S","W","N","A","B","I","A","M","S",
-    "M","A","A","E","O","M","A","I","X",
-    "E","B","I","D","R","S","D","L","T",
-    "E","W","T","H","E","L","A","N","U"],
-    "starSpotIndexes":[32],
-    "wordsCanBeFoundArray":["SWEDEN","NETHERLANDS","SOMALIA","NAMIBIA"],
-    "startPoint":9,
-    "stopPoint":15,
-    "gridHeight":5,
-    "gridWidth":9
-    }
-
- 
+"deckArray":
+    [
+        {
+        "themeName":"",
+        "gridValueIndexes":["M","O","M"],
+        "starSpotIndexes":[1],
+        "wordsCanBeFoundArray":["MOM"],
+        "startPoint":0,
+        "stopPoint":2,
+        "gridHeight":1,
+        "gridWidth":3
+        },
     
-
+        {
+        "themeName":"",
+        "gridValueIndexes":
+        ["A","D","A",
+        "R","","R"],
+        "starSpotIndexes":[1],
+        "wordsCanBeFoundArray":["RADAR"],
+        "startPoint":3,
+        "stopPoint":5,
+        "gridHeight":2,
+        "gridWidth":3
+        },
+    
+        {
+        "themeName":"F1",
+        "gridValueIndexes":
+        ["C","A","R",
+        "C","A","R",
+        "","E",""],
+        "starSpotIndexes":[1],
+        "wordsCanBeFoundArray":["CAR","RACER"],
+        "startPoint":0,
+        "stopPoint":5,
+        "gridHeight":3,
+        "gridWidth":3
+        },
+    
+        {
+        "themeName":"Clothes",
+        "gridValueIndexes":
+        ["I","R","T",
+        "K","S","H",
+        "S","I","R",
+        "","T",""],
+        "starSpotIndexes":[3],
+        "wordsCanBeFoundArray":["SKIRT","TSHIRT"],
+        "startPoint":6,
+        "stopPoint":10,
+        "gridHeight":4,
+        "gridWidth":3
+        },
+    
+        {
+        "themeName":"Sports",
+        "gridValueIndexes":
+        ["B","O","X","I","N",
+        "O","F","L","O","G",
+        "O","B","A","L","L",
+        "","T","","D",""],
+        "starSpotIndexes":[6,9,12],
+        "wordsCanBeFoundArray":["BOXING","GOLF","FOOTBALL"],
+        "startPoint":0,
+        "stopPoint":14,
+        "gridHeight":4,
+        "gridWidth":5
+        },
+    
+        {
+        "themeName":"Fruits",
+        "gridValueIndexes":
+        ["M","A","N","R","A","N","E",
+        "B","A","G","O","L","G","V",
+        "","C","","D","","I",""],
+        "starSpotIndexes":[6,9,12],
+        "wordsCanBeFoundArray":["ORANGE","MANGO","OLIVE"],
+        "startPoint":0,
+        "stopPoint":6,
+        "gridHeight":3,
+        "gridWidth":7
+        },
+    
+         {
+         "themeName":"Animals",
+        "gridValueIndexes":
+        ["P","I","G","I","R","A","F","A","Y",
+        "O","U","L","A","F","E","L","E","O",
+        "B","L","R","D","B","T","R","A","X",
+        "S","T","E","A","B","I","T","U","Q"],
+        "starSpotIndexes":[25],
+        "wordsCanBeFoundArray":["PIG","GULL","GIRAFFE","RABBIT","LOBSTER","TURTLE"],
+        "startPoint":0,
+        "stopPoint":14,
+        "gridHeight":4,
+        "gridWidth":9
+        },
+    
+        {
+        "themeName":"Countries",
+        "gridValueIndexes":
+        ["E","D","E","F","M","I","B","G","A",
+        "S","W","N","A","B","I","A","M","S",
+        "M","A","A","E","O","M","A","I","X",
+        "E","B","I","D","R","S","D","L","T",
+        "E","W","T","H","E","L","A","N","U"],
+        "starSpotIndexes":[32],
+        "wordsCanBeFoundArray":["SWEDEN","NETHERLANDS","SOMALIA","NAMIBIA"],
+        "startPoint":9,
+        "stopPoint":15,
+        "gridHeight":5,
+        "gridWidth":9
+        },
+        
+        {
+        "themeName":"BONUS",
+        "gridValueIndexes":[
+        "W","A","T","I","F","E", "A","R","T",
+        "Y","M","O","E","R","W","E","N","U",
+        "A","K","T","A","A","G","U","N","O",
+        "T","E","N","S","A","I","N","E","W",
+        "M","S","E","A","U","S","E","A","Z",
+        "A","I","M","Y","A","R","D","R","K"
+        ],
+        "starSpotIndexes":[1,2,3],
+        "wordsCanBeFoundArray":["WATER","RAIN","NEW","RATE","ENEMY","YARD","DRAW","NERD"],
+        "startPoint":0,
+        "stopPoint":35,
+        "gridHeight":6,
+        "gridWidth":9
+        }
     ]
 }
 

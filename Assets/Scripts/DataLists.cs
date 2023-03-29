@@ -8,6 +8,7 @@ public class DataLists
     [System.Serializable]
     public class GeneralDataStructure
     {
+        public string themeName;
         public string[] gridValueIndexes;
         public int[] starSpotIndexes;
         public string[] wordsCanBeFoundArray;

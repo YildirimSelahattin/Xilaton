@@ -25,6 +25,6 @@ public class LevelButtonManager : MonoBehaviour
         UIManager.Instance.levelSelectionPanel.SetActive(false);
         UIManager.Instance.inGameScreen.SetActive(true);
         UIManager.Instance.levelText.text = "LEVEL " + levelNumberText.text;
-
+        UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
     }
 }
