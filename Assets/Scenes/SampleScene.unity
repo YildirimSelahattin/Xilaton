@@ -660,7 +660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6790ac8eb08ae43aadd25f39a18fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winPanel: {fileID: 475736333}
   hexPrefab: {fileID: 3120872014597406882, guid: 74d90e2e67e7a0a46a0098c6459c4e9e, type: 3}
   gridWidth: 1
   gridHeight: 1
@@ -672,6 +671,7 @@ MonoBehaviour:
   touchColor: {r: 0, g: 0.69076276, b: 1, a: 1}
   gridList: []
   isGettingTouch: 0
+  isTrueBegan: 0
   spacing: 0.1
 --- !u!4 &1161414292
 Transform:
@@ -719,6 +719,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelSelectionPanel: {fileID: 1539621983}
   startScreen: {fileID: 411166686}
+  winPanel: {fileID: 475736333}
+  levelIndex: 1
 --- !u!4 &1466895317
 Transform:
   m_ObjectHideFlags: 0

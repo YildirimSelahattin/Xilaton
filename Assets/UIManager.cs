@@ -11,8 +11,6 @@ public class UIManager : MonoBehaviour
     public GameObject startScreen;
     public GameObject winPanel;
     public int levelIndex = 1;
-    
-    public static UIManager Instance;
     public static bool goStartPage = true;
     void Start()
     {
