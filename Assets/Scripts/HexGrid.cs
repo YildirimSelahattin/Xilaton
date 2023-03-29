@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 
 public class HexGrid : MonoBehaviour
@@ -30,8 +31,11 @@ public class HexGrid : MonoBehaviour
     public List<GameObject> gridList;
 
     public bool isGettingTouch = false;
+    public float spacing = 0.1f;
+    
     public static HexGrid Instance;
     Camera cam;
+    
     void Start()
     {
         if (Instance == null)
@@ -145,8 +149,8 @@ public class HexGrid : MonoBehaviour
         gridHeight = GameDataManager.Instance.data.deckArray[levelNumber].gridHeight;
         isGettingTouch = true;//start getting player touch
         CreateGrid(levelNumber);
-        transform.position = new Vector3(-1.9f, -3, 0);
-        cam.transform.position = new Vector3(transform.position.x + 0.6f, transform.position.y, cam.transform.position.z);
+        //transform.position = new Vector3(-1.9f, -3, 0);
+        
     }
     GameObject GetHexAtPosition(Vector3 position)
     {
@@ -171,12 +175,12 @@ public class HexGrid : MonoBehaviour
             for (int x = 0; x < gridWidth; x++)
             {
                 int index = (y * gridWidth) + x;
-                float xPos = x * hexWidth * 0.75f;
-                float yPos = -y * hexHeight;
+                float xPos = x * (hexWidth * 0.75f + spacing);
+                float yPos = -y * (hexHeight + spacing);
 
                 if (x % 2 == 1)
                 {
-                    yPos += hexHeight * 0.5f;
+                    yPos += (hexHeight * 0.5f + spacing / 2);
                 }
 
                 GameObject hex = Instantiate(hexPrefab, new Vector3(xPos, yPos - 0.5f, -y ), Quaternion.identity);
@@ -184,12 +188,25 @@ public class HexGrid : MonoBehaviour
                 hex.name = "Hex_" + x + "_" + y;
                 TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
                 textMeshPro.text = GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index];
+                
                 hex.GetComponent<HexCell>().SetIndex(0);
                 gridList.Add(hex);
+                if (GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index].Equals(""))
+                {
+                    Destroy(hex);
+                }
                 if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
                 {
                     textMeshPro.color = Color.blue;
                 }
+                if (x == gridWidth/2 && y == gridHeight/2)
+                {
+                    Vector3 posHex = hex.transform.position;
+                    cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
+                    cam.orthographicSize = gridWidth + 1;
+                    hex.GetComponent<SpriteRenderer>().color = Color.black;
+                }
+                
             }
         }
 
