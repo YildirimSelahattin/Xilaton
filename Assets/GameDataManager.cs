@@ -28,7 +28,7 @@ public class GameDataManager : MonoBehaviour
     public void LoadData()
     {
         data = JsonUtility.FromJson<DataLists>(JSONText.text);
-        levelToLoad = PlayerPrefs.GetInt("levelToLoad",0);
+        //levelToLoad = PlayerPrefs.GetInt("levelToLoad",0);
         totalLevelNumber = data.deckArray.Length;
         Debug.Log(data.deckArray[0].gridValueIndexes[0]);
     }
