@@ -5,9 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static GameManager Instance;
     void Start()
     {
-        
+        if(Instance == null)
+        {
+
+        }
     }
 
     // Update is called once per frame

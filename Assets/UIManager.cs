@@ -12,11 +12,17 @@ public class UIManager : MonoBehaviour
     public GameObject winPanel;
     public int levelIndex = 1;
     
+    public static UIManager Instance;
+    public static bool goStartPage = true;
     void Start()
     {
         if(Instance == null)
         {
             Instance = this;
+        }
+        if(goStartPage == true)
+        {
+            startScreen.SetActive(true);
         }
     }
 
@@ -37,12 +43,11 @@ public class UIManager : MonoBehaviour
         startScreen.SetActive(false);
     }
 
-    public void NextLevel()
+    public void OnNextLevelButtonClicked()
     {
+        GameDataManager.Instance.levelToLoad++;
+        HexGrid.loadDeckDirectly = true;
+        UIManager.goStartPage = false;
         SceneManager.LoadScene(0);
-        levelIndex++;
-        HexGrid.Instance.CreateLevelByIndex(3);
-        startScreen.SetActive(false);
-
     }
 }
