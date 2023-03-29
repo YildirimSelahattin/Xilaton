@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 
 public class HexGrid : MonoBehaviour
 {
-    public GameObject winPanel;
+    
 
     public GameObject hexPrefab;
     public int gridWidth = 10;
@@ -31,6 +31,7 @@ public class HexGrid : MonoBehaviour
     public List<GameObject> gridList;
 
     public bool isGettingTouch = false;
+    public bool isTrueBegan = false;
     public float spacing = 0.1f;
     
     public static HexGrid Instance;
@@ -63,10 +64,10 @@ public class HexGrid : MonoBehaviour
                     int cellIndex = touchedHex.GetComponent<HexCell>().GetIndex();
                     if (touch.phase == TouchPhase.Began)
                     {
-                        touchedLetters = ""; // Clear the string when the touch begins
                         if (cellIndex == 2)
                         {
-                            touchedLetters += touchedHex.GetComponentInChildren<TextMeshPro>().text; // Clear the string when the touch begins
+                            touchedLetters = ""; // Clear the string when the touch begins
+                            touchedLetters += touchedHex.GetComponentInChildren<TextMeshPro>().text;
                         }
                     }
                     else
@@ -86,9 +87,28 @@ public class HexGrid : MonoBehaviour
                             touchedSpriteRenderer.color = touchColor;
 
                             prevTouchedHex = touchedHex;
+                            
+                            ///////////////////////////
+                            ///
+                            if (englishWords.Contains(touchedLetters))
+                            {
+                                Debug.Log("It's a valid English word: " + touchedLetters);
+
+                                // Set the index of the last touched hexagon to 2
+                                HexCell lastHexCell = prevTouchedHex.GetComponent<HexCell>();
+                                int lastIndex = lastHexCell.GetIndex();
+                    
+                                if (lastIndex == 3)
+                                {
+                                    UIManager.Instance.winPanel.SetActive(true);
+                                }
+                                else
+                                {
+                                    lastHexCell.SetIndex(2);
+                                }
+                            }
                         }
                     }
-                    
                 }
             }
 
@@ -104,7 +124,7 @@ public class HexGrid : MonoBehaviour
                     
                     if (lastIndex == 3)
                     {
-                        winPanel.SetActive(true);
+                        UIManager.Instance.winPanel.SetActive(true);
                     }
                     else
                     {
