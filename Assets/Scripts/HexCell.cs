@@ -4,6 +4,12 @@ using UnityEngine;
 public class HexCell : MonoBehaviour
 {
     public int index = 0; // Hex cell's index value
+    private SpriteRenderer gridCellSpriteRenderer;
+    
+    private void Start()
+    {
+        gridCellSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
 
     public void SetIndex(int newIndex)
     {
@@ -17,15 +23,25 @@ public class HexCell : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (index == 1)
         {
             Destroy(gameObject);
         }
+        */
+        if (index == 1)
+        {
+            gridCellSpriteRenderer.color = Color.cyan;
+        }
 
         if (index == 2)
         {
-            SpriteRenderer gridCellSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             gridCellSpriteRenderer.color = Color.yellow;
+        }
+        
+        if (index == 3)
+        {
+            gridCellSpriteRenderer.color = Color.green;
         }
     }
 }

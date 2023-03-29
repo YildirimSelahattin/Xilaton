@@ -57,24 +57,24 @@ public class HexGrid : MonoBehaviour
                 Vector3 worldTouchPosition = Camera.main.ScreenToWorldPoint(touch.position);
                 worldTouchPosition.z = 0;
 
-                GameObject touchedHex = GetHexAtPosition(worldTouchPosition);
+                GameObject touchedHexa = GetHexAtPosition(worldTouchPosition);
                 
-                if (touchedHex != null )
+                if (touchedHexa != null )
                 {
-                    int cellIndex = touchedHex.GetComponent<HexCell>().GetIndex();
+                    int cellIndex = touchedHexa.GetComponent<HexCell>().GetIndex();
                     if (touch.phase == TouchPhase.Began)
                     {
                         if (cellIndex == 2)
                         {
                             touchedLetters = ""; // Clear the string when the touch begins
-                            touchedLetters += touchedHex.GetComponentInChildren<TextMeshPro>().text;
+                            touchedLetters += touchedHexa.GetComponentInChildren<TextMeshPro>().text;
                         }
                     }
                     else
                     {
-                        if (touchedHex != prevTouchedHex)
+                        if (touchedHexa != prevTouchedHex)
                         {
-                            TextMeshPro touchedTextMeshPro = touchedHex.GetComponentInChildren<TextMeshPro>();
+                            TextMeshPro touchedTextMeshPro = touchedHexa.GetComponentInChildren<TextMeshPro>();
 
                             if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Began)
                             {
@@ -82,11 +82,11 @@ public class HexGrid : MonoBehaviour
                                 Debug.Log("Current string: " + touchedLetters);
                             }
 
-                            SpriteRenderer touchedSpriteRenderer = touchedHex.GetComponent<SpriteRenderer>();
-                            touchedHexes.Add(touchedHex);
+                            SpriteRenderer touchedSpriteRenderer = touchedHexa.GetComponent<SpriteRenderer>();
+                            touchedHexes.Add(touchedHexa);
                             touchedSpriteRenderer.color = touchColor;
 
-                            prevTouchedHex = touchedHex;
+                            prevTouchedHex = touchedHexa;
                             
                             ///////////////////////////
                             ///
@@ -97,7 +97,7 @@ public class HexGrid : MonoBehaviour
                                 // Set the index of the last touched hexagon to 2
                                 HexCell lastHexCell = prevTouchedHex.GetComponent<HexCell>();
                                 int lastIndex = lastHexCell.GetIndex();
-                    
+
                                 if (lastIndex == 3)
                                 {
                                     UIManager.Instance.winPanel.SetActive(true);
@@ -105,7 +105,18 @@ public class HexGrid : MonoBehaviour
                                 else
                                 {
                                     lastHexCell.SetIndex(2);
+                                    touchedLetters = lastHexCell.GetComponentInChildren<TextMeshPro>().text;
                                 }
+                                
+                                foreach (GameObject touchedHex in touchedHexes)
+                                {
+                                    if (touchedHex != prevTouchedHex)
+                                    {
+                                        HexCell hexCell = touchedHex.GetComponent<HexCell>();
+                                        hexCell.SetIndex(1);
+                                    }
+                                }
+                                touchedHexes.Clear();
                             }
                         }
                     }
@@ -132,11 +143,11 @@ public class HexGrid : MonoBehaviour
                     }
 
                     // Set the index of all other touched hexagons to 1
-                    foreach (GameObject touchedHex in touchedHexes)
+                    foreach (GameObject touchedHexa in touchedHexes)
                     {
-                        if (touchedHex != prevTouchedHex)
+                        if (touchedHexa != prevTouchedHex)
                         {
-                            HexCell hexCell = touchedHex.GetComponent<HexCell>();
+                            HexCell hexCell = touchedHexa.GetComponent<HexCell>();
                             hexCell.SetIndex(1);
                         }
                     }
@@ -224,7 +235,6 @@ public class HexGrid : MonoBehaviour
                     Vector3 posHex = hex.transform.position;
                     cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
                     cam.orthographicSize = gridWidth + 1;
-                    hex.GetComponent<SpriteRenderer>().color = Color.black;
                 }
                 
             }
