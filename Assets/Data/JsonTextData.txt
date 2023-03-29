@@ -29,7 +29,8 @@
     },
 
     {
-    "gridValueIndexes":["A","D","A",
+    "gridValueIndexes":
+    ["A","D","A",
     "R","","R"],
     "starSpotIndexes":[1],
     "wordsCanBeFoundArray":["RADAR"],
@@ -41,7 +42,8 @@
 
 
     {
-    "gridValueIndexes":["C","A","R",
+    "gridValueIndexes":
+    ["C","A","R",
     "C","A","R",
     "","E",""],
     "starSpotIndexes":[1],
@@ -53,7 +55,8 @@
     },
 
     {
-    "gridValueIndexes":["I","R","T",
+    "gridValueIndexes":
+    ["I","R","T",
     "K","S","H",
     "S","I","R",
     "","T",""],
@@ -66,7 +69,8 @@
     },
 
     {
-    "gridValueIndexes":["B","O","X","I","N",
+    "gridValueIndexes":
+    ["B","O","X","I","N",
     "O","F","L","O","G",
     "O","B","A","L","L",
     "","T","","D",""],
@@ -79,7 +83,8 @@
     },
 
     {
-    "gridValueIndexes":["M","A","N","R","A","N","E",
+    "gridValueIndexes":
+    ["M","A","N","R","A","N","E",
     "B","A","G","O","L","G","V",
     "","C","","D","","I",""],
     "starSpotIndexes":[6,9,12],
@@ -91,31 +96,32 @@
     },
 
      {
-    "gridValueIndexes":["P","I","G","I","R","A","F","A",
-    "O","U","L","A","F","E","L","E",
-    "O","U","L","A","F","E","L","E",
-    "B","L","R","D","B","T","R","A",
-    "S","T","E","A","B","I","T","U"],
+    "gridValueIndexes":
+    ["P","I","G","I","R","A","F","A","Y",
+    "O","U","L","A","F","E","L","E","O",
+    "B","L","R","D","B","T","R","A","X",
+    "S","T","E","A","B","I","T","U","Q"],
     "starSpotIndexes":[25],
     "wordsCanBeFoundArray":["PIG","GULL","GIRAFFE","RABBIT","LOBSTER","TURTLE"],
     "startPoint":0,
     "stopPoint":14,
     "gridHeight":4,
-    "gridWidth":8
+    "gridWidth":9
     },
 
     {
-   "gridValueIndexes":["E","D","E","F","M","I","B","G",
-    "S","W","N","A","B","I","A","M",
-    "M","A","A","E","O","M","A","I",
-    "E","B","I","D","R","S","D","L",
-    "E","W","T","H","E","L","A","N"],
+   "gridValueIndexes":
+   ["E","D","E","F","M","I","B","G","A",
+    "S","W","N","A","B","I","A","M","S",
+    "M","A","A","E","O","M","A","I","X",
+    "E","B","I","D","R","S","D","L","T",
+    "E","W","T","H","E","L","A","N","U"],
     "starSpotIndexes":[32],
     "wordsCanBeFoundArray":["SWEDEN","NETHERLANDS","SOMALIA","NAMIBIA"],
     "startPoint":8,
     "stopPoint":14,
     "gridHeight":5,
-    "gridWidth":8
+    "gridWidth":9
     }
 
  
