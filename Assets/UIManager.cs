@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI levelText;
     public int levelIndex = 1;
     public static bool goStartPage = true;
+    public TextMeshProUGUI comboText;
+    
     void Start()
     {
         if(Instance == null)
@@ -32,12 +34,7 @@ public class UIManager : MonoBehaviour
         }
         levelText.text ="LEVEL " +  GameDataManager.Instance.levelToLoad.ToString();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     public void OnLevelsButtonClicked()
     {
         levelSelectionPanel.SetActive(true);

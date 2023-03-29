@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 
 public class HexGrid : MonoBehaviour
 {
-    
-
     public GameObject hexPrefab;
     public int gridWidth = 10;
     public int gridHeight = 10;
@@ -37,6 +32,9 @@ public class HexGrid : MonoBehaviour
     public static HexGrid Instance;
     Camera cam;
     public static bool loadDeckDirectly;
+
+    private int comboCounter = 1;
+
     void Start()
     {
         if (Instance == null)
@@ -95,11 +93,15 @@ public class HexGrid : MonoBehaviour
                             prevTouchedHex = touchedHexa;
                             
                             ///////////////////////////
-                            ///
+             
                             if (englishWords.Contains(touchedLetters))
                             {
-                                Debug.Log("It's a valid English word: " + touchedLetters);
+                                comboCounter++;
+                                UIManager.Instance.comboText.gameObject.SetActive(true);
+                                UIManager.Instance.comboText.text = comboCounter + " x!";
 
+                                Debug.Log("It's a valid English word: " + touchedLetters);
+                                StartCoroutine(CorrectFeel());
                                 // Set the index of the last touched hexagon to 2
                                 HexCell lastHexCell = prevTouchedHex.GetComponent<HexCell>();
                                 int lastIndex = lastHexCell.GetIndex();
@@ -132,10 +134,12 @@ public class HexGrid : MonoBehaviour
 
             if (touch.phase == TouchPhase.Ended)
             {
+                comboCounter = 0;
+
                 if (englishWords.Contains(touchedLetters))
                 {
                     Debug.Log("It's a valid English word: " + touchedLetters);
-
+                    StartCoroutine(CorrectFeel());
                     // Set the index of the last touched hexagon to 2
                     HexCell lastHexCell = prevTouchedHex.GetComponent<HexCell>();
                     int lastIndex = lastHexCell.GetIndex();
@@ -174,6 +178,13 @@ public class HexGrid : MonoBehaviour
                 touchedHexes.Clear();
             }
         }
+    }
+
+    public IEnumerator CorrectFeel()
+    {
+        cam.backgroundColor = Color.green;
+        yield return new WaitForSeconds(0.3f);
+        cam.backgroundColor = new Color(233, 233, 233);
     }
 
     public void CreateLevelByIndex(int levelNumber)
