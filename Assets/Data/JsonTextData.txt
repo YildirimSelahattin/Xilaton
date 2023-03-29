@@ -19,65 +19,63 @@
     },
 
     {
-    "gridValueIndexes":["","m","o","","","m"],
-    "starSpotIndexes":[1,2,5],
-    "wordsCanBeFoundArray":["mom"],
+    "gridValueIndexes":["M","O","M"],
+    "starSpotIndexes":[1],
+    "wordsCanBeFoundArray":["MOM"],
     "startPoint":0,
-    "stopPoint":0,
+    "stopPoint":2,
+    "gridHeight":1,
+    "gridWidth":3
+    },
+
+    {
+    "gridValueIndexes":["A","D","A",
+    "R","","R"],
+    "starSpotIndexes":[1],
+    "wordsCanBeFoundArray":["RADAR"],
+    "startPoint":3,
+    "stopPoint":5,
     "gridHeight":2,
     "gridWidth":3
     },
 
-    {
-    "gridValueIndexes":["r","a","",
-    "","d","",
-    "r","a",""],
-    "starSpotIndexes":[1,4,5],
-    "wordsCanBeFoundArray":["radar"],
-    "gridHeight":3,
-    "startPoint":0,
-    "stopPoint":0,
-    "gridWidth":3
-    },
-
 
     {
-    "gridValueIndexes":["","c","c",
-    "e","a","a",
-    "","r","r"],
-    "starSpotIndexes":[3,4,5],
-    "wordsCanBeFoundArray":["car","racer"],
+    "gridValueIndexes":["C","A","R",
+    "C","A","R",
+    "","E",""],
+    "starSpotIndexes":[1],
+    "wordsCanBeFoundArray":["CAR","RACER"],
     "startPoint":0,
-    "stopPoint":0,
+    "stopPoint":5,
     "gridHeight":3,
     "gridWidth":3
     },
 
     {
-    "gridValueIndexes":["","s","k","i",
-    "t","i","s","r",
-    "","r","h","t"],
-    "starSpotIndexes":[3,4,6],
-    "wordsCanBeFoundArray":["skirt","tshirt"],
-    "startPoint":0,
-    "stopPoint":0,
+    "gridValueIndexes":["I","R","T",
+    "K","S","H",
+    "S","I","R",
+    "","T",""],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["SKIRT","TSHIRT"],
+    "startPoint":6,
+    "stopPoint":10,
     "gridHeight":4,
     "gridWidth":3
     },
 
     {
-    "gridValueIndexes":["","t","b",
-    "b","o","o",
-    "a","o","x",
-    "l","f","i",
-    "l","l","n",
-    "","o","g"],
+    "gridValueIndexes":["B","O","X","I","N",
+    "O","F","L","O","G",
+    "O","B","A","L","L",
+    "","T","","D",""],
     "starSpotIndexes":[6,9,12],
-    "wordsCanBeFoundArray":["boxing","golf","football"],
+    "wordsCanBeFoundArray":["BOXING","GOLF","FOOTBALL"],
     "startPoint":0,
-    "stopPoint":0,
-    "gridHeight":3,
-    "gridWidth":6
+    "stopPoint":14,
+    "gridHeight":4,
+    "gridWidth":5
     },
 
     {
