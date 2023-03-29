@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; 
+using TMPro;
 using UnityEngine.EventSystems;
 using System.IO;
 using System.Linq;
@@ -14,12 +14,12 @@ public class HexGrid : MonoBehaviour
     public GameObject hexPrefab;
     public int gridWidth = 10;
     public int gridHeight = 10;
-    
+
     private float hexWidth;
     private float hexHeight;
-    
-    public string[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-    
+
+    public string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+
     public Color touchColor = Color.red; // Dokunulan altıgenin rengi.
     private List<GameObject> touchedHexes = new List<GameObject>(); // Touched hexagons list
 
@@ -28,20 +28,22 @@ public class HexGrid : MonoBehaviour
     
     private HashSet<string> englishWords = new HashSet<string>(); // Kelimeleri saklamak için
     public List<GameObject> gridList;
+
+    public bool isGettingTouch = false;
+    public static HexGrid Instance;
+    Camera cam;
     void Start()
     {
-        LoadEnglishWords();
-        hexWidth = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
-        hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
-        gridWidth = GameDataManager.Instance.data.deckArray[0].gridWidth;
-        gridHeight = GameDataManager.Instance.data.deckArray[0].gridHeight;
-        CreateGrid();
-        transform.position = new Vector3(-1.5f, 2, 0);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        cam = Camera.main;
     }
-    
+
     void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && isGettingTouch != false)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -125,13 +127,27 @@ public class HexGrid : MonoBehaviour
                         touchedSpriteRenderer.color = Color.white;
                     }
                 }
-        
+
                 // Clear the lists for the next touch event
                 touchedHexes.Clear();
             }
         }
     }
-    
+
+    public void CreateLevelByIndex(int levelNumber)
+    {
+        //jsonda leveller 0 dan baslıyor
+        levelNumber--;
+        LoadEnglishWords();
+        hexWidth = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
+        hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+        gridWidth = GameDataManager.Instance.data.deckArray[levelNumber].gridWidth;
+        gridHeight = GameDataManager.Instance.data.deckArray[levelNumber].gridHeight;
+        isGettingTouch = true;//start getting player touch
+        CreateGrid(levelNumber);
+        transform.position = new Vector3(-1.9f, -3, 0);
+        cam.transform.position = new Vector3(transform.position.x + 0.6f, transform.position.y, cam.transform.position.z);
+    }
     GameObject GetHexAtPosition(Vector3 position)
     {
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero);
@@ -148,7 +164,7 @@ public class HexGrid : MonoBehaviour
         return null;
     }
 
-    void CreateGrid()
+    void CreateGrid(int levelNumber)
     {
         for (int y = 0; y < gridHeight; y++)
         {
@@ -167,19 +183,20 @@ public class HexGrid : MonoBehaviour
                 hex.transform.parent = this.transform;
                 hex.name = "Hex_" + x + "_" + y;
                 TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
-                textMeshPro.text = GameDataManager.Instance.data.deckArray[0].gridValueIndexes[index];
+                textMeshPro.text = GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index];
                 hex.GetComponent<HexCell>().SetIndex(0);
                 gridList.Add(hex);
-                if (GameDataManager.Instance.data.deckArray[0].starSpotIndexes.Contains(index))
+                if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
                 {
                     textMeshPro.color = Color.blue;
                 }
             }
         }
-        gridList[GameDataManager.Instance.data.deckArray[0].startPoint].GetComponent<HexCell>().SetIndex(2);//value of start point is 2 
-        gridList[GameDataManager.Instance.data.deckArray[0].stopPoint].GetComponent<HexCell>().SetIndex(3);//value of end point is 3;
+
+        gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint].GetComponent<HexCell>().SetIndex(2);//value of start point is 2 
+        gridList[GameDataManager.Instance.data.deckArray[levelNumber].stopPoint].GetComponent<HexCell>().SetIndex(3);//value of end point is 3;
     }
-    
+
     private void LoadEnglishWords()
     {
         foreach (string word in GameDataManager.Instance.data.deckArray[0].wordsCanBeFoundArray)
