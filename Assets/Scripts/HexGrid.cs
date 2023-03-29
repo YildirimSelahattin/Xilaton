@@ -107,6 +107,7 @@ public class HexGrid : MonoBehaviour
                                 if (lastIndex == 3)
                                 {
                                     UIManager.Instance.winPanel.SetActive(true);
+                                    UIManager.Instance.inGameScreen.SetActive(false);
                                 }
                                 else
                                 {

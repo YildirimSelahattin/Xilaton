@@ -118,8 +118,8 @@
     "E","W","T","H","E","L","A","N","U"],
     "starSpotIndexes":[32],
     "wordsCanBeFoundArray":["SWEDEN","NETHERLANDS","SOMALIA","NAMIBIA"],
-    "startPoint":8,
-    "stopPoint":14,
+    "startPoint":9,
+    "stopPoint":15,
     "gridHeight":5,
     "gridWidth":9
     }
