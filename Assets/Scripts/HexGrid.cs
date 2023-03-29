@@ -36,7 +36,7 @@ public class HexGrid : MonoBehaviour
         gridWidth = GameDataManager.Instance.data.deckArray[0].gridWidth;
         gridHeight = GameDataManager.Instance.data.deckArray[0].gridHeight;
         CreateGrid();
-        transform.position = new Vector3(-1.9f, -3, 0);
+        transform.position = new Vector3(-1.5f, 2, 0);
     }
     
     void Update()
@@ -150,20 +150,20 @@ public class HexGrid : MonoBehaviour
 
     void CreateGrid()
     {
-        for (int x = 0; x < gridWidth; x++)
+        for (int y = 0; y < gridHeight; y++)
         {
-            for (int y = 0; y < gridHeight; y++)
+            for (int x = 0; x < gridWidth; x++)
             {
-                int index = (x * gridHeight) + y;
+                int index = (y * gridWidth) + x;
                 float xPos = x * hexWidth * 0.75f;
-                float yPos = y * hexHeight;
+                float yPos = -y * hexHeight;
 
                 if (x % 2 == 1)
                 {
                     yPos += hexHeight * 0.5f;
                 }
 
-                GameObject hex = Instantiate(hexPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
+                GameObject hex = Instantiate(hexPrefab, new Vector3(xPos, yPos - 0.5f, -y ), Quaternion.identity);
                 hex.transform.parent = this.transform;
                 hex.name = "Hex_" + x + "_" + y;
                 TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
