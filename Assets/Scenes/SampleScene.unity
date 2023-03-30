@@ -981,12 +981,10 @@ MonoBehaviour:
   hexPrefab: {fileID: 3120872014597406882, guid: 74d90e2e67e7a0a46a0098c6459c4e9e, type: 3}
   gridWidth: 1
   gridHeight: 1
-  letters:
-  - B
-  - E
-  - D
-  - A
   touchColor: {r: 0, g: 0.69076276, b: 1, a: 1}
+  touchedHexes: []
+  prevTouchedHex: {fileID: 0}
+  touchedLetters: 
   gridList: []
   isGettingTouch: 0
   isTrueBegan: 0

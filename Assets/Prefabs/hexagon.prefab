@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  gridCellSpriteRenderer: {fileID: 6708635798418492391}
 --- !u!60 &7140149579773581070
 PolygonCollider2D:
   m_ObjectHideFlags: 0

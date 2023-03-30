@@ -4,7 +4,7 @@ using UnityEngine;
 public class HexCell : MonoBehaviour
 {
     public int index = 0; // Hex cell's index value
-    private SpriteRenderer gridCellSpriteRenderer;
+    public  SpriteRenderer gridCellSpriteRenderer;
     
     private void Start()
     {
@@ -21,7 +21,7 @@ public class HexCell : MonoBehaviour
         return index;
     }
 
-    private void Update()
+    public void Colorize(int index)
     {
         if (index == 1)
         {
@@ -32,10 +32,16 @@ public class HexCell : MonoBehaviour
         {
             gridCellSpriteRenderer.color = Color.yellow;
         }
-        
+
         if (index == 3)
         {
             gridCellSpriteRenderer.color = Color.green;
         }
+    }
+
+    
+    private void Update()
+    {
+        
     }
 }

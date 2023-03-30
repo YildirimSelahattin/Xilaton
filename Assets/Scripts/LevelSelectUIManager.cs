@@ -88,7 +88,7 @@ public class LevelSelectUIManager : MonoBehaviour
                 buttonScript.levelIndex = index;
                 buttonScript.levelNumberText.text = index.ToString();
                 Debug.Log("as");
-                int starNumber = GameDataManager.Instance.data.deckArray[index-1].starSpotIndexes.Length;
+                int starNumber = GameDataManager.Instance.data.deckArray[index-1].starSpotIndexes.Count;
                 int earnedStarNumber=PlayerPrefs.GetInt("LevelStar" + index, 0);
                 for (int starCounter = 0; starCounter < starNumber; starCounter++)
                 {
