@@ -27,7 +27,6 @@
     "gridWidth":3
     },
 
-
     {
     "themeName":"F1",
     "gridValueIndexes":

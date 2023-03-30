@@ -10,7 +10,7 @@ public class FpsCounter : MonoBehaviour
 
     IEnumerator Start()
     {
-        Application.targetFrameRate = 30;
+        //Application.targetFrameRate = 30;
 
         GUI.depth = 50;
         while (true)

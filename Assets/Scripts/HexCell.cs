@@ -23,12 +23,6 @@ public class HexCell : MonoBehaviour
 
     private void Update()
     {
-        /*
-        if (index == 1)
-        {
-            Destroy(gameObject);
-        }
-        */
         if (index == 1)
         {
             gridCellSpriteRenderer.color = Color.cyan;
