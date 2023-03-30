@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelButtonManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class LevelButtonManager : MonoBehaviour
     // Start is called before the first frame update
     public TextMeshProUGUI levelNumberText;
     public int levelIndex;
+    public GameObject starParent;
     void Start()
     {
         

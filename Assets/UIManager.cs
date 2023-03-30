@@ -65,4 +65,10 @@ public class UIManager : MonoBehaviour
         UIManager.goStartPage = false;
         SceneManager.LoadScene(0);
     }
+    public void OnHomeButtonClicked()
+    {
+        HexGrid.loadDeckDirectly = false;
+        UIManager.goStartPage = true;
+        SceneManager.LoadScene(0);
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class LevelSelectUIManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class LevelSelectUIManager : MonoBehaviour
     public float gridWidth;
     public GameObject leftArrow;
     public GameObject rightArrow;
+    public GameObject starObject;
+    public Sprite filledStarSprite;
+    public Sprite emptyStarSprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,12 +82,28 @@ public class LevelSelectUIManager : MonoBehaviour
             gridCounter++;
             for (int i = 0; i < howManyToAdd; i++)
             {
-                
+                int index = (gridCounter - 1) * 9 + i + 1;
                 GameObject levelButton = Instantiate(levelButtonPrefab, grid.transform);
                 LevelButtonManager buttonScript = levelButton.GetComponent<LevelButtonManager>();
-                buttonScript.levelIndex = (gridCounter-1) * 9 + i + 1;
-                Debug.Log((gridCounter - 1) * 9 + i + 1);
-                buttonScript.levelNumberText.text = buttonScript.levelIndex.ToString();
+                buttonScript.levelIndex = index;
+                buttonScript.levelNumberText.text = index.ToString();
+                Debug.Log("as");
+                int starNumber = GameDataManager.Instance.data.deckArray[index-1].starSpotIndexes.Length;
+                int earnedStarNumber=PlayerPrefs.GetInt("LevelStar" + index, 0);
+                for (int starCounter = 0; starCounter < starNumber; starCounter++)
+                {
+                    GameObject star = Instantiate(starObject,buttonScript.starParent.transform);
+                    if (earnedStarNumber > 0)
+                    {
+                        star.GetComponent<Image>().sprite = filledStarSprite;
+                        earnedStarNumber--;
+                    }
+                    else
+                    {
+                        star.GetComponent<Image>().sprite = emptyStarSprite;
+                    }
+                    
+                }
             }
         }
     }
