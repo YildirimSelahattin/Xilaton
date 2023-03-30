@@ -10,6 +10,7 @@ public class GameDataManager : MonoBehaviour
     public static GameDataManager Instance;
     public int levelToLoad;
     public int totalLevelNumber;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,12 +21,7 @@ public class GameDataManager : MonoBehaviour
         }
         LoadData();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
     public void LoadData()
     {
         data = JsonUtility.FromJson<DataLists>(JSONText.text);

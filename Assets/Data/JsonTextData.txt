@@ -40,7 +40,6 @@
     "gridWidth":3
     },
 
-
     {
     "gridValueIndexes":
     ["C","A","R",
