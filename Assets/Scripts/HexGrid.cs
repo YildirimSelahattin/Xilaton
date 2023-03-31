@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using System.Linq;
+using System;
+using System.Reflection;
 
 public class HexGrid : MonoBehaviour
 {
@@ -16,8 +19,8 @@ public class HexGrid : MonoBehaviour
     public Color touchColor = Color.red;
     public List<GameObject> touchedHexes = new List<GameObject>();
 
-    public  GameObject prevTouchedHex;
-    public  string touchedLetters;
+    public GameObject prevTouchedHex;
+    public string touchedLetters;
 
     private HashSet<string> englishWords = new HashSet<string>();
     public List<GameObject> gridList;
@@ -68,6 +71,7 @@ public class HexGrid : MonoBehaviour
                 {
                     HexCell hexCell = touchedHexa.GetComponent<HexCell>();
                     int cellIndex = hexCell.GetIndex();
+                    char letter = hexCell.GetComponentInChildren<TextMeshPro>().text[0];
                     if (touch.phase == TouchPhase.Began)//if it is first touch
                     {
                         if (cellIndex == 2) // if it is a start grid
@@ -79,19 +83,53 @@ public class HexGrid : MonoBehaviour
                     }
                     else if (touchedHexa != prevTouchedHex && prevTouchedHex != null) // if it is different than the previous hex
                     {
+                        prevTouchedHex = touchedHexa;
                         Debug.Log("DDDD");
-                        touchedLetters += hexCell.GetComponentInChildren<TextMeshPro>().text;
                         Debug.Log(touchedLetters);
-                        if(cellIndex != 2)
+                        if (cellIndex == 0)
                         {
+                            touchedLetters += letter;
+                            hexCell.SetIndex(4);
                             touchedHexes.Add(touchedHexa);
-                        }
-                        if (cellIndex != 2 && cellIndex != 3)
-                        {
                             touchedHexa.GetComponent<SpriteRenderer>().color = touchColor;
                         }
-                        prevTouchedHex = touchedHexa;
+                        if (cellIndex == 3)
+                        {
+                            touchedLetters += letter;
+                            touchedHexes.Add(touchedHexa);
+                        }
+                        if (cellIndex == 4 )
+                        {
+                            /*List<char> touchedletterList = touchedLetters.ToList();
+                            touchedletterList.Remove(hexCell.GetComponentInChildren<TextMeshPro>().text[0]);
+                            touchedLetters = touchedletterList.ToString();*/
+                            char[] touchedletterArray = touchedLetters.ToCharArray();
+                            List<char> touchedletterList = touchedletterArray.ToList();
+                            int index = Array.IndexOf(touchedHexes.ToArray(), touchedHexa);
+                            Debug.Log("index" + index);
+                            for (int i = touchedHexes.Count-1; i >index; i--)
+                            {
+                                touchedHexes[i].GetComponent<SpriteRenderer>().color = Color.white;
+                                touchedletterList.RemoveAt(i+1);
+                                touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
+                                touchedHexes.RemoveAt(i);
+                            }
+                            touchedLetters = string.Join("", touchedletterList.ToArray()); ;
+                            Debug.Log(touchedLetters);
 
+                        }
+                        if(cellIndex == 2)
+                        {
+                            for(int i = touchedHexes.Count - 1; i >= 0; i--)
+                            {
+                                touchedHexes[i].GetComponent<SpriteRenderer>().color = Color.white;
+                                touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
+                                touchedHexes.RemoveAt(i);
+                            }
+                            touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
+                        }
+
+                        //CONTROLL 
                         if (englishWords.Contains(touchedLetters))
                         {
                             comboCounter++;
@@ -113,7 +151,7 @@ public class HexGrid : MonoBehaviour
                                 Debug.Log("WWWW");
                             }
 
-                            for (int i = 0; i< touchedHexes.Count;i++)
+                            for (int i = 0; i < touchedHexes.Count; i++)
                             {
                                 if (touchedHexes[i] != prevTouchedHex)
                                 {
@@ -132,7 +170,7 @@ public class HexGrid : MonoBehaviour
                 comboCounter = 0;
                 touchedLetters = "";
                 // Set the index of all other touched hexagons to 1
-                
+
                 for (int i = 0; i < touchedHexes.Count; i++)
                 {
                     if (touchedHexes[i].GetComponent<HexCell>().index == 3)
@@ -141,6 +179,7 @@ public class HexGrid : MonoBehaviour
                     }
                     SpriteRenderer touchedSpriteRenderer = touchedHexes[i].GetComponent<SpriteRenderer>();
                     touchedSpriteRenderer.color = Color.white;
+                    touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                 }
                 // Clear the lists for the next touch event
                 touchedHexes.Clear();
