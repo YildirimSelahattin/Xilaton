@@ -109,6 +109,10 @@ public class HexGrid : MonoBehaviour
                             Debug.Log("index" + index);
                             for (int i = touchedHexes.Count-1; i >index; i--)
                             {
+                                if (touchedHexes[i].GetComponent<HexCell>().index == 3)
+                                {
+                                    continue;
+                                }
                                 touchedHexes[i].GetComponent<SpriteRenderer>().color = Color.white;
                                 touchedletterList.RemoveAt(i+1);
                                 touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
@@ -155,6 +159,11 @@ public class HexGrid : MonoBehaviour
                             {
                                 if (touchedHexes[i] != prevTouchedHex)
                                 {
+                                    if (touchedHexes[i].transform.tag == "Star")
+                                    {
+                                        touchedHexes[i].transform.GetChild(0).gameObject.SetActive(false);
+                                    }
+                                    
                                     touchedHexes[i].GetComponent<HexCell>().SetIndex(1);
                                     touchedHexes[i].GetComponent<HexCell>().Colorize(1);
                                 }
@@ -255,17 +264,30 @@ public class HexGrid : MonoBehaviour
 
                 if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
                 {
-                    textMeshPro.color = Color.blue;
+                    hex.transform.GetChild(0).gameObject.SetActive(true);
+                    textMeshPro.color = Color.white;
+                    hex.transform.tag = "Star";
                 }
 
                 if (x == gridWidth / 2 && y == gridHeight / 2)
                 {
                     Vector3 posHex = hex.transform.position;
                     cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
-                    cam.orthographicSize = gridWidth + 1;
+                    
+                    if (gridWidth >= gridHeight)
+                    {
+                        cam.orthographicSize = gridWidth + 1;
+                    }
+                    else
+                    {
+                        cam.orthographicSize = gridHeight + 1;
+                    }
                 }
             }
+            
         }
+        
+        
 
         gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint].GetComponent<HexCell>()
             .SetIndex(2);
