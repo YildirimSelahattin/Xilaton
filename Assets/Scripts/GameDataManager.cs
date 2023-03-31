@@ -9,6 +9,7 @@ public class GameDataManager : MonoBehaviour
     public TextAsset JSONText;
     public static GameDataManager Instance;
     public int levelToLoad;
+    public int levelToLoadWhenNextPressed;
     public int totalLevelNumber;
     
     // Start is called before the first frame update

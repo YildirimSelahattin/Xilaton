@@ -156,6 +156,7 @@ public class HexGrid : MonoBehaviour
                                 if (touchedHexes[i] != prevTouchedHex)
                                 {
                                     touchedHexes[i].GetComponent<HexCell>().SetIndex(1);
+                                    touchedHexes[i].GetComponent<HexCell>().Colorize(1);
                                 }
                             }
                             touchedHexes.Clear();

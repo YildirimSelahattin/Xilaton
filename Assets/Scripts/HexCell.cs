@@ -25,7 +25,7 @@ public class HexCell : MonoBehaviour
     {
         if (index == 1)
         {
-            gridCellSpriteRenderer.color = Color.cyan;
+            gridCellSpriteRenderer.color = Color.green;
         }
 
         if (index == 2)
@@ -35,7 +35,7 @@ public class HexCell : MonoBehaviour
 
         if (index == 3)
         {
-            gridCellSpriteRenderer.color = Color.green;
+            gridCellSpriteRenderer.color = Color.red;
         }
     }
 
