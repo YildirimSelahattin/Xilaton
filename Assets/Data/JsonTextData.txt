@@ -44,30 +44,32 @@
     {
     "themeName":"Clothes",
     "gridValueIndexes":
-    ["I","R","T",
+    ["","","",
+    "I","R","T",
     "K","S","H",
     "S","I","R",
     "","T",""],
     "starSpotIndexes":[3],
     "wordsCanBeFoundArray":["SKIRT","TSHIRT"],
-    "startPoint":6,
-    "stopPoint":10,
-    "gridHeight":4,
+    "startPoint":9,
+    "stopPoint":13,
+    "gridHeight":5,
     "gridWidth":3
     },
 
     {
     "themeName":"Sports",
     "gridValueIndexes":
-    ["B","O","X","I","N",
+    ["","","","","",
+    "B","O","X","I","N",
     "O","F","L","O","G",
     "O","B","A","L","L",
     "","T","","D",""],
     "starSpotIndexes":[6,9,12],
     "wordsCanBeFoundArray":["BOXING","GOLF","FOOTBALL"],
-    "startPoint":0,
-    "stopPoint":14,
-    "gridHeight":4,
+    "startPoint":5,
+    "stopPoint":19,
+    "gridHeight":5,
     "gridWidth":5
     },
 
@@ -106,7 +108,7 @@
    ["E","D","E","F","M","I","B","G","A",
     "S","W","N","A","B","I","A","M","S",
     "M","A","A","E","O","M","A","I","X",
-    "E","B","I","D","R","S","T","L","T",
+    "E","B","I","T","R","S","D","L","T",
     "E","W","T","H","E","L","A","N","U"],
     "starSpotIndexes":[32],
     "wordsCanBeFoundArray":["SWEDEN","NETHERLANDS","SOMALIA","NAMIBIA"],
@@ -163,6 +165,24 @@
     },
 
     {
+    "themeName":"Camping",
+    "gridValueIndexes":
+    ["","","",
+    "A","B","P",
+    "C","K","A",
+    "N","K","C",
+    "I","F","E",
+    "T","R","A",
+    "H","A","B"],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["BACKPACK","KNIFE","EARTH"],
+    "startPoint":4,
+    "stopPoint":18,
+    "gridHeight":7 ,
+    "gridWidth":3
+    },
+
+    {
     "themeName":"Body Parts",
     "gridValueIndexes":
     ["H","E","E","Y","R",
@@ -171,13 +191,30 @@
     "starSpotIndexes":[3],
     "wordsCanBeFoundArray":["CHEEK","KNEE","EYE","EAR"],
     "startPoint":5,
-    "stopPoint":9,
+    "stopPoint":4,
     "gridHeight":3 ,
     "gridWidth":5
     },
 
+     {
+    "themeName":"Cinema",
+    "gridValueIndexes":
+    ["D","I","R","E","C",
+    "O","R","O","T","C",
+    "I","M","A","N","E",
+    "N","T","I","D","D",
+    "E","G","R","E","W",
+    "","N","","W",""],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["DIRECTOR","ROMANCE","EDITING","GENRE"],
+    "startPoint":0,
+    "stopPoint":23,
+    "gridHeight":6,
+    "gridWidth":5
+    },
+
     {
-    "themeName":"Food",
+    "themeName":"Nature",
     "gridValueIndexes":
     ["R","V","E","R","S","E","",
     "B","I","I","A","E","R","E",
@@ -189,6 +226,54 @@
     "stopPoint":13,
     "gridHeight":4,
     "gridWidth":7
+    },
+
+    {
+    "themeName":"Animals",
+    "gridValueIndexes":
+    ["T","I","L","E","L","N","A","L","U",
+    "E","G","E","I","E","U","T","T","N",
+    "H","R","P","T","P","A","N","A","A",
+    "Z","G","","R","","H","","R",""],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["TIGER","REPTILE","TUNA","ELEPHANT","TARANTULA"],
+    "startPoint":0,
+    "stopPoint":6,
+    "gridHeight":4,
+    "gridWidth":9
+    },
+
+        {
+    "themeName":"Education",
+    "gridValueIndexes":
+    ["L","E","C","T","R","E","N","T","",
+    "","","A","U","E","D","","C","",
+    "","M","A","X","T","U","T","E","J",
+    "","","","S","E","R","S","U","B"],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["LECTURE","EXAM","MASTERS","STUDENT","SUBJECT"],
+    "startPoint":0,
+    "stopPoint":7,
+    "gridHeight":4,
+    "gridWidth":9
+    },
+
+    {
+    "themeName":"Technology",
+    "gridValueIndexes":[
+    "C","H","A","R","W","","","","",
+    "","E","T","D","R","A","P","","",
+    "","E","N","E","R","Y","T","I","",
+    "E","R","E","N","C","","N","O","",
+    "","H","T","R","U","E","E","T","W",
+    "O","","","A","R","O","N","O","",
+    "S","F","T","W","","","","R","K"],
+    "starSpotIndexes":[1,2,3],
+    "wordsCanBeFoundArray":["SOFTWARE","ETHERNET","TECH","HARDWARE","ENCRYPTION","NEURON","NETWORK"],
+    "startPoint":54,
+    "stopPoint":62,
+    "gridHeight":7,
+    "gridWidth":9
     },
 
     {
@@ -207,6 +292,7 @@
     "gridHeight":6,
     "gridWidth":9
     }
+
     ]
 }
 
