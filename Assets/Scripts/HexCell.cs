@@ -5,9 +5,13 @@ public class HexCell : MonoBehaviour
 {
     public int index = 0; // Hex cell's index value
     public  SpriteRenderer gridCellSpriteRenderer;
-
+    public Vector3 originPos;
+    public Vector3 originChildPos;
+    
     private void Start()
     {
+        originPos = transform.position; 
+        originChildPos = transform.GetChild(1).position; 
         gridCellSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 

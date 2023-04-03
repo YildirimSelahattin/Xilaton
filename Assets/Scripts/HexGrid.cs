@@ -27,7 +27,6 @@ public class HexGrid : MonoBehaviour
     public List<GameObject> gridList;
 
     public bool isGettingTouch = false;
-    public bool isTrueBegan = false;
     public float spacing = 0.1f;
 
     public static HexGrid Instance;
@@ -91,9 +90,11 @@ public class HexGrid : MonoBehaviour
                             hexCell.SetIndex(4);
                             touchedHexes.Add(touchedHexa);
                             touchedHexa.GetComponent<SpriteRenderer>().color = touchColor;
-                            Vector3 originPos = hexCell.transform.position;
+                            
+                            Vector3 originPos = hexCell.originPos;
+                            Vector3 originChildPos = hexCell.originChildPos;
                             hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y-0.03f, originPos.z), 0.1f);
-                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originPos.x, originPos.y-0.06f, originPos.z), 0.1f);
+                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y+0.03f, originChildPos.z), 0.1f);
                         }
                         if (cellIndex == 3)
                         {
@@ -115,10 +116,19 @@ public class HexGrid : MonoBehaviour
                                 {
                                     continue;
                                 }
-                                touchedHexes[i].GetComponent<SpriteRenderer>().color = Color.white;
+
+                                
+                                Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
+                                Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
+                                touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
+                                touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y, originPos.z), 0.1f);
+                                SpriteRenderer touchedSpriteRenderer = touchedHexes[i].GetComponent<SpriteRenderer>();
+                                touchedSpriteRenderer.color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
+                                touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                                 touchedletterList.RemoveAt(i+1);
                                 touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                                 touchedHexes.RemoveAt(i);
+                                
                             }
                             touchedLetters = string.Join("", touchedletterList.ToArray()); ;
                             Debug.Log(touchedLetters);
@@ -128,7 +138,11 @@ public class HexGrid : MonoBehaviour
                         {
                             for(int i = touchedHexes.Count - 1; i >= 0; i--)
                             {
-                                touchedHexes[i].GetComponent<SpriteRenderer>().color = Color.white;
+                                Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
+                                Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
+                                touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
+                                touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y, originPos.z), 0.1f);
+                                touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                                 touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                                 touchedHexes.RemoveAt(i);
                             }
@@ -188,8 +202,12 @@ public class HexGrid : MonoBehaviour
                     {
                         continue;
                     }
+                    Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
+                    Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
+                    touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
+                    touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y, originPos.z), 0.1f);
                     SpriteRenderer touchedSpriteRenderer = touchedHexes[i].GetComponent<SpriteRenderer>();
-                    touchedSpriteRenderer.color = Color.white;
+                    touchedSpriteRenderer.color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                     touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                 }
                 // Clear the lists for the next touch event
@@ -287,8 +305,6 @@ public class HexGrid : MonoBehaviour
             
         }
         
-        
-
         gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint].GetComponent<HexCell>()
             .SetIndex(2);
         gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint].GetComponent<HexCell>()
