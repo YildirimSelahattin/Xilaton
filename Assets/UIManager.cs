@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,7 +18,13 @@ public class UIManager : MonoBehaviour
     public static bool goStartPage = true;
     public TextMeshProUGUI comboText;
     public TextMeshProUGUI themeText;
-    
+    public GameObject starParent;
+    public GameObject levelHeaderStar;
+    public GameObject canvas;
+
+    public Sprite filledStar;
+    public Sprite emptyStar;
+
     void Start()
     {
         if(Instance == null)
@@ -33,8 +40,7 @@ public class UIManager : MonoBehaviour
             startScreen.SetActive(false);
             inGameScreen.SetActive(true);
         }
-        levelText.text ="LEVEL " +  GameDataManager.Instance.levelToLoad.ToString();
-        themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
+
     }
     
     public void OnLevelsButtonClicked()
@@ -49,6 +55,7 @@ public class UIManager : MonoBehaviour
         
         startScreen.SetActive(false);
         inGameScreen.SetActive(true);
+        
     }
 
     public void OnNextLevelButtonClicked()

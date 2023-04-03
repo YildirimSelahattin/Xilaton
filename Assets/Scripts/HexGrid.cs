@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using System;
 using System.Reflection;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class HexGrid : MonoBehaviour
@@ -78,12 +79,14 @@ public class HexGrid : MonoBehaviour
                         if (cellIndex == 2) // if it is a start grid
                         {
                             touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
+                            Debug.Log("CCCC");
                             prevTouchedHex = touchedHexa;
                         }
                     }
                     else if (touchedHexa != prevTouchedHex && prevTouchedHex != null) // if it is different than the previous hex
                     {
                         prevTouchedHex = touchedHexa;
+                        Debug.Log("DDDD");
                         Debug.Log(touchedLetters);
                         if (cellIndex == 0)
                         {
@@ -91,9 +94,6 @@ public class HexGrid : MonoBehaviour
                             hexCell.SetIndex(4);
                             touchedHexes.Add(touchedHexa);
                             touchedHexa.GetComponent<SpriteRenderer>().color = touchColor;
-                            Vector3 originPos = hexCell.transform.position;
-                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y-0.03f, originPos.z), 0.1f);
-                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originPos.x, originPos.y-0.06f, originPos.z), 0.1f);
                         }
                         if (cellIndex == 3)
                         {
@@ -154,6 +154,7 @@ public class HexGrid : MonoBehaviour
                                 hexCell.SetIndex(2);
                                 hexCell.Colorize(2);
                                 touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
+                                Debug.Log("WWWW");
                             }
 
                             for (int i = 0; i < touchedHexes.Count; i++)
@@ -163,6 +164,15 @@ public class HexGrid : MonoBehaviour
                                     if (touchedHexes[i].transform.tag == "Star")
                                     {
                                         touchedHexes[i].transform.GetChild(0).gameObject.SetActive(false);
+                                        Vector3 pos = Camera.main.WorldToScreenPoint(touchedHexes[i].transform.GetChild(0).gameObject.transform.position );
+                                        GameObject tempStar=Instantiate(UIManager.Instance.levelHeaderStar, pos,Quaternion.identity,UIManager.Instance.canvas.transform);
+                                        tempStar.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
+                                        tempStar.transform.DOMove(UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.transform.position, 1f).OnComplete(() =>
+                                        {
+                                            UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
+                                            Destroy(tempStar);
+                                        });
+                                        GameManager.Instance.currentStarAmount++;
                                     }
                                     
                                     touchedHexes[i].GetComponent<HexCell>().SetIndex(1);
@@ -211,6 +221,12 @@ public class HexGrid : MonoBehaviour
         LoadEnglishWords(levelNumber);
         hexWidth = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
         hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+        UIManager.Instance.levelText.text = "LEVEL " + GameDataManager.Instance.levelToLoad.ToString();
+        UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
+        for (int i = 0; i < GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].starSpotIndexes.Count; i++)
+        {
+            Instantiate(UIManager.Instance.levelHeaderStar, UIManager.Instance.starParent.transform);
+        }
         gridWidth = GameDataManager.Instance.data.deckArray[levelNumber].gridWidth;
         gridHeight = GameDataManager.Instance.data.deckArray[levelNumber].gridHeight;
         isGettingTouch = true;
@@ -266,7 +282,6 @@ public class HexGrid : MonoBehaviour
                 if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
                 {
                     hex.transform.GetChild(0).gameObject.SetActive(true);
-                    textMeshPro.color = Color.white;
                     hex.transform.tag = "Star";
                 }
 
