@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using System;
 using System.Reflection;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class HexGrid : MonoBehaviour
@@ -77,12 +78,14 @@ public class HexGrid : MonoBehaviour
                         if (cellIndex == 2) // if it is a start grid
                         {
                             touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
+                            Debug.Log("CCCC");
                             prevTouchedHex = touchedHexa;
                         }
                     }
                     else if (touchedHexa != prevTouchedHex && prevTouchedHex != null) // if it is different than the previous hex
                     {
                         prevTouchedHex = touchedHexa;
+                        Debug.Log("DDDD");
                         Debug.Log(touchedLetters);
                         if (cellIndex == 0)
                         {
@@ -168,6 +171,7 @@ public class HexGrid : MonoBehaviour
                                 hexCell.SetIndex(2);
                                 hexCell.Colorize(2);
                                 touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
+                                Debug.Log("WWWW");
                             }
 
                             for (int i = 0; i < touchedHexes.Count; i++)
@@ -177,6 +181,16 @@ public class HexGrid : MonoBehaviour
                                     if (touchedHexes[i].transform.tag == "Star")
                                     {
                                         touchedHexes[i].transform.GetChild(0).gameObject.SetActive(false);
+                                        Vector3 pos = Camera.main.WorldToScreenPoint(touchedHexes[i].transform.GetChild(0).gameObject.transform.position );
+                                        GameObject tempStar=Instantiate(UIManager.Instance.levelHeaderStar, pos,Quaternion.identity,UIManager.Instance.canvas.transform);
+                                        tempStar.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
+                                        tempStar.transform.DOMove(UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.transform.position, 1f).OnComplete(() =>
+                                        {
+                                            UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
+                                            GameManager.Instance.currentStarAmount++;
+                                            Destroy(tempStar.gameObject);
+                                        });
+                                        
                                     }
                                     
                                     touchedHexes[i].GetComponent<HexCell>().SetIndex(1);
