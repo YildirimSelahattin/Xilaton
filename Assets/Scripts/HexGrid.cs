@@ -223,7 +223,7 @@ public class HexGrid : MonoBehaviour
         hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
         UIManager.Instance.levelText.text = "LEVEL " + GameDataManager.Instance.levelToLoad.ToString();
         UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
-        for (int i = 0; i < GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].starSpotIndexes.Count; i++)
+        for (int i = 0; i < GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Count; i++)
         {
             Instantiate(UIManager.Instance.levelHeaderStar, UIManager.Instance.starParent.transform);
         }
