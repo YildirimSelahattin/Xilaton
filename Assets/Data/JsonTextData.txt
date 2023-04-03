@@ -137,7 +137,7 @@
     "wordsCanBeFoundArray":["BEEF","FAJITAS","SALMON","FALAFEL","LASAGNA","ANCHOVIES"],
     "startPoint":36,
     "stopPoint":43,
-    "gridHeight":7,
+    "gridHeight":8,
     "gridWidth":9
     },
 
