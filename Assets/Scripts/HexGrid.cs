@@ -170,9 +170,10 @@ public class HexGrid : MonoBehaviour
                                         tempStar.transform.DOMove(UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.transform.position, 1f).OnComplete(() =>
                                         {
                                             UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
-                                            Destroy(tempStar);
+                                            GameManager.Instance.currentStarAmount++;
+                                            Destroy(tempStar.gameObject);
                                         });
-                                        GameManager.Instance.currentStarAmount++;
+                                        
                                     }
                                     
                                     touchedHexes[i].GetComponent<HexCell>().SetIndex(1);
@@ -221,12 +222,6 @@ public class HexGrid : MonoBehaviour
         LoadEnglishWords(levelNumber);
         hexWidth = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
         hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
-        UIManager.Instance.levelText.text = "LEVEL " + GameDataManager.Instance.levelToLoad.ToString();
-        UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
-        for (int i = 0; i < GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Count; i++)
-        {
-            Instantiate(UIManager.Instance.levelHeaderStar, UIManager.Instance.starParent.transform);
-        }
         gridWidth = GameDataManager.Instance.data.deckArray[levelNumber].gridWidth;
         gridHeight = GameDataManager.Instance.data.deckArray[levelNumber].gridHeight;
         isGettingTouch = true;

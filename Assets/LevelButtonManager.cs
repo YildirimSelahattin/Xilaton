@@ -26,5 +26,12 @@ public class LevelButtonManager : MonoBehaviour
         HexGrid.Instance.CreateLevelByIndex(levelIndex);
         UIManager.Instance.levelSelectionPanel.SetActive(false);
         UIManager.Instance.inGameScreen.SetActive(true);
+        UIManager.Instance.starParent.SetActive(true);
+        UIManager.Instance.levelText.text = "LEVEL " + GameDataManager.Instance.levelToLoad.ToString();
+        UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
+        for (int i = 0; i < GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].starSpotIndexes.Count; i++)
+        {
+            Instantiate(UIManager.Instance.levelHeaderStar, UIManager.Instance.starParent.transform);
+        }
     }
 }

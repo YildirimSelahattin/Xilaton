@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3342331531989615830}
   - component: {fileID: 4709258451912483796}
   - component: {fileID: 5443314544532012017}
-  - component: {fileID: 4892916484543592196}
   m_Layer: 5
   m_Name: LevelHeaderStar
   m_TagString: Untagged
@@ -77,15 +76,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4892916484543592196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2342383689114490490}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afe73c53100b1094cb2469416c6fc228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
