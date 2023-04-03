@@ -30,7 +30,7 @@ public class HexCell : MonoBehaviour
 
         if (index == 2)
         {
-            gridCellSpriteRenderer.color = new Color(255/255f,134/255f,237/255f,1);
+            gridCellSpriteRenderer.color = new Color(81/255f,226/255f,255/255f,1);
         }
 
         if (index == 3)

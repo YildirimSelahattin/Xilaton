@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using System;
 using System.Reflection;
+using DG.Tweening;
 
 public class HexGrid : MonoBehaviour
 {
@@ -77,14 +78,12 @@ public class HexGrid : MonoBehaviour
                         if (cellIndex == 2) // if it is a start grid
                         {
                             touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
-                            Debug.Log("CCCC");
                             prevTouchedHex = touchedHexa;
                         }
                     }
                     else if (touchedHexa != prevTouchedHex && prevTouchedHex != null) // if it is different than the previous hex
                     {
                         prevTouchedHex = touchedHexa;
-                        Debug.Log("DDDD");
                         Debug.Log(touchedLetters);
                         if (cellIndex == 0)
                         {
@@ -92,6 +91,9 @@ public class HexGrid : MonoBehaviour
                             hexCell.SetIndex(4);
                             touchedHexes.Add(touchedHexa);
                             touchedHexa.GetComponent<SpriteRenderer>().color = touchColor;
+                            Vector3 originPos = hexCell.transform.position;
+                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y-0.03f, originPos.z), 0.1f);
+                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originPos.x, originPos.y-0.06f, originPos.z), 0.1f);
                         }
                         if (cellIndex == 3)
                         {
@@ -152,7 +154,6 @@ public class HexGrid : MonoBehaviour
                                 hexCell.SetIndex(2);
                                 hexCell.Colorize(2);
                                 touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
-                                Debug.Log("WWWW");
                             }
 
                             for (int i = 0; i < touchedHexes.Count; i++)
