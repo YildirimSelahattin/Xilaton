@@ -266,7 +266,6 @@ public class HexGrid : MonoBehaviour
                 if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
                 {
                     hex.transform.GetChild(0).gameObject.SetActive(true);
-                    textMeshPro.color = Color.white;
                     hex.transform.tag = "Star";
                 }
 
