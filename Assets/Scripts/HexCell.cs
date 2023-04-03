@@ -25,7 +25,7 @@ public class HexCell : MonoBehaviour
     {
         if (index == 1)
         {
-            gridCellSpriteRenderer.color = new Color(193/255f,255/255f,95/255f,1);
+            gridCellSpriteRenderer.color = new Color(211/255f,255/255f,141/255f,1);
         }
 
         if (index == 2)

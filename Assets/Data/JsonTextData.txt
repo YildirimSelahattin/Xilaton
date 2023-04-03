@@ -30,14 +30,15 @@
     {
     "themeName":"F1",
     "gridValueIndexes":
-    ["C","A","R",
+    ["","","",
+    "C","A","R",
     "C","A","R",
     "","E",""],
     "starSpotIndexes":[4],
     "wordsCanBeFoundArray":["CAR","RACER"],
-    "startPoint":0,
-    "stopPoint":5,
-    "gridHeight":3,
+    "startPoint":3,
+    "stopPoint":8,
+    "gridHeight":4,
     "gridWidth":3
     },
 
@@ -76,44 +77,47 @@
     {
     "themeName":"Fruits",
     "gridValueIndexes":
-    ["M","A","N","R","A","N","E",
+    ["","","","","","","",
+    "M","A","N","R","A","N","E",
     "B","A","G","O","L","G","V",
     "","C","","D","","I",""],
     "starSpotIndexes":[19],
     "wordsCanBeFoundArray":["ORANGE","MANGO","OLIVE"],
-    "startPoint":0,
-    "stopPoint":6,
-    "gridHeight":3,
+    "startPoint":7,
+    "stopPoint":13,
+    "gridHeight":4,
     "gridWidth":7
     },
 
      {
      "themeName":"Animals",
     "gridValueIndexes":
-    ["P","I","G","I","R","A","F","A","Y",
+    ["","","","","","","","","",
+    "P","I","G","I","R","A","F","A","Y",
     "O","U","L","A","F","E","L","E","O",
     "B","L","R","D","B","T","R","A","X",
     "S","T","E","A","B","I","T","U","Q"],
     "starSpotIndexes":[19,22,34],
     "wordsCanBeFoundArray":["PIG","GULL","GIRAFFE","RABBIT","LOBSTER","TURTLE"],
-    "startPoint":0,
-    "stopPoint":14,
-    "gridHeight":4,
+    "startPoint":9,
+    "stopPoint":23,
+    "gridHeight":5,
     "gridWidth":9
     },
 
     {
     "themeName":"Countries",
    "gridValueIndexes":
-   ["E","D","E","F","M","I","B","G","A",
+   ["","","","","","","","","",
+   "E","D","E","F","M","I","B","G","A",
     "S","W","N","A","B","I","A","M","S",
     "M","A","A","E","O","M","A","I","X",
     "E","B","I","T","R","S","D","L","T",
     "E","W","T","H","E","L","A","N","U"],
     "starSpotIndexes":[49,52],
     "wordsCanBeFoundArray":["SWEDEN","NETHERLANDS","SOMALIA","NAMIBIA"],
-    "startPoint":9,
-    "stopPoint":15,
+    "startPoint":18,
+    "stopPoint":24,
     "gridHeight":5,
     "gridWidth":9
     },
@@ -121,7 +125,9 @@
     {
     "themeName":"Foods",
      "gridValueIndexes":
-    ["Y","A","M","D","J","Y","T","M","A",
+    ["","","","","","","","","",
+    "","","","","","","","","",
+    "Y","A","M","D","J","Y","T","M","A",
     "D","U","F","A","H","I","Z","A","S",
     "B","E","E","F","V","I","E","S","X",
     "F","A","L","A","N","O","H","A","T",
@@ -129,38 +135,41 @@
     "A","L","J","A","R","N","G","C","U"],
     "starSpotIndexes":[36,39],
     "wordsCanBeFoundArray":["BEEF","FAJITAS","SALMON","FALAFEL","LASAGNA","ANCHOVIES"],
-    "startPoint":18,
-    "stopPoint":25,
-    "gridHeight":6,
+    "startPoint":36,
+    "stopPoint":43,
+    "gridHeight":7,
     "gridWidth":9
     },
 
     {
     "themeName":"Art",
     "gridValueIndexes":
-    ["A","L","B","U","M",
+    ["","","","","",
+    "","","","","",
+    "A","L","B","U","M",
     "","","I","","U",
     "","C","","S",""],
     "starSpotIndexes":[3],
     "wordsCanBeFoundArray":["ALBUM","MUSIC"],
-    "startPoint":0,
-    "stopPoint":11,
-    "gridHeight":3,
+    "startPoint":10,
+    "stopPoint":21,
+    "gridHeight":5,
     "gridWidth":5
     },
 
     {
     "themeName":"Emotions",
     "gridValueIndexes":
-    ["S","N","O","I","S",
+    ["","","","","",
+    "S","N","O","I","S",
     "A","","","","S",
     "D","","P","","E",
     "","E","","R",""],
     "starSpotIndexes":[3],
     "wordsCanBeFoundArray":["SAD","DEPRESSION"],
-    "startPoint":0,
-    "stopPoint":1,
-    "gridHeight":4 ,
+    "startPoint":5,
+    "stopPoint":6,
+    "gridHeight":5 ,
     "gridWidth":5
     },
 
@@ -185,21 +194,23 @@
     {
     "themeName":"Body Parts",
     "gridValueIndexes":
-    ["H","E","E","Y","R",
+    ["","","","","",
+    "H","E","E","Y","R",
     "C","E","E","E","A",
     "","K","N","E",""],
     "starSpotIndexes":[7,12],
     "wordsCanBeFoundArray":["CHEEK","KNEE","EYE","EAR"],
-    "startPoint":5,
-    "stopPoint":4,
-    "gridHeight":3 ,
+    "startPoint":10,
+    "stopPoint":9,
+    "gridHeight":4 ,
     "gridWidth":5
     },
 
      {
     "themeName":"Cinema",
     "gridValueIndexes":
-    ["D","I","R","E","C",
+    ["","","","","",
+    "D","I","R","E","C",
     "O","R","O","T","C",
     "I","M","A","N","E",
     "N","T","I","D","D",
@@ -207,54 +218,57 @@
     "","N","","W",""],
     "starSpotIndexes":[7,17],
     "wordsCanBeFoundArray":["DIRECTOR","ROMANCE","EDITING","GENRE"],
-    "startPoint":0,
-    "stopPoint":23,
-    "gridHeight":6,
+    "startPoint":5,
+    "stopPoint":28,
+    "gridHeight":7,
     "gridWidth":5
     },
 
     {
     "themeName":"Nature",
     "gridValueIndexes":
-    ["R","V","E","R","S","E","",
+    ["","","","","","","",
+    "R","V","E","R","S","E","",
     "B","I","I","A","E","R","E",
     "B","N","W","N","D","T","E",
     "","O","","I","","R",""],
     "starSpotIndexes":[3,24],
     "wordsCanBeFoundArray":["RIVER","RAINBOW","WIND","DESERT","TREE"],
-    "startPoint":0,
-    "stopPoint":13,
-    "gridHeight":4,
+    "startPoint":7,
+    "stopPoint":20,
+    "gridHeight":5,
     "gridWidth":7
     },
 
     {
     "themeName":"Animals",
     "gridValueIndexes":
-    ["T","I","L","E","L","N","A","L","U",
+    ["","","","","","","","","",
+    "T","I","L","E","L","N","A","L","U",
     "E","G","E","I","E","U","T","T","N",
     "H","R","P","T","P","A","N","A","A",
     "Z","G","","R","","H","","R",""],
     "starSpotIndexes":[3,9,11],
     "wordsCanBeFoundArray":["TIGER","REPTILE","TUNA","ELEPHANT","TARANTULA"],
     "startPoint":0,
-    "stopPoint":6,
-    "gridHeight":4,
+    "stopPoint":15,
+    "gridHeight":5,
     "gridWidth":9
     },
 
         {
     "themeName":"Education",
     "gridValueIndexes":
-    ["L","E","C","T","R","E","N","T","",
+    ["","","","","","","","","",
+    "L","E","C","T","R","E","N","T","",
     "","","A","U","E","D","","C","",
     "","M","A","X","T","U","T","E","J",
     "","","","S","E","R","S","U","B"],
     "starSpotIndexes":[5],
     "wordsCanBeFoundArray":["LECTURE","EXAM","MASTERS","STUDENT","SUBJECT"],
-    "startPoint":0,
-    "stopPoint":7,
-    "gridHeight":4,
+    "startPoint":9,
+    "stopPoint":16,
+    "gridHeight":5,
     "gridWidth":9
     },
 
@@ -279,6 +293,7 @@
     {
     "themeName":"Bonus",
     "gridValueIndexes":[
+    "","","","","","","","","",
     "W","A","T","I","F","E","A","R","T",
     "Y","M","O","E","R","W","E","N","U",
     "A","K","T","A","A","G","U","N","O",
@@ -287,9 +302,9 @@
     "A","I","M","Y","A","R","D","R","K"],
     "starSpotIndexes":[1,2,3],
     "wordsCanBeFoundArray":["WATER","RAIN","NEW","RATE","ENEMY","YARD","DRAW","NERD"],
-    "startPoint":0,
-    "stopPoint":35,
-    "gridHeight":6,
+    "startPoint":9,
+    "stopPoint":44,
+    "gridHeight":7,
     "gridWidth":9
     }
 
