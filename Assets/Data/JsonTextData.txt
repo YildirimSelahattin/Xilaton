@@ -172,6 +172,21 @@
     "gridHeight":5 ,
     "gridWidth":5
     },
+    {
+    "themeName":"Emotions",
+    "gridValueIndexes":
+    ["","","",
+    "G","O","D",
+    "Y","","E",
+    "L","","A",
+    "O","H","T"],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["GOD","DEATH","HOLY"],
+    "startPoint":3,
+    "stopPoint":6,
+    "gridHeight":5 ,
+    "gridWidth":3
+    },
 
     {
     "themeName":"Camping",
@@ -189,6 +204,40 @@
     "stopPoint":18,
     "gridHeight":7 ,
     "gridWidth":3
+    },
+
+  
+     {
+    "themeName":"Body Parts",
+    "gridValueIndexes":
+    ["","","","","",
+    "J","E","S","U","S",
+    "B","A","N","I","A",
+    "C","A","G","M","T",
+    "E","T","E","F","G"],
+    "starSpotIndexes":[7,12],
+    "wordsCanBeFoundArray":["BIBLE","EVIL","LUCIFER"],
+    "startPoint":0,
+    "stopPoint":17,
+    "gridHeight":5,
+    "gridWidth":5
+    },
+
+    {
+    "themeName":"Body Parts",
+    "gridValueIndexes":
+    ["","","","","",
+    "D","R","E","D","A",
+    "E","","","","E",
+    "V","","","","L",
+    "I","","O","","A",
+    "","L","","Y",""],
+    "starSpotIndexes":[7,12],
+    "wordsCanBeFoundArray":["DEVIL","LOYAL","LEADER"],
+    "startPoint":5,
+    "stopPoint":6,
+    "gridHeight":6,
+    "gridWidth":5
     },
 
     {
@@ -221,6 +270,135 @@
     "startPoint":5,
     "stopPoint":28,
     "gridHeight":7,
+    "gridWidth":5
+    },
+
+    {
+    "themeName":"Halloween",
+    "gridValueIndexes":
+    ["","","","","","","","","",
+    "B","","B","","T","","F","","",
+    "A","M","O","E","S","E","L","Y","",
+    "T","O","N","A","A","R","R","S","",
+    "","T","E","L","F","N","T","A",""],
+    "starSpotIndexes":[7,17],
+    "wordsCanBeFoundArray":["BAT","TOMB","BONE","ELF","FANTASY","BEAST","TERRIFY"],
+    "startPoint":9,
+    "stopPoint":25,
+    "gridHeight":5,
+    "gridWidth":9
+    },
+
+    {
+    "themeName":"Desert",
+    "gridValueIndexes":
+    ["","","","","","","",
+    "I","C","E","C","R","E","",
+    "L","L","S","R","A","A","",
+    "O","A","M","H","F","M","",
+    "","W","A","F","L","E",""],
+    "starSpotIndexes":[7,17],
+    "wordsCanBeFoundArray":["ICECREAM","MARSHMALLOW","WAFFLE"],
+    "startPoint":7,
+    "stopPoint":33,
+    "gridHeight":5,
+    "gridWidth":7
+    },
+
+    {
+    "themeName":"Art",
+    "gridValueIndexes":
+    ["","","","","",
+    "A","R","X","H","N",
+    "I","T","E","I","O",
+    "T","S","N","B","I",
+    "M","O","E","I","T"],
+    "starSpotIndexes":[7,17],
+    "wordsCanBeFoundArray":["ARTIST","TONE","EXHIBITION"],
+    "startPoint":5,
+    "stopPoint":4,
+    "gridHeight":5,
+    "gridWidth":5
+    },
+
+    {
+    "themeName":"Car",
+    "gridValueIndexes":
+    ["A","I","R","O","O","","",
+    "A","B","N","R","E","F","",
+    "Y","G","A","U","Y","U","",
+    "E","A","U","S","H","E","",
+    "W","Z","E","R","M","L",""],
+    "starSpotIndexes":[7,17],
+    "wordsCanBeFoundArray":["AIRBAG","GAS","SUNROOF","FUEL"],
+    "startPoint":0,
+    "stopPoint":33,
+    "gridHeight":5,
+    "gridWidth":7
+    },
+
+    {
+    "themeName":"Car",
+    "gridValueIndexes":
+    ["A","I","R","O","O","","",
+    "A","B","N","R","E","F","",
+    "Y","G","A","U","Y","U","",
+    "E","A","U","S","H","E","",
+    "W","Z","E","R","M","L",""],
+    "starSpotIndexes":[7,17],
+    "wordsCanBeFoundArray":["AIRBAG","GAS","SUNROOF","FUEL"],
+    "startPoint":0,
+    "stopPoint":33,
+    "gridHeight":5,
+    "gridWidth":7
+    },
+
+
+     {
+    "themeName":"Family",
+    "gridValueIndexes":
+    ["C","A","D","R","C","M","N",
+    "I","H","A","U","H","A","T",
+    "L","D","E","G","T","L","E",
+    "D","A","R","T","E","E","D",
+    "","W","","F","","R",""],
+    "starSpotIndexes":[7,17],
+    "wordsCanBeFoundArray":["CHILD","DAD","DAUGHTER","RELATED"],
+    "startPoint":0,
+    "stopPoint":27,
+    "gridHeight":5,
+    "gridWidth":7
+    },
+
+    {
+    "themeName":"HOUSE",
+    "gridValueIndexes":
+    ["D","B","Y","A","E","N","E",
+    "R","E","A","F","M","C","N",
+    "Z","O","O","O","O","L","E",
+    "D","M","R","R","R","E","D",
+    "","I","","O","","A",""],
+    "starSpotIndexes":[7,17],
+    "wordsCanBeFoundArray":["BEDROOM","MIRROR","ROOF","FENCE"],
+    "startPoint":1,
+    "stopPoint":6,
+    "gridHeight":5,
+    "gridWidth":7
+    },
+
+    {
+    "themeName":"Birds",
+    "gridValueIndexes":
+    ["","","","","",
+    "C","R","O","E","L",
+    "A","I","W","E","G",
+    "M","N","O","A","E",
+    "Y","G","O","S","R"],
+    "starSpotIndexes":[7,17],
+    "wordsCanBeFoundArray":["CROW","WING","GOOSE","EAGLE"],
+    "startPoint":5,
+    "stopPoint":3,
+    "gridHeight":5,
     "gridWidth":5
     },
 
