@@ -61,7 +61,7 @@ public class HexGrid : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+            //if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
             {
                 Vector3 worldTouchPosition = Camera.main.ScreenToWorldPoint(touch.position);
                 worldTouchPosition.z = 0;
