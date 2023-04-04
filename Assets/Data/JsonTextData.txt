@@ -247,10 +247,10 @@
     "T","I","L","E","L","N","A","L","U",
     "E","G","E","I","E","U","T","T","N",
     "H","R","P","T","P","A","N","A","A",
-    "Z","G","","R","","H","","R",""],
+    "","G","","R","","H","","R",""],
     "starSpotIndexes":[3,9,11],
     "wordsCanBeFoundArray":["TIGER","REPTILE","TUNA","ELEPHANT","TARANTULA"],
-    "startPoint":0,
+    "startPoint":9,
     "stopPoint":15,
     "gridHeight":5,
     "gridWidth":9

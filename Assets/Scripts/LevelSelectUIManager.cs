@@ -20,7 +20,7 @@ public class LevelSelectUIManager : MonoBehaviour
     public GameObject starObject;
     public Sprite filledStarSprite;
     public Sprite emptyStarSprite;
-    // Start is called before the first frame update
+    
     void Start()
     {
         if(buttonPerGrid == 0)
@@ -35,12 +35,7 @@ public class LevelSelectUIManager : MonoBehaviour
         ControlRightLeftButton();
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
     public void ControlRightLeftButton()
     {
         if(currentGridIndex == 0)
