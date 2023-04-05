@@ -4,6 +4,8 @@ using UnityEngine;
 public class HexCell : MonoBehaviour
 {
     public int index = 0; // Hex cell's index value
+    public int rowIndex;
+    public int columnIndex;
     public  SpriteRenderer gridCellSpriteRenderer;
     public Vector3 originPos;
     public Vector3 originChildPos;
