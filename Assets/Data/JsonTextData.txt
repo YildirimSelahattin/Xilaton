@@ -5,14 +5,114 @@
 
     {
     "themeName":"",
-    "gridValueIndexes":["M","O","M"],
+    "gridValueIndexes":["G","O","D"],
     "starSpotIndexes":[1],
-    "wordsCanBeFoundArray":["MOM"],
+    "wordsCanBeFoundArray":["GOD"],
     "startPoint":0,
     "stopPoint":2,
     "gridHeight":1,
     "gridWidth":3
     },
+
+    {
+    "themeName":"Emotions",
+    "gridValueIndexes":
+    ["","","","","",
+    "J","E","S","U","S",
+    "R","","","","U",
+    "","E","F","F",""],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["JESUS","SUFFER"],
+    "startPoint":5,
+    "stopPoint":6,
+    "gridHeight":5 ,
+    "gridWidth":5
+    },
+
+    {
+    "themeName":"Emotions",
+    "gridValueIndexes":
+    ["","","",
+    "G","O","D",
+    "Y","","E",
+    "L","","A",
+    "O","H","T"],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["GOD","DEVIL","LUCIFER"],
+    "startPoint":3,
+    "stopPoint":6,
+    "gridHeight":5 ,
+    "gridWidth":3
+    },
+
+    {
+    "themeName":"Emotions",
+    "gridValueIndexes":
+    ["","","","","",
+    "S","N","O","I","S",
+    "A","","","","S",
+    "D","","P","","E",
+    "","E","","R",""],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["SAD","DEPRESSION"],
+    "startPoint":5,
+    "stopPoint":6,
+    "gridHeight":5 ,
+    "gridWidth":5
+    },
+
+      
+     {
+    "themeName":"Body Parts",
+    "gridValueIndexes":
+    ["","","","","",
+    "J","E","S","U","S",
+    "B","A","N","I","A",
+    "C","A","G","M","T",
+    "E","T","E","F","G"],
+    "starSpotIndexes":[7,12],
+    "wordsCanBeFoundArray":["BIBLE","EVIL","LUCIFER"],
+    "startPoint":0,
+    "stopPoint":17,
+    "gridHeight":5,
+    "gridWidth":5
+    },
+
+         {
+    "themeName":"Emotions",
+    "gridValueIndexes":
+    ["","","",
+    "G","O","D",
+    "Y","","E",
+    "L","","A",
+    "O","H","T"],
+    "starSpotIndexes":[3],
+    "wordsCanBeFoundArray":["GOD","DEATH","HOLY"],
+    "startPoint":3,
+    "stopPoint":6,
+    "gridHeight":5 ,
+    "gridWidth":3
+    },
+
+    
+
+    {
+    "themeName":"Body Parts",
+    "gridValueIndexes":
+    ["","","","","",
+    "D","R","E","D","A",
+    "E","","","","E",
+    "V","","","","L",
+    "I","","O","","A",
+    "","L","","Y",""],
+    "starSpotIndexes":[7,12],
+    "wordsCanBeFoundArray":["DEVIL","LOYAL","LEADER"],
+    "startPoint":5,
+    "stopPoint":6,
+    "gridHeight":6,
+    "gridWidth":5
+    },
+
 
     {
     "themeName":"",
@@ -157,36 +257,8 @@
     "gridWidth":5
     },
 
-    {
-    "themeName":"Emotions",
-    "gridValueIndexes":
-    ["","","","","",
-    "S","N","O","I","S",
-    "A","","","","S",
-    "D","","P","","E",
-    "","E","","R",""],
-    "starSpotIndexes":[3],
-    "wordsCanBeFoundArray":["SAD","DEPRESSION"],
-    "startPoint":5,
-    "stopPoint":6,
-    "gridHeight":5 ,
-    "gridWidth":5
-    },
-    {
-    "themeName":"Emotions",
-    "gridValueIndexes":
-    ["","","",
-    "G","O","D",
-    "Y","","E",
-    "L","","A",
-    "O","H","T"],
-    "starSpotIndexes":[3],
-    "wordsCanBeFoundArray":["GOD","DEATH","HOLY"],
-    "startPoint":3,
-    "stopPoint":6,
-    "gridHeight":5 ,
-    "gridWidth":3
-    },
+ 
+    
 
     {
     "themeName":"Camping",
@@ -206,39 +278,7 @@
     "gridWidth":3
     },
 
-  
-     {
-    "themeName":"Body Parts",
-    "gridValueIndexes":
-    ["","","","","",
-    "J","E","S","U","S",
-    "B","A","N","I","A",
-    "C","A","G","M","T",
-    "E","T","E","F","G"],
-    "starSpotIndexes":[7,12],
-    "wordsCanBeFoundArray":["BIBLE","EVIL","LUCIFER"],
-    "startPoint":0,
-    "stopPoint":17,
-    "gridHeight":5,
-    "gridWidth":5
-    },
 
-    {
-    "themeName":"Body Parts",
-    "gridValueIndexes":
-    ["","","","","",
-    "D","R","E","D","A",
-    "E","","","","E",
-    "V","","","","L",
-    "I","","O","","A",
-    "","L","","Y",""],
-    "starSpotIndexes":[7,12],
-    "wordsCanBeFoundArray":["DEVIL","LOYAL","LEADER"],
-    "startPoint":5,
-    "stopPoint":6,
-    "gridHeight":6,
-    "gridWidth":5
-    },
 
     {
     "themeName":"Body Parts",
@@ -255,7 +295,23 @@
     "gridWidth":5
     },
 
-     {
+    {
+    "themeName":"Colors",
+    "gridValueIndexes":
+    ["","","","","",
+    "G","R","H","I","T",
+    "R","I","W","D","E",
+    "","E","L","O","",
+    "","Y","E","L",""],
+    "starSpotIndexes":[7,12],
+    "wordsCanBeFoundArray":["GREY","YELLOW","WHITE"],
+    "startPoint":5,
+    "stopPoint":14,
+    "gridHeight":5,
+    "gridWidth":5
+    },
+
+    {
     "themeName":"Cinema",
     "gridValueIndexes":
     ["","","","","",
@@ -337,21 +393,6 @@
     "gridWidth":7
     },
 
-    {
-    "themeName":"Car",
-    "gridValueIndexes":
-    ["A","I","R","O","O","","",
-    "A","B","N","R","E","F","",
-    "Y","G","A","U","Y","U","",
-    "E","A","U","S","H","E","",
-    "W","Z","E","R","M","L",""],
-    "starSpotIndexes":[7,17],
-    "wordsCanBeFoundArray":["AIRBAG","GAS","SUNROOF","FUEL"],
-    "startPoint":0,
-    "stopPoint":33,
-    "gridHeight":5,
-    "gridWidth":7
-    },
 
 
      {
