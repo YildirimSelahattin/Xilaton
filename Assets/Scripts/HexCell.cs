@@ -9,6 +9,7 @@ public class HexCell : MonoBehaviour
     public  SpriteRenderer gridCellSpriteRenderer;
     public Vector3 originPos;
     public Vector3 originChildPos;
+    public GameObject hintObject;
     
     private void Start()
     {
