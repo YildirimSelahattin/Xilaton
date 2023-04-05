@@ -77,9 +77,14 @@ public class HexGrid : MonoBehaviour
                     {
                         if (cellIndex == 2) // if it is a start grid
                         {
+                            touchedHexes.Add(touchedHexa);
                             touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
                             Debug.Log("CCCC");
                             prevTouchedHex = touchedHexa;
+                            Vector3 originPos = hexCell.originPos;
+                            Vector3 originChildPos = hexCell.originChildPos;
+                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y-0.03f, originPos.z), 0.1f);
+                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y+0.03f, originChildPos.z), 0.1f);
                         }
                     }
                     else if (touchedHexa != prevTouchedHex && prevTouchedHex != null) // if it is different than the previous hex
@@ -102,7 +107,14 @@ public class HexGrid : MonoBehaviour
                         if (cellIndex == 3)
                         {
                             touchedLetters += letter;
+                            hexCell.SetIndex(8);
+                            cellIndex = 8;
                             touchedHexes.Add(touchedHexa);
+                            Vector3 originPos = hexCell.originPos;
+                            Vector3 originChildPos = hexCell.originChildPos;
+                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y-0.03f, originPos.z), 0.1f);
+                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y+0.03f, originChildPos.z), 0.1f);
+                            
                         }
                         if (cellIndex == 4 )
                         {
@@ -115,11 +127,11 @@ public class HexGrid : MonoBehaviour
                             Debug.Log("index" + index);
                             for (int i = touchedHexes.Count-1; i >index; i--)
                             {
-                                if (touchedHexes[i].GetComponent<HexCell>().index == 3)
+                                if (touchedHexes[i].GetComponent<HexCell>().index == 8)
                                 {
+                                    
                                     continue;
                                 }
-
                                 
                                 Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
                                 Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
@@ -128,7 +140,7 @@ public class HexGrid : MonoBehaviour
                                 SpriteRenderer touchedSpriteRenderer = touchedHexes[i].GetComponent<SpriteRenderer>();
                                 touchedSpriteRenderer.color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                                 touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
-                                touchedletterList.RemoveAt(i+1);
+                                touchedletterList.RemoveAt(i);
                                 touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                                 touchedHexes.RemoveAt(i);
                                 
@@ -139,8 +151,13 @@ public class HexGrid : MonoBehaviour
                         }
                         if(cellIndex == 2)
                         {
-                            for(int i = touchedHexes.Count - 1; i >= 0; i--)
+                            for(int i = touchedHexes.Count - 1; i > 0; i--)
                             {
+                                if (touchedHexes[i].GetComponent<HexCell>().GetIndex() == 8)
+                                {
+                                    
+                                    continue;
+                                }
                                 Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
                                 Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
                                 touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
@@ -161,7 +178,7 @@ public class HexGrid : MonoBehaviour
 
                             StartCoroutine(CorrectFeel());
 
-                            if (cellIndex == 3)//if it is last index 
+                            if (cellIndex == 8)//if it is last index 
                             {
                                 UIManager.Instance.winPanel.SetActive(true);
                                 UIManager.Instance.inGameScreen.SetActive(false);
@@ -171,6 +188,7 @@ public class HexGrid : MonoBehaviour
                                 hexCell.SetIndex(2);
                                 hexCell.Colorize(2);
                                 touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
+                                
                                 Debug.Log("WWWW");
                             }
 
@@ -198,6 +216,7 @@ public class HexGrid : MonoBehaviour
                                 }
                             }
                             touchedHexes.Clear();
+                            touchedHexes.Add(touchedHexa);
                         }
                     }
                 }
@@ -212,8 +231,22 @@ public class HexGrid : MonoBehaviour
 
                 for (int i = 0; i < touchedHexes.Count; i++)
                 {
-                    if (touchedHexes[i].GetComponent<HexCell>().index == 3)
+                    if (touchedHexes[i].GetComponent<HexCell>().index == 2)
                     {
+                        Vector3 originEndPos = touchedHexes[i].GetComponent<HexCell>().originPos;
+                        Vector3 originEndChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
+                        touchedHexes[i].transform.DOMove(new Vector3(originEndPos.x, originEndPos.y, originEndPos.z), 0.1f);
+                        touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originEndChildPos.x, originEndChildPos.y, originEndChildPos.z), 0.1f);
+                        continue;
+                    }
+                    
+                    if (touchedHexes[i].GetComponent<HexCell>().index == 8)
+                    {
+                        Vector3 originEndPos = touchedHexes[i].GetComponent<HexCell>().originPos;
+                        Vector3 originEndChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
+                        touchedHexes[i].transform.DOMove(new Vector3(originEndPos.x, originEndPos.y, originEndPos.z), 0.1f);
+                        touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originEndChildPos.x, originEndChildPos.y, originEndChildPos.z), 0.1f);
+                        touchedHexes[i].GetComponent<HexCell>().SetIndex(3);
                         continue;
                     }
                     Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
@@ -224,6 +257,7 @@ public class HexGrid : MonoBehaviour
                     touchedSpriteRenderer.color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                     touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                 }
+                
                 // Clear the lists for the next touch event
                 touchedHexes.Clear();
             }
