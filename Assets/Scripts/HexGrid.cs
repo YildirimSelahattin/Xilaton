@@ -8,6 +8,7 @@ using System;
 using System.Reflection;
 using UnityEngine.UI;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class HexGrid : MonoBehaviour
 {
@@ -194,6 +195,7 @@ public class HexGrid : MonoBehaviour
                                 clueString = "";
                                 clueString += hexCell.GetComponentInChildren<TextMeshPro>().text;
                                 cluePointList.Clear();
+                                clueFindStartObject = touchedHexa;
                             }
 
                             for (int i = 0; i < touchedHexes.Count; i++)
@@ -383,7 +385,10 @@ public class HexGrid : MonoBehaviour
     {
         int clueHexIndex = GetNextClueIndex();
         Debug.Log(clueHexIndex);
-        gridList[clueHexIndex].GetComponent<HexCell>().hintObject.SetActive(true);
+        if (clueHexIndex !=-1)
+        {
+            gridList[clueHexIndex].GetComponent<HexCell>().hintObject.SetActive(true);
+        }
     }
 
     private int GetNextClueIndex()
@@ -396,17 +401,25 @@ public class HexGrid : MonoBehaviour
         {
             for (int i = -1; i < 2; i++)
             {
-                if (columnIndex + i < 0 || columnIndex + i >= gridWidth)
+                if(columnIndex + i <0)
                 {
                     continue;
                 }
+                int index = (gridWidth * (rowIndex - 1)) + columnIndex + i;
+                Debug.Log(index + "index");
+                if ((gridList[index].IsDestroyed()) || index < 0 || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+                {
+                    continue;
+                }
+                
                 foreach (string word in englishWords)
                 {
-                    int index = (gridWidth * (rowIndex - 1)) + columnIndex + i;
+                   
                     if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                     {
                         clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
                         cluePointList.Add(gridList[index]);
+                        clueFindStartObject = gridList[index];
                         return index;
                     }
                 }
@@ -415,39 +428,48 @@ public class HexGrid : MonoBehaviour
 
         for (int i = -1; i < 2; i = i + 2)
         {
-            if (columnIndex + i < 0 || columnIndex + i >= gridWidth)
+            if (columnIndex + i < 0)
+            {
+                continue;
+            }
+            int index = (gridWidth * (rowIndex)) + columnIndex + i;
+            if ((gridList[index].IsDestroyed()) || index < 0 || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]) )
             {
                 continue;
             }
             foreach (string word in englishWords)
             {
                 Debug.Log(word);
-                int index = (gridWidth * (rowIndex)) + columnIndex + i;
                 Debug.Log("qwe"+clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text);
                 if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                 {
                     clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
                     cluePointList.Add(gridList[index]);
+                    clueFindStartObject = gridList[index];
                     return index;
                 }
             }
         }
 
-        if (rowIndex + 1 >= gridWidth - 1)//Has a upper row
+        if (rowIndex + 1 <= gridWidth - 1)//Has a upper row
         {
+            Debug.Log("gridim");
             for (int i = -1; i < 2; i++)
             {
-                if (columnIndex + i < 0 || columnIndex + i >= gridWidth)
+                
+                int index = (gridWidth * (rowIndex + 1)) + columnIndex + i;
+              
+                if ((gridList[index].IsDestroyed()) ||index<0|| columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
                 {
                     continue;
                 }
                 foreach (string word in englishWords)
                 {
-                    int index = (gridWidth * (rowIndex + 1)) + columnIndex + i;
                     if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                     {
                         clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
                         cluePointList.Add(gridList[index]);
+                        clueFindStartObject = gridList[index];
                         return index;
                     }
                 }

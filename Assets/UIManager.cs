@@ -95,6 +95,6 @@ public class UIManager : MonoBehaviour
 
     public void GiveHint()
     {
-        
+        HexGrid.Instance.PaintHintHexa();
     }
 }
