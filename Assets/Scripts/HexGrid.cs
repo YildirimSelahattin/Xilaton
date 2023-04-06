@@ -1,13 +1,12 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.EventSystems;
 using System.Linq;
-using System;
-using System.Reflection;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class HexGrid : MonoBehaviour
 {
@@ -36,6 +35,9 @@ public class HexGrid : MonoBehaviour
 
     private int comboCounter = 1;
 
+    public GameObject clueFindStartObject;
+    public string clueString;
+    public List<GameObject> cluePointList;
     void Awake()
     {
         if (Instance == null)
@@ -83,8 +85,8 @@ public class HexGrid : MonoBehaviour
                             prevTouchedHex = touchedHexa;
                             Vector3 originPos = hexCell.originPos;
                             Vector3 originChildPos = hexCell.originChildPos;
-                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y-0.03f, originPos.z), 0.1f);
-                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y+0.03f, originChildPos.z), 0.1f);
+                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y - 0.03f, originPos.z), 0.1f);
+                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
                         }
                     }
                     else if (touchedHexa != prevTouchedHex && prevTouchedHex != null) // if it is different than the previous hex
@@ -98,11 +100,11 @@ public class HexGrid : MonoBehaviour
                             hexCell.SetIndex(4);
                             touchedHexes.Add(touchedHexa);
                             touchedHexa.GetComponent<SpriteRenderer>().color = touchColor;
-                            
+
                             Vector3 originPos = hexCell.originPos;
                             Vector3 originChildPos = hexCell.originChildPos;
-                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y-0.03f, originPos.z), 0.1f);
-                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y+0.03f, originChildPos.z), 0.1f);
+                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y - 0.03f, originPos.z), 0.1f);
+                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
                         }
                         if (cellIndex == 3)
                         {
@@ -112,11 +114,11 @@ public class HexGrid : MonoBehaviour
                             touchedHexes.Add(touchedHexa);
                             Vector3 originPos = hexCell.originPos;
                             Vector3 originChildPos = hexCell.originChildPos;
-                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y-0.03f, originPos.z), 0.1f);
-                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y+0.03f, originChildPos.z), 0.1f);
-                            
+                            hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y - 0.03f, originPos.z), 0.1f);
+                            hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
+
                         }
-                        if (cellIndex == 4 )
+                        if (cellIndex == 4)
                         {
                             /*List<char> touchedletterList = touchedLetters.ToList();
                             touchedletterList.Remove(hexCell.GetComponentInChildren<TextMeshPro>().text[0]);
@@ -125,14 +127,14 @@ public class HexGrid : MonoBehaviour
                             List<char> touchedletterList = touchedletterArray.ToList();
                             int index = Array.IndexOf(touchedHexes.ToArray(), touchedHexa);
                             Debug.Log("index" + index);
-                            for (int i = touchedHexes.Count-1; i >index; i--)
+                            for (int i = touchedHexes.Count - 1; i > index; i--)
                             {
                                 if (touchedHexes[i].GetComponent<HexCell>().index == 8)
                                 {
-                                    
+
                                     continue;
                                 }
-                                
+
                                 Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
                                 Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
                                 touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
@@ -143,19 +145,19 @@ public class HexGrid : MonoBehaviour
                                 touchedletterList.RemoveAt(i);
                                 touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                                 touchedHexes.RemoveAt(i);
-                                
+
                             }
                             touchedLetters = string.Join("", touchedletterList.ToArray()); ;
                             Debug.Log(touchedLetters);
 
                         }
-                        if(cellIndex == 2)
+                        if (cellIndex == 2)
                         {
-                            for(int i = touchedHexes.Count - 1; i > 0; i--)
+                            for (int i = touchedHexes.Count - 1; i > 0; i--)
                             {
                                 if (touchedHexes[i].GetComponent<HexCell>().GetIndex() == 8)
                                 {
-                                    
+                                    touchedHexes[i].GetComponent<HexCell>().SetIndex(3);
                                     continue;
                                 }
                                 Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
@@ -175,7 +177,6 @@ public class HexGrid : MonoBehaviour
                             comboCounter++;
                             UIManager.Instance.comboText.gameObject.SetActive(true);
                             UIManager.Instance.comboText.text = comboCounter + " x!";
-
                             StartCoroutine(CorrectFeel());
 
                             if (cellIndex == 8)//if it is last index 
@@ -188,8 +189,11 @@ public class HexGrid : MonoBehaviour
                                 hexCell.SetIndex(2);
                                 hexCell.Colorize(2);
                                 touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
-                                
                                 Debug.Log("WWWW");
+                                clueString = "";
+                                clueString += hexCell.GetComponentInChildren<TextMeshPro>().text;
+                                cluePointList.Clear();
+                                clueFindStartObject = touchedHexa;
                             }
 
                             for (int i = 0; i < touchedHexes.Count; i++)
@@ -199,8 +203,8 @@ public class HexGrid : MonoBehaviour
                                     if (touchedHexes[i].transform.tag == "Star")
                                     {
                                         touchedHexes[i].transform.GetChild(0).gameObject.SetActive(false);
-                                        Vector3 pos = Camera.main.WorldToScreenPoint(touchedHexes[i].transform.GetChild(0).gameObject.transform.position );
-                                        GameObject tempStar=Instantiate(UIManager.Instance.levelHeaderStar, pos,Quaternion.identity,UIManager.Instance.canvas.transform);
+                                        Vector3 pos = Camera.main.WorldToScreenPoint(touchedHexes[i].transform.GetChild(0).gameObject.transform.position);
+                                        GameObject tempStar = Instantiate(UIManager.Instance.levelHeaderStar, pos, Quaternion.identity, UIManager.Instance.canvas.transform);
                                         tempStar.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
                                         tempStar.transform.DOMove(UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.transform.position, 1f).OnComplete(() =>
                                         {
@@ -208,9 +212,9 @@ public class HexGrid : MonoBehaviour
                                             GameManager.Instance.currentStarAmount++;
                                             Destroy(tempStar.gameObject);
                                         });
-                                        
+
                                     }
-                                    
+
                                     touchedHexes[i].GetComponent<HexCell>().SetIndex(1);
                                     touchedHexes[i].GetComponent<HexCell>().Colorize(1);
                                 }
@@ -239,7 +243,7 @@ public class HexGrid : MonoBehaviour
                         touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originEndChildPos.x, originEndChildPos.y, originEndChildPos.z), 0.1f);
                         continue;
                     }
-                    
+
                     if (touchedHexes[i].GetComponent<HexCell>().index == 8)
                     {
                         Vector3 originEndPos = touchedHexes[i].GetComponent<HexCell>().originPos;
@@ -257,7 +261,7 @@ public class HexGrid : MonoBehaviour
                     touchedSpriteRenderer.color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                     touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                 }
-                
+
                 // Clear the lists for the next touch event
                 touchedHexes.Clear();
             }
@@ -322,6 +326,8 @@ public class HexGrid : MonoBehaviour
                 textMeshPro.text = GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index];
 
                 hex.GetComponent<HexCell>().SetIndex(0);
+                hex.GetComponent<HexCell>().columnIndex = x;
+                hex.GetComponent<HexCell>().rowIndex = y;
                 gridList.Add(hex);
 
                 if (GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index].Equals(""))
@@ -339,7 +345,7 @@ public class HexGrid : MonoBehaviour
                 {
                     Vector3 posHex = hex.transform.position;
                     cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
-                    
+
                     if (gridWidth >= gridHeight)
                     {
                         cam.orthographicSize = gridWidth + 1;
@@ -350,9 +356,9 @@ public class HexGrid : MonoBehaviour
                     }
                 }
             }
-            
+
         }
-        
+
         gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint].GetComponent<HexCell>()
             .SetIndex(2);
         gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint].GetComponent<HexCell>()
@@ -362,6 +368,8 @@ public class HexGrid : MonoBehaviour
             .SetIndex(3); //value of end point is 3;
         gridList[GameDataManager.Instance.data.deckArray[levelNumber].stopPoint].GetComponent<HexCell>()
             .Colorize(3); //value of end point is 3;
+        clueString = gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint].GetComponentInChildren<TextMeshPro>().text;
+        clueFindStartObject = gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint];
     }
 
     private void LoadEnglishWords(int levelNumber)
@@ -370,6 +378,104 @@ public class HexGrid : MonoBehaviour
         {
             englishWords.Add(word); // Harfler büyük olduğu için kelimeleri büyük harfe çeviriyoruz
         }
+    }
+    public void PaintHintHexa()
+    {
+        int clueHexIndex = GetNextClueIndex();
+        Debug.Log(clueHexIndex);
+        if (clueHexIndex != -1)
+        {
+            gridList[clueHexIndex].GetComponent<HexCell>().hintObject.SetActive(true);
+        }
+    }
+
+    private int GetNextClueIndex()
+    {
+        int rowIndex = clueFindStartObject.GetComponent<HexCell>().rowIndex;
+        int columnIndex = clueFindStartObject.GetComponent<HexCell>().columnIndex;
+        Debug.Log(rowIndex + "qwe" + columnIndex);
+
+        if (rowIndex - 1 >= 0)//Has a upper row
+        {
+            for (int i = -1; i < 2; i++)
+            {
+                if (columnIndex + i < 0)
+                {
+                    continue;
+                }
+                int index = (gridWidth * (rowIndex - 1)) + columnIndex + i;
+                Debug.Log(index + "index");
+                if ((gridList[index].IsDestroyed()) || index < 0 || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+                {
+                    continue;
+                }
+
+                foreach (string word in englishWords)
+                {
+
+                    if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
+                    {
+                        clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
+                        cluePointList.Add(gridList[index]);
+                        clueFindStartObject = gridList[index];
+                        return index;
+                    }
+                }
+            }
+        }
+
+        for (int i = -1; i < 2; i = i + 2)
+        {
+
+            int index = (gridWidth * (rowIndex)) + columnIndex + i;
+            if ((gridList[index].IsDestroyed()) || index < 0 || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+            {
+                continue;
+            }
+            foreach (string word in englishWords)
+            {
+                Debug.Log(word);
+                Debug.Log("qwe1" + clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text);
+                if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
+                {
+                    clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
+                    cluePointList.Add(gridList[index]);
+                    clueFindStartObject = gridList[index];
+                    return index;
+                }
+            }
+        }
+
+        if (rowIndex + 1 < gridWidth )//Has a lower row
+        {
+            Debug.Log("gridim");
+            for (int i = -1; i < 2; i++)
+            {
+
+                int index = (gridWidth * (rowIndex + 1)) + columnIndex + i;
+
+                if ((gridList[index].IsDestroyed()) || index < 0 || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+                {
+                    Debug.Log("geçtim");
+                    continue;
+                }
+                foreach (string word in englishWords)
+                {
+                    if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
+                    {
+                        clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
+                        Debug.Log("clueString"+clueString);
+
+                        cluePointList.Add(gridList[index]);
+                        clueFindStartObject = gridList[index];
+                        return index;
+                    }
+                }
+            }
+        }
+
+        return -1;
+
     }
 }
 

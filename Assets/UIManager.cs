@@ -92,4 +92,9 @@ public class UIManager : MonoBehaviour
         UIManager.goStartPage = true;
         SceneManager.LoadScene(0);
     }
+
+    public void GiveHint()
+    {
+        HexGrid.Instance.PaintHintHexa();
+    }
 }
