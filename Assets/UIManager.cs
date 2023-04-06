@@ -29,10 +29,8 @@ public class UIManager : MonoBehaviour
     public Button soundOff;
     public Button vibrationOn;
     public Button vibrationOff;
-    public GameObject optionBar;
     public GameObject GameMusic;
-
-
+    
     public Sprite filledStar;
     public Sprite emptyStar;
     public GameObject optionsPanel;
@@ -42,6 +40,7 @@ public class UIManager : MonoBehaviour
     public int isSoundOn;
     public int isMusicOn;
     public int isVibrateOn;
+    
     void Start()
     {
         if(Instance == null)
@@ -119,14 +118,6 @@ public class UIManager : MonoBehaviour
         {
             Instantiate(UIManager.Instance.levelHeaderStar, UIManager.Instance.starParent.transform);
         }
-    }
-
-    public void OnNextLevelButtonClicked()
-    {
-        GameDataManager.Instance.levelToLoad++;
-        HexGrid.loadDeckDirectly = true;
-        UIManager.goStartPage = false;
-        SceneManager.LoadScene(0);
     }
 
     public void OnRestartButtonClicked()
@@ -264,26 +255,11 @@ public class UIManager : MonoBehaviour
         Handheld.Vibrate();
         PlayerPrefs.SetInt("PlayVibrateKey", GameDataManager.Instance.playVibrate);
         //UpdateVibrate();
-
     }
 
     public void VibratePhone()
     {
         Handheld.Vibrate();
-    }
-
-
-
-    public void OpenCloseOptionBar()
-    {
-        if (optionBar.active)
-        {
-            optionBar.SetActive(false);
-        }
-        else
-        {
-            optionBar.SetActive(true);
-        }
     }
 
     public void OnClickOpenSettingButton()
@@ -297,7 +273,7 @@ public class UIManager : MonoBehaviour
     }
     
     public void OnLevelPageToHome()
-    {
+    { 
         levelSelectionPanel.SetActive(false);
         startScreen.SetActive(true);
     }
