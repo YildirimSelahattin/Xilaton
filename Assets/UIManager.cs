@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
 
     public Sprite filledStar;
     public Sprite emptyStar;
+    public GameObject optionsPanel;
 
     void Start()
     {
@@ -47,9 +49,24 @@ public class UIManager : MonoBehaviour
                 Instantiate(UIManager.Instance.levelHeaderStar, UIManager.Instance.starParent.transform);
             }
         }
-
     }
-    
+
+    private void Update()
+    {
+        if (optionsPanel.activeSelf)
+        {
+            // Make sure user is on Android platform
+            if (Application.platform == RuntimePlatform.Android) 
+            {
+                // Check if Back was pressed this frame
+                if (Input.GetKeyDown(KeyCode.Escape)) 
+                {
+                    optionsPanel.SetActive(false);
+                }
+            }
+        }
+    }
+
     public void OnLevelsButtonClicked()
     {
         levelSelectionPanel.SetActive(true);
@@ -73,7 +90,6 @@ public class UIManager : MonoBehaviour
 
     public void OnNextLevelButtonClicked()
     {
-
         GameDataManager.Instance.levelToLoad++;
         HexGrid.loadDeckDirectly = true;
         UIManager.goStartPage = false;
@@ -96,5 +112,21 @@ public class UIManager : MonoBehaviour
     public void GiveHint()
     {
         HexGrid.Instance.PaintHintHexa();
+    }
+
+    public void OnClickOpenSettingButton()
+    {
+        optionsPanel.SetActive(true);
+    }
+
+    public void OnClickCloseSettingPanel()
+    {
+        optionsPanel.SetActive(false);
+    }
+    
+    public void OnLevelPageToHome()
+    {
+        levelSelectionPanel.SetActive(false);
+        startScreen.SetActive(true);
     }
 }
