@@ -1,8 +1,5 @@
 {
 "deckArray":[
-
-    
-
     {
     "themeName":"",
     "gridValueIndexes":["G","O","D"],
@@ -21,14 +18,14 @@
     "J","E","S","U","S",
     "R","","","","U",
     "","E","F","F",""],
-    "starSpotIndexes":[3],
+    "starSpotIndexes":[8,10],
     "wordsCanBeFoundArray":["JESUS","SUFFER"],
     "startPoint":5,
-    "stopPoint":6,
-    "gridHeight":5 ,
+    "stopPoint":10,
+    "gridHeight":4 ,
     "gridWidth":5
     },
-
+    
     {
     "themeName":"Emotions",
     "gridValueIndexes":
@@ -37,8 +34,8 @@
     "Y","","E",
     "L","","A",
     "O","H","T"],
-    "starSpotIndexes":[3],
-    "wordsCanBeFoundArray":["GOD","DEVIL","LUCIFER"],
+    "starSpotIndexes":[4,9,14],
+    "wordsCanBeFoundArray":["GOD","DEATH","HOLY"],
     "startPoint":3,
     "stopPoint":6,
     "gridHeight":5 ,
@@ -53,16 +50,31 @@
     "A","","","","S",
     "D","","P","","E",
     "","E","","R",""],
-    "starSpotIndexes":[3],
+    "starSpotIndexes":[7,10],
     "wordsCanBeFoundArray":["SAD","DEPRESSION"],
     "startPoint":5,
     "stopPoint":6,
     "gridHeight":5 ,
     "gridWidth":5
     },
+    
+    {
+    "themeName":"Devil",
+    "gridValueIndexes":
+    ["","","","","","","",
+    "","","","","","","",
+    "G","O","D","E","V","I","L",
+    "A","","E","","I","","U",
+    "","R","","F","","C",""],
+    "starSpotIndexes":[15,19,29],
+    "wordsCanBeFoundArray":["GOD","DEVIL","LUCIFER"],
+    "startPoint":14,
+    "stopPoint":29,
+    "gridHeight":5,
+    "gridWidth":7
+    },
 
-      
-     {
+    {
     "themeName":"Body Parts",
     "gridValueIndexes":
     ["","","","","",
@@ -70,31 +82,13 @@
     "B","A","N","I","A",
     "C","A","G","M","T",
     "E","T","E","F","G"],
-    "starSpotIndexes":[7,12],
-    "wordsCanBeFoundArray":["BIBLE","EVIL","LUCIFER"],
-    "startPoint":0,
-    "stopPoint":17,
+    "starSpotIndexes":[8,12,21],
+    "wordsCanBeFoundArray":["JESUS","SING","GATE"],
+    "startPoint":5,
+    "stopPoint":22,
     "gridHeight":5,
     "gridWidth":5
     },
-
-         {
-    "themeName":"Emotions",
-    "gridValueIndexes":
-    ["","","",
-    "G","O","D",
-    "Y","","E",
-    "L","","A",
-    "O","H","T"],
-    "starSpotIndexes":[3],
-    "wordsCanBeFoundArray":["GOD","DEATH","HOLY"],
-    "startPoint":3,
-    "stopPoint":6,
-    "gridHeight":5 ,
-    "gridWidth":3
-    },
-
-    
 
     {
     "themeName":"Body Parts",
@@ -105,7 +99,7 @@
     "V","","","","L",
     "I","","O","","A",
     "","L","","Y",""],
-    "starSpotIndexes":[7,12],
+    "starSpotIndexes":[7,20,24],
     "wordsCanBeFoundArray":["DEVIL","LOYAL","LEADER"],
     "startPoint":5,
     "stopPoint":6,
@@ -113,13 +107,12 @@
     "gridWidth":5
     },
 
-
     {
     "themeName":"",
     "gridValueIndexes":
     ["A","D","A",
     "R","","R"],
-    "starSpotIndexes":[1],
+    "starSpotIndexes":[2],
     "wordsCanBeFoundArray":["RADAR"],
     "startPoint":3,
     "stopPoint":5,
@@ -134,7 +127,7 @@
     "C","A","R",
     "C","A","R",
     "","E",""],
-    "starSpotIndexes":[4],
+    "starSpotIndexes":[7],
     "wordsCanBeFoundArray":["CAR","RACER"],
     "startPoint":3,
     "stopPoint":8,
@@ -189,8 +182,8 @@
     "gridWidth":7
     },
 
-     {
-     "themeName":"Animals",
+    {
+    "themeName":"Animals",
     "gridValueIndexes":
     ["","","","","","","","","",
     "P","I","G","I","R","A","F","A","Y",
@@ -207,9 +200,9 @@
 
     {
     "themeName":"Countries",
-   "gridValueIndexes":
-   ["","","","","","","","","",
-   "E","D","E","F","M","I","B","G","A",
+    "gridValueIndexes":
+    ["","","","","","","","","",
+    "E","D","E","F","M","I","B","G","A",
     "S","W","N","A","B","I","A","M","S",
     "M","A","A","E","O","M","A","I","X",
     "E","B","I","T","R","S","D","L","T",
@@ -224,7 +217,7 @@
 
     {
     "themeName":"Foods",
-     "gridValueIndexes":
+    "gridValueIndexes":
     ["","","","","","","","","",
     "","","","","","","","","",
     "Y","A","M","D","J","Y","T","M","A",
@@ -257,9 +250,6 @@
     "gridWidth":5
     },
 
- 
-    
-
     {
     "themeName":"Camping",
     "gridValueIndexes":
@@ -277,8 +267,6 @@
     "gridHeight":7 ,
     "gridWidth":3
     },
-
-
 
     {
     "themeName":"Body Parts",
@@ -368,11 +356,11 @@
     "A","R","X","H","N",
     "I","T","E","I","O",
     "T","S","N","B","I",
-    "M","O","E","I","T"],
+    "M","O","P","I","T"],
     "starSpotIndexes":[7,17],
     "wordsCanBeFoundArray":["ARTIST","TONE","EXHIBITION"],
     "startPoint":5,
-    "stopPoint":4,
+    "stopPoint":9,
     "gridHeight":5,
     "gridWidth":5
     },
@@ -393,9 +381,7 @@
     "gridWidth":7
     },
 
-
-
-     {
+    {
     "themeName":"Family",
     "gridValueIndexes":
     ["C","A","D","R","C","M","N",
@@ -475,7 +461,7 @@
     "gridWidth":9
     },
 
-        {
+    {
     "themeName":"Education",
     "gridValueIndexes":
     ["","","","","","","","","",
@@ -489,6 +475,40 @@
     "stopPoint":16,
     "gridHeight":5,
     "gridWidth":9
+    },
+    
+    {
+    "themeName":"Music",
+    "gridValueIndexes":[
+    "","","","R","","","",
+    "","","Y","E","I","","",
+    "","O","L","L","C","X","",
+    "C","P","L","S","A","","O",
+    "T","A","U","","O","H","P",
+    "","","V","E","N","",""],
+    "starSpotIndexes":[11,15,30,37,39],
+    "wordsCanBeFoundArray":["LYRIC","CELLO","OPUS","SAXOPHONE","OCTAVE"],
+    "startPoint":3,
+    "stopPoint":38,
+    "gridHeight":6,
+    "gridWidth":7
+    },
+    
+    {
+    "themeName":"Mythology",
+    "gridValueIndexes":[
+    "","A","","E","",
+    "H","M","D","N","S",
+    "E","I","E","E","I",
+    "S","S","A","T","R",
+    "","","Y","","",
+    "","","R","",""],
+    "starSpotIndexes":[3,17],
+    "wordsCanBeFoundArray":["HADES","SIREN","NEMESIS","SATYR"],
+    "startPoint":5,
+    "stopPoint":27,
+    "gridHeight":6,
+    "gridWidth":5
     },
 
     {
@@ -526,8 +546,7 @@
     "gridHeight":7,
     "gridWidth":9
     }
-
-    ]
+]
 }
 
 
