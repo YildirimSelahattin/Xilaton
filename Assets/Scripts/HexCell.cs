@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HexCell : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class HexCell : MonoBehaviour
     public Vector3 originPos;
     public Vector3 originChildPos;
     public GameObject hintObject;
+    public SpriteRenderer belowSquareImage;
     
     private void Start()
     {

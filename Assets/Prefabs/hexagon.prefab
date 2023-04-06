@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 599a699dcc772684c863649832c5957e, type: 3}
-  m_Color: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
+  m_Color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -365,6 +365,7 @@ MonoBehaviour:
   originPos: {x: 0, y: 0, z: 0}
   originChildPos: {x: 0, y: 0, z: 0}
   hintObject: {fileID: 8667913383659931477}
+  belowSquareImage: {fileID: 4902234321652373179}
 --- !u!60 &4306469475738288766
 PolygonCollider2D:
   m_ObjectHideFlags: 0
