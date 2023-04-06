@@ -22,6 +22,7 @@ public class LevelSelectUIManager : MonoBehaviour
     public Sprite emptyStarSprite;
 
     public Sprite notInteractableButtonSprite;
+    public Sprite finishedButtonSprite;
 
     void Start()
     {
@@ -90,8 +91,10 @@ public class LevelSelectUIManager : MonoBehaviour
                     levelButton.GetComponent<Image>().sprite = notInteractableButtonSprite;
                     levelButton.GetComponent<Button>().interactable = false;
                 }
-                else
+                else if(index < GameDataManager.Instance.levelToLoad)
                 {
+                    levelButton.GetComponent<Image>().sprite = finishedButtonSprite;
+                    levelButton.GetComponent<LevelButtonManager>().levelNumberText.color = Color.white;
                     int starNumber = GameDataManager.Instance.data.deckArray[index - 1].starSpotIndexes.Count;
                     int earnedStarNumber = PlayerPrefs.GetInt("LevelStar" + index, 0);
                     for (int starCounter = 0; starCounter < starNumber; starCounter++)
