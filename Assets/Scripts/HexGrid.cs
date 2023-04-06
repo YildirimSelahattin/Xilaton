@@ -131,7 +131,6 @@ public class HexGrid : MonoBehaviour
                             {
                                 if (touchedHexes[i].GetComponent<HexCell>().index == 8)
                                 {
-
                                     continue;
                                 }
 
@@ -155,15 +154,16 @@ public class HexGrid : MonoBehaviour
                         {
                             for (int i = touchedHexes.Count - 1; i > 0; i--)
                             {
-                                if (touchedHexes[i].GetComponent<HexCell>().GetIndex() == 8)
-                                {
-                                    touchedHexes[i].GetComponent<HexCell>().SetIndex(3);
-                                    continue;
-                                }
                                 Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
                                 Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
                                 touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
                                 touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y, originPos.z), 0.1f);
+                                if (touchedHexes[i].GetComponent<HexCell>().GetIndex() == 8)
+                                {
+                                    touchedHexes[i].GetComponent<HexCell>().SetIndex(3);
+                                    touchedHexes.RemoveAt(i);
+                                    continue;
+                                }
                                 touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                                 touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                                 touchedHexes.RemoveAt(i);
