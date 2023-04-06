@@ -89,7 +89,7 @@ public class HexGrid : MonoBehaviour
                             hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
                         }
                     }
-                    else if (touchedHexa != prevTouchedHex && prevTouchedHex != null) // if it is different than the previous hex
+                    else if (touchedHexa != prevTouchedHex && prevTouchedHex != null && IsANeighbour(prevTouchedHex,touchedHexa)) // if it is different than the previous hex
                     {
                         prevTouchedHex = touchedHexa;
                         Debug.Log("DDDD");
@@ -224,6 +224,7 @@ public class HexGrid : MonoBehaviour
                         }
                     }
                 }
+                
             }
 
             if (touch.phase == TouchPhase.Ended)
@@ -476,6 +477,41 @@ public class HexGrid : MonoBehaviour
 
         return -1;
 
+    }
+
+    public bool IsANeighbour(GameObject prevTouchedHex,GameObject touchedHexa)
+    {
+        int rowIndexPrev = prevTouchedHex.GetComponent<HexCell>().rowIndex;
+        int columnIndexPrev = prevTouchedHex.GetComponent<HexCell>().columnIndex; 
+        int rowIndexCur = touchedHexa.GetComponent<HexCell>().rowIndex;
+        int columnIndexCur = touchedHexa.GetComponent<HexCell>().columnIndex;
+        if (rowIndexCur - 1 == rowIndexPrev)//Has a upper row
+        {
+            if (columnIndexCur==columnIndexPrev + 1|| columnIndexCur == columnIndexPrev|| columnIndexCur == columnIndexPrev  -1)
+            {
+                return true;
+            }
+        }
+
+        else if (rowIndexCur== rowIndexPrev)
+        {
+            if (columnIndexCur == columnIndexPrev + 1 ||  columnIndexCur == columnIndexPrev  -1)
+            {
+                return true;
+            }
+        }
+
+        else if (rowIndexCur + 1 == rowIndexPrev)//Has a lower row
+        {
+
+            if (columnIndexCur == columnIndexPrev + 1 || columnIndexCur == columnIndexPrev || columnIndexCur == columnIndexPrev  -1)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+        
     }
 }
 
