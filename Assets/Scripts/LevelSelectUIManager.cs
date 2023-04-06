@@ -20,7 +20,9 @@ public class LevelSelectUIManager : MonoBehaviour
     public GameObject starObject;
     public Sprite filledStarSprite;
     public Sprite emptyStarSprite;
-    
+
+    public Sprite notInteractableButtonSprite;
+
     void Start()
     {
         if(buttonPerGrid == 0)
@@ -82,22 +84,29 @@ public class LevelSelectUIManager : MonoBehaviour
                 LevelButtonManager buttonScript = levelButton.GetComponent<LevelButtonManager>();
                 buttonScript.levelIndex = index;
                 buttonScript.levelNumberText.text = index.ToString();
-                Debug.Log("as");
-                int starNumber = GameDataManager.Instance.data.deckArray[index-1].starSpotIndexes.Count;
-                int earnedStarNumber=PlayerPrefs.GetInt("LevelStar" + index, 0);
-                for (int starCounter = 0; starCounter < starNumber; starCounter++)
+
+                if (index > GameDataManager.Instance.levelToLoad)
                 {
-                    GameObject star = Instantiate(starObject,buttonScript.starParent.transform);
-                    if (earnedStarNumber > 0)
+                    levelButton.GetComponent<Image>().sprite = notInteractableButtonSprite;
+                    levelButton.GetComponent<Button>().interactable = false;
+                }
+                else
+                {
+                    int starNumber = GameDataManager.Instance.data.deckArray[index - 1].starSpotIndexes.Count;
+                    int earnedStarNumber = PlayerPrefs.GetInt("LevelStar" + index, 0);
+                    for (int starCounter = 0; starCounter < starNumber; starCounter++)
                     {
-                        star.GetComponent<Image>().sprite = filledStarSprite;
-                        earnedStarNumber--;
+                        GameObject star = Instantiate(starObject, buttonScript.starParent.transform);
+                        if (earnedStarNumber > 0)
+                        {
+                            star.GetComponent<Image>().sprite = filledStarSprite;
+                            earnedStarNumber--;
+                        }
+                        else
+                        {
+                            star.GetComponent<Image>().sprite = emptyStarSprite;
+                        }
                     }
-                    else
-                    {
-                        star.GetComponent<Image>().sprite = emptyStarSprite;
-                    }
-                    
                 }
             }
         }

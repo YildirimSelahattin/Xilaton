@@ -51,7 +51,7 @@ public class HexGrid : MonoBehaviour
         cam = Camera.main;
         if (loadDeckDirectly)
         {
-            CreateLevelByIndex(GameDataManager.Instance.levelToLoad);
+            CreateLevelByIndex(GameDataManager.Instance.levelToLoadWhenNextPressed);
             isGettingTouch = true;
             loadDeckDirectly = false;
         }
@@ -87,9 +87,15 @@ public class HexGrid : MonoBehaviour
                             Vector3 originChildPos = hexCell.originChildPos;
                             hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y - 0.03f, originPos.z), 0.1f);
                             hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
+                            if (GameDataManager.Instance.playSound == 1)
+                            {
+                                GameObject sound = new GameObject("sound");
+                                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.forwardMoveSound);
+                                Destroy(sound, GameDataManager.Instance.forwardMoveSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                            }
                         }
                     }
-                    else if (touchedHexa != prevTouchedHex && prevTouchedHex != null) // if it is different than the previous hex
+                    else if (touchedHexa != prevTouchedHex && prevTouchedHex != null && IsANeighbour(prevTouchedHex,touchedHexa)) // if it is different than the previous hex
                     {
                         prevTouchedHex = touchedHexa;
                         Debug.Log("DDDD");
@@ -105,6 +111,12 @@ public class HexGrid : MonoBehaviour
                             Vector3 originChildPos = hexCell.originChildPos;
                             hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y - 0.03f, originPos.z), 0.1f);
                             hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
+                            if (GameDataManager.Instance.playSound == 1)
+                            {
+                                GameObject sound = new GameObject("sound");
+                                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.forwardMoveSound);
+                                Destroy(sound, GameDataManager.Instance.forwardMoveSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                            }
                         }
                         if (cellIndex == 3)
                         {
@@ -149,6 +161,12 @@ public class HexGrid : MonoBehaviour
                             touchedLetters = string.Join("", touchedletterList.ToArray()); ;
                             Debug.Log(touchedLetters);
 
+                            if (GameDataManager.Instance.playSound == 1)
+                            {
+                                GameObject sound = new GameObject("sound");
+                                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.backwardMoveSound);
+                                Destroy(sound, GameDataManager.Instance.backwardMoveSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                            }
                         }
                         if (cellIndex == 2)
                         {
@@ -220,11 +238,18 @@ public class HexGrid : MonoBehaviour
                                     touchedHexes[i].GetComponent<HexCell>().Colorize(1);
                                 }
                             }
+                            if (GameDataManager.Instance.playSound == 1)
+                            {
+                                GameObject sound = new GameObject("sound");
+                                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.successSound);
+                                Destroy(sound, GameDataManager.Instance.successSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                            }
                             touchedHexes.Clear();
                             touchedHexes.Add(touchedHexa);
                         }
                     }
                 }
+                
             }
 
             if (touch.phase == TouchPhase.Ended)
@@ -262,6 +287,7 @@ public class HexGrid : MonoBehaviour
                     touchedSpriteRenderer.color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                     touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                 }
+
 
                 // Clear the lists for the next touch event
                 touchedHexes.Clear();
@@ -477,6 +503,41 @@ public class HexGrid : MonoBehaviour
 
         return -1;
 
+    }
+
+    public bool IsANeighbour(GameObject prevTouchedHex,GameObject touchedHexa)
+    {
+        int rowIndexPrev = prevTouchedHex.GetComponent<HexCell>().rowIndex;
+        int columnIndexPrev = prevTouchedHex.GetComponent<HexCell>().columnIndex; 
+        int rowIndexCur = touchedHexa.GetComponent<HexCell>().rowIndex;
+        int columnIndexCur = touchedHexa.GetComponent<HexCell>().columnIndex;
+        if (rowIndexCur - 1 == rowIndexPrev)//Has a upper row
+        {
+            if (columnIndexCur==columnIndexPrev + 1|| columnIndexCur == columnIndexPrev|| columnIndexCur == columnIndexPrev  -1)
+            {
+                return true;
+            }
+        }
+
+        else if (rowIndexCur== rowIndexPrev)
+        {
+            if (columnIndexCur == columnIndexPrev + 1 ||  columnIndexCur == columnIndexPrev  -1)
+            {
+                return true;
+            }
+        }
+
+        else if (rowIndexCur + 1 == rowIndexPrev)//Has a lower row
+        {
+
+            if (columnIndexCur == columnIndexPrev + 1 || columnIndexCur == columnIndexPrev || columnIndexCur == columnIndexPrev  -1)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+        
     }
 }
 
