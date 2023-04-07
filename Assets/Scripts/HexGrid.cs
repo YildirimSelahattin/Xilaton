@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,7 +22,17 @@ public class HexGrid : MonoBehaviour
     public List<GameObject> touchedHexes = new List<GameObject>();
 
     public GameObject prevTouchedHex;
-    public string touchedLetters;
+    
+    public string _touchedLetters;
+    public string touchedLetters   // property
+    {
+        get { return _touchedLetters; }   // get method
+        set
+        {
+            _touchedLetters = value;
+            UIManager.Instance.writenWordText.text = value;
+        }  // set method
+    }
 
     private HashSet<string> englishWords = new HashSet<string>();
     public List<GameObject> gridList;
@@ -51,7 +62,7 @@ public class HexGrid : MonoBehaviour
         cam = Camera.main;
         if (loadDeckDirectly)
         {
-            CreateLevelByIndex(GameDataManager.Instance.levelToLoadWhenNextPressed);
+            CreateLevelByIndex(GameDataManager.Instance.currentlevel);
             isGettingTouch = true;
             loadDeckDirectly = false;
         }
@@ -95,7 +106,7 @@ public class HexGrid : MonoBehaviour
                             }
                         }
                     }
-                    else if (touchedHexa != prevTouchedHex && prevTouchedHex != null && IsANeighbour(prevTouchedHex,touchedHexa)) // if it is different than the previous hex
+                    else if (touchedHexa != prevTouchedHex && prevTouchedHex != null && IsANeighbour(prevTouchedHex, touchedHexa)) // if it is different than the previous hex
                     {
                         prevTouchedHex = touchedHexa;
                         Debug.Log("DDDD");
@@ -145,17 +156,21 @@ public class HexGrid : MonoBehaviour
                                 {
                                     continue;
                                 }
-
+                                
                                 Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
                                 Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
                                 touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
                                 touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y, originPos.z), 0.1f);
                                 SpriteRenderer touchedSpriteRenderer = touchedHexes[i].GetComponent<SpriteRenderer>();
-                                touchedSpriteRenderer.color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
-                                touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
                                 touchedletterList.RemoveAt(i);
                                 touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
+                                if (!cluePointList.Contains(touchedHexes[i]))
+                                {
+                                    touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
+                                }
+                                touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                                 touchedHexes.RemoveAt(i);
+
 
                             }
                             touchedLetters = string.Join("", touchedletterList.ToArray()); ;
@@ -182,7 +197,10 @@ public class HexGrid : MonoBehaviour
                                     touchedHexes.RemoveAt(i);
                                     continue;
                                 }
-                                touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
+                                if (!cluePointList.Contains(touchedHexes[i]))
+                                {
+                                    touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
+                                }
                                 touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                                 touchedHexes.RemoveAt(i);
                             }
@@ -192,28 +210,13 @@ public class HexGrid : MonoBehaviour
                         //CONTROLL 
                         if (englishWords.Contains(touchedLetters))
                         {
+                            UIManager.Instance.hintButton.interactable = true;
                             comboCounter++;
                             UIManager.Instance.comboText.gameObject.SetActive(true);
                             UIManager.Instance.comboText.text = comboCounter + " x!";
                             StartCoroutine(CorrectFeel());
 
-                            if (cellIndex == 8)//if it is last index 
-                            {
-                                UIManager.Instance.starParent.GetComponent<Animator>().enabled = true;
-                                UIManager.Instance.winPanel.SetActive(true);
-                                UIManager.Instance.inGameScreen.SetActive(false);
-                            }
-                            else
-                            {
-                                hexCell.SetIndex(2);
-                                hexCell.Colorize(2);
-                                touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
-                                Debug.Log("WWWW");
-                                clueString = "";
-                                clueString += hexCell.GetComponentInChildren<TextMeshPro>().text;
-                                cluePointList.Clear();
-                                clueFindStartObject = touchedHexa;
-                            }
+
 
                             for (int i = 0; i < touchedHexes.Count; i++)
                             {
@@ -225,12 +228,13 @@ public class HexGrid : MonoBehaviour
                                         Vector3 pos = Camera.main.WorldToScreenPoint(touchedHexes[i].transform.GetChild(0).gameObject.transform.position);
                                         GameObject tempStar = Instantiate(UIManager.Instance.levelHeaderStar, pos, Quaternion.identity, UIManager.Instance.canvas.transform);
                                         tempStar.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
-                                        tempStar.transform.DOMove(UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.transform.position, 1f).OnComplete(() =>
+                                        int indexStarToOpen = GameManager.Instance.currentStarAmount;
+                                        tempStar.transform.DOMove(UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.transform.position, 0.5f).OnComplete(() =>
                                         {
-                                            UIManager.Instance.starParent.transform.GetChild(GameManager.Instance.currentStarAmount).gameObject.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
-                                            GameManager.Instance.currentStarAmount++;
+                                            UIManager.Instance.starParent.transform.GetChild(indexStarToOpen).gameObject.GetComponent<Image>().sprite = UIManager.Instance.filledStar;
                                             Destroy(tempStar.gameObject);
                                         });
+                                        GameManager.Instance.currentStarAmount++;
 
                                     }
 
@@ -238,18 +242,47 @@ public class HexGrid : MonoBehaviour
                                     touchedHexes[i].GetComponent<HexCell>().Colorize(1);
                                 }
                             }
-                            if (GameDataManager.Instance.playSound == 1)
-                            {
-                                GameObject sound = new GameObject("sound");
-                                sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.successSound);
-                                Destroy(sound, GameDataManager.Instance.successSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
-                            }
+                            
                             touchedHexes.Clear();
                             touchedHexes.Add(touchedHexa);
+
+                            if (cellIndex == 8)//if it is last index 
+                            {
+                                UIManager.Instance.starParent.GetComponent<Animator>().enabled = true;
+                                if (PlayerPrefs.GetInt("LevelStar" + GameDataManager.Instance.currentlevel, 0) < GameManager.Instance.currentStarAmount)
+                                {
+                                    PlayerPrefs.SetInt("LevelStar" + GameDataManager.Instance.currentlevel, GameManager.Instance.currentStarAmount);
+                                }
+                                UIManager.Instance.winPanel.SetActive(true);
+                                UIManager.Instance.inGameScreen.SetActive(false);
+                                if (GameDataManager.Instance.playSound == 1)
+                                {
+                                    GameObject sound = new GameObject("sound");
+                                    sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.levelSuccessSound);
+                                    Destroy(sound, GameDataManager.Instance.levelSuccessSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                                }
+                            }
+                            else
+                            {
+                                if (GameDataManager.Instance.playSound == 1)
+                                {
+                                    GameObject sound = new GameObject("sound");
+                                    sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.successSound);
+                                    Destroy(sound, GameDataManager.Instance.successSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                                }
+                                hexCell.SetIndex(2);
+                                hexCell.Colorize(2);
+                                touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
+                                Debug.Log("WWWW");
+                                clueString = "";
+                                clueString += hexCell.GetComponentInChildren<TextMeshPro>().text;
+                                cluePointList.Clear();
+                                clueFindStartObject = touchedHexa;
+                            }
                         }
                     }
                 }
-                
+
             }
 
             if (touch.phase == TouchPhase.Ended)
@@ -284,15 +317,28 @@ public class HexGrid : MonoBehaviour
                     touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
                     touchedHexes[i].transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y, originPos.z), 0.1f);
                     SpriteRenderer touchedSpriteRenderer = touchedHexes[i].GetComponent<SpriteRenderer>();
-                    touchedSpriteRenderer.color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
+
+                    if (!cluePointList.Contains(touchedHexes[i]))
+                    {
+                        touchedHexes[i].GetComponent<SpriteRenderer>().color = new Color(240 / 255f, 240 / 255f, 240 / 255f, 1);
+                    }
                     touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                 }
-
+                if (touchedHexes.Count>1)
+                {
+                    if (GameDataManager.Instance.playSound == 1)
+                    {
+                        GameObject sound = new GameObject("sound");
+                        sound.AddComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.failSound);
+                        Destroy(sound, GameDataManager.Instance.failSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+                    }
+                }
 
                 // Clear the lists for the next touch event
                 touchedHexes.Clear();
             }
         }
+       
     }
 
     public IEnumerator CorrectFeel()
@@ -406,45 +452,42 @@ public class HexGrid : MonoBehaviour
             englishWords.Add(word); // Harfler büyük olduğu için kelimeleri büyük harfe çeviriyoruz
         }
     }
-    public void PaintHintHexa()
+    public bool PaintHintHexa()
     {
         int clueHexIndex = GetNextClueIndex();
-        Debug.Log(clueHexIndex);
+        clueString += gridList[clueHexIndex].GetComponentInChildren<TextMeshPro>().text;
+        cluePointList.Add(gridList[clueHexIndex]);
+        clueFindStartObject = gridList[clueHexIndex];
         if (clueHexIndex != -1)
         {
-            gridList[clueHexIndex].GetComponent<HexCell>().hintObject.SetActive(true);
+            //gridList[clueHexIndex].GetComponent<HexCell>().hintObject.SetActive(true);
+            gridList[clueHexIndex].GetComponent<SpriteRenderer>().color = touchColor;
+            return false;
         }
+        return true;
     }
 
-    private int GetNextClueIndex()
+    public int GetNextClueIndex()
     {
         int rowIndex = clueFindStartObject.GetComponent<HexCell>().rowIndex;
         int columnIndex = clueFindStartObject.GetComponent<HexCell>().columnIndex;
-        Debug.Log(rowIndex + "qwe" + columnIndex);
 
         if (rowIndex - 1 >= 0)//Has a upper row
         {
             for (int i = -1; i < 2; i++)
             {
-                if (columnIndex + i < 0)
-                {
-                    continue;
-                }
+               
                 int index = (gridWidth * (rowIndex - 1)) + columnIndex + i;
-                Debug.Log(index + "index");
-                if ((gridList[index].IsDestroyed()) || index < 0 || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+                if (index < 0 || (gridList[index].IsDestroyed()) || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
                 {
                     continue;
                 }
-
+                Debug.Log("ust" +gridList[index].GetComponentInChildren<TextMeshPro>().text);
                 foreach (string word in englishWords)
                 {
-
                     if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                     {
-                        clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
-                        cluePointList.Add(gridList[index]);
-                        clueFindStartObject = gridList[index];
+                        
                         return index;
                     }
                 }
@@ -453,48 +496,40 @@ public class HexGrid : MonoBehaviour
 
         for (int i = -1; i < 2; i = i + 2)
         {
-
             int index = (gridWidth * (rowIndex)) + columnIndex + i;
-            if ((gridList[index].IsDestroyed()) || index < 0 || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+
+            if (  index < 0||(gridList[index].IsDestroyed())|| columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
             {
                 continue;
             }
+            Debug.Log("ayni" + gridList[index].GetComponentInChildren<TextMeshPro>().text);
             foreach (string word in englishWords)
             {
-                Debug.Log(word);
-                Debug.Log("qwe1" + clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text);
                 if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                 {
-                    clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
-                    cluePointList.Add(gridList[index]);
-                    clueFindStartObject = gridList[index];
+                   
                     return index;
                 }
             }
         }
 
-        if (rowIndex + 1 < gridWidth )//Has a lower row
+        if (rowIndex + 1 < gridWidth)//Has a lower row
         {
-            Debug.Log("gridim");
             for (int i = -1; i < 2; i++)
             {
 
                 int index = (gridWidth * (rowIndex + 1)) + columnIndex + i;
 
-                if ((gridList[index].IsDestroyed()) || index < 0 || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+                if (index < 0 || (gridList[index].IsDestroyed()) ||  columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
                 {
-                    Debug.Log("geçtim");
                     continue;
                 }
+                Debug.Log("alt" + gridList[index].GetComponentInChildren<TextMeshPro>().text);
                 foreach (string word in englishWords)
                 {
                     if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                     {
-                        clueString += gridList[index].GetComponentInChildren<TextMeshPro>().text;
-                        Debug.Log("clueString"+clueString);
-
-                        cluePointList.Add(gridList[index]);
-                        clueFindStartObject = gridList[index];
+                 
                         return index;
                     }
                 }
@@ -505,23 +540,23 @@ public class HexGrid : MonoBehaviour
 
     }
 
-    public bool IsANeighbour(GameObject prevTouchedHex,GameObject touchedHexa)
+    public bool IsANeighbour(GameObject prevTouchedHex, GameObject touchedHexa)
     {
         int rowIndexPrev = prevTouchedHex.GetComponent<HexCell>().rowIndex;
-        int columnIndexPrev = prevTouchedHex.GetComponent<HexCell>().columnIndex; 
+        int columnIndexPrev = prevTouchedHex.GetComponent<HexCell>().columnIndex;
         int rowIndexCur = touchedHexa.GetComponent<HexCell>().rowIndex;
         int columnIndexCur = touchedHexa.GetComponent<HexCell>().columnIndex;
         if (rowIndexCur - 1 == rowIndexPrev)//Has a upper row
         {
-            if (columnIndexCur==columnIndexPrev + 1|| columnIndexCur == columnIndexPrev|| columnIndexCur == columnIndexPrev  -1)
+            if (columnIndexCur == columnIndexPrev + 1 || columnIndexCur == columnIndexPrev || columnIndexCur == columnIndexPrev - 1)
             {
                 return true;
             }
         }
 
-        else if (rowIndexCur== rowIndexPrev)
+        else if (rowIndexCur == rowIndexPrev)
         {
-            if (columnIndexCur == columnIndexPrev + 1 ||  columnIndexCur == columnIndexPrev  -1)
+            if (columnIndexCur == columnIndexPrev + 1 || columnIndexCur == columnIndexPrev - 1)
             {
                 return true;
             }
@@ -530,14 +565,14 @@ public class HexGrid : MonoBehaviour
         else if (rowIndexCur + 1 == rowIndexPrev)//Has a lower row
         {
 
-            if (columnIndexCur == columnIndexPrev + 1 || columnIndexCur == columnIndexPrev || columnIndexCur == columnIndexPrev  -1)
+            if (columnIndexCur == columnIndexPrev + 1 || columnIndexCur == columnIndexPrev || columnIndexCur == columnIndexPrev - 1)
             {
                 return true;
             }
         }
-        
+
         return false;
-        
+
     }
 }
 

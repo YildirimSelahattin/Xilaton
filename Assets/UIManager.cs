@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     public GameObject startScreen;
     public GameObject winPanel;
     public GameObject inGameScreen;
-    public TextMeshProUGUI levelText;
     public int levelIndex = 1;
     public static bool goStartPage = true;
     public TextMeshProUGUI comboText;
@@ -40,6 +39,8 @@ public class UIManager : MonoBehaviour
     public int isSoundOn;
     public int isMusicOn;
     public int isVibrateOn;
+
+    public TextMeshProUGUI writenWordText;
     
     void Start()
     {
@@ -91,10 +92,10 @@ public class UIManager : MonoBehaviour
 
     public void OnNextLevelButtonClicked()
     {
-        GameDataManager.Instance.levelToLoadWhenNextPressed++;
-        if (GameDataManager.Instance.levelToLoadWhenNextPressed>GameDataManager.Instance.levelToLoad)
+        GameDataManager.Instance.currentlevel++;
+        if (GameDataManager.Instance.currentlevel >GameDataManager.Instance.levelToLoad)
         {
-            GameDataManager.Instance.levelToLoad = GameDataManager.Instance.levelToLoadWhenNextPressed;
+            GameDataManager.Instance.levelToLoad = GameDataManager.Instance.currentlevel;
         }
         GameDataManager.Instance.hintAmount++;
         GameDataManager.Instance.SaveData();
@@ -107,7 +108,6 @@ public class UIManager : MonoBehaviour
         startScreen.SetActive(false);
         inGameScreen.SetActive(true);
         starParent.SetActive(true);
-        UIManager.Instance.levelText.text = "LEVEL " + GameDataManager.Instance.levelToLoad.ToString();
         UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
         hintAmount.text = GameDataManager.Instance.hintAmount.ToString();
         if (GameDataManager.Instance.hintAmount == 0)
@@ -135,14 +135,21 @@ public class UIManager : MonoBehaviour
 
     public void GiveHint()
     {
-        GameDataManager.Instance.hintAmount--;
-        hintAmount.text = GameDataManager.Instance.hintAmount.ToString();
-        HexGrid.Instance.PaintHintHexa();
-        GameDataManager.Instance.SaveData();
-        if (GameDataManager.Instance.hintAmount == 0)
+        if (HexGrid.Instance.PaintHintHexa())
+        {
+            GameDataManager.Instance.hintAmount--;
+            hintAmount.text = GameDataManager.Instance.hintAmount.ToString();
+            GameDataManager.Instance.SaveData();
+            if (GameDataManager.Instance.hintAmount == 0)
+            {
+                hintButton.interactable = false;
+            }
+        }
+        if (HexGrid.Instance.GetNextClueIndex()==-1)
         {
             hintButton.interactable = false;
         }
+       
 
     }
     //DEFAULT UI FUNCTIONS

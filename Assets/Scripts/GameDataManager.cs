@@ -9,7 +9,7 @@ public class GameDataManager : MonoBehaviour
     public TextAsset JSONText;
     public static GameDataManager Instance;
     public int levelToLoad;
-    public int levelToLoadWhenNextPressed;
+    public int currentlevel;
     public int totalLevelNumber;
     public int hintAmount;
     public int playSound;
@@ -19,6 +19,7 @@ public class GameDataManager : MonoBehaviour
     public AudioClip backwardMoveSound;
     public AudioClip successSound;
     public AudioClip failSound;
+    public AudioClip levelSuccessSound;
 
     // Start is called before the first frame update
     void Awake()
@@ -38,7 +39,7 @@ public class GameDataManager : MonoBehaviour
         playVibrate = PlayerPrefs.GetInt("PlayVibrate", 1);
         data = JsonUtility.FromJson<DataLists>(JSONText.text);
         levelToLoad = PlayerPrefs.GetInt("levelToLoad", 1);
-        levelToLoadWhenNextPressed = levelToLoad + 1;
+        currentlevel = levelToLoad;
         totalLevelNumber = data.deckArray.Length;
         Debug.Log(data.deckArray[0].gridValueIndexes[0]);
         hintAmount = PlayerPrefs.GetInt("HintAmount", 3);
