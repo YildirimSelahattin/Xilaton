@@ -10,16 +10,6 @@ public class LevelButtonManager : MonoBehaviour
     public TextMeshProUGUI levelNumberText;
     public int levelIndex;
     public GameObject starParent;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     public void OnButtonClicked()
     {

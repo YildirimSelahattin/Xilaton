@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,18 +29,18 @@ public class UIManager : MonoBehaviour
     public Button soundOff;
     public Button vibrationOn;
     public Button vibrationOff;
-    public GameObject optionBar;
     public GameObject GameMusic;
-
-
+    
     public Sprite filledStar;
     public Sprite emptyStar;
+    public GameObject optionsPanel;
     public TextMeshProUGUI hintAmount;
     public Button hintButton;
 
     public int isSoundOn;
     public int isMusicOn;
     public int isVibrateOn;
+    
     void Start()
     {
         if(Instance == null)
@@ -58,7 +59,23 @@ public class UIManager : MonoBehaviour
         UpdateMusic();
         UpdateVibrate();
     }
-    
+
+    private void Update()
+    {
+        if (optionsPanel.activeSelf)
+        {
+            // Make sure user is on Android platform
+            if (Application.platform == RuntimePlatform.Android) 
+            {
+                // Check if Back was pressed this frame
+                if (Input.GetKeyDown(KeyCode.Escape)) 
+                {
+                    optionsPanel.SetActive(false);
+                }
+            }
+        }
+    }
+
     public void OnLevelsButtonClicked()
     {
         levelSelectionPanel.SetActive(true);
@@ -238,7 +255,6 @@ public class UIManager : MonoBehaviour
         Handheld.Vibrate();
         PlayerPrefs.SetInt("PlayVibrateKey", GameDataManager.Instance.playVibrate);
         //UpdateVibrate();
-
     }
 
     public void VibratePhone()
@@ -246,17 +262,19 @@ public class UIManager : MonoBehaviour
         Handheld.Vibrate();
     }
 
-
-
-    public void OpenCloseOptionBar()
+    public void OnClickOpenSettingButton()
     {
-        if (optionBar.active)
-        {
-            optionBar.SetActive(false);
-        }
-        else
-        {
-            optionBar.SetActive(true);
-        }
+        optionsPanel.SetActive(true);
+    }
+
+    public void OnClickCloseSettingPanel()
+    {
+        optionsPanel.SetActive(false);
+    }
+    
+    public void OnLevelPageToHome()
+    { 
+        levelSelectionPanel.SetActive(false);
+        startScreen.SetActive(true);
     }
 }

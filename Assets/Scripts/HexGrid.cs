@@ -199,6 +199,7 @@ public class HexGrid : MonoBehaviour
 
                             if (cellIndex == 8)//if it is last index 
                             {
+                                UIManager.Instance.starParent.GetComponent<Animator>().enabled = true;
                                 UIManager.Instance.winPanel.SetActive(true);
                                 UIManager.Instance.inGameScreen.SetActive(false);
                             }
