@@ -13,6 +13,7 @@ public class LevelButtonManager : MonoBehaviour
     
     public void OnButtonClicked()
     {
+        UIManager.Instance.PlayUISound();
         GameDataManager.Instance.currentlevel = levelIndex;
         HexGrid.Instance.CreateLevelByIndex(levelIndex);
         UIManager.Instance.levelSelectionPanel.SetActive(false);

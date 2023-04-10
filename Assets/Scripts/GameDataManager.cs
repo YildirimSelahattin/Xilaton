@@ -20,7 +20,7 @@ public class GameDataManager : MonoBehaviour
     public AudioClip successSound;
     public AudioClip failSound;
     public AudioClip levelSuccessSound;
-
+    public AudioClip clickSound;
     // Start is called before the first frame update
     void Awake()
     {

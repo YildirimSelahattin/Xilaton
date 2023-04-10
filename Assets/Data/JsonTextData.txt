@@ -1,10 +1,10 @@
 {
 "deckArray":[
     {
-    "themeName":"",
-    "gridValueIndexes":["G","O","D"],
+    "themeName":"BIRTH",
+    "gridValueIndexes":["M","O","M"],
     "starSpotIndexes":[1],
-    "wordsCanBeFoundArray":["GOD"],
+    "wordsCanBeFoundArray":["MOM"],
     "startPoint":0,
     "stopPoint":2,
     "gridHeight":1,
@@ -12,7 +12,7 @@
     },
 
     {
-    "themeName":"Emotions",
+    "themeName":"CHRIST",
     "gridValueIndexes":
     ["","","","","",
     "J","E","S","U","S",
@@ -27,7 +27,7 @@
     },
     
     {
-    "themeName":"Emotions",
+    "themeName":"LIFE",
     "gridValueIndexes":
     ["","","",
     "G","O","D",
@@ -43,7 +43,7 @@
     },
 
     {
-    "themeName":"Emotions",
+    "themeName":"EMOTIONS",
     "gridValueIndexes":
     ["","","","","",
     "S","N","O","I","S",
@@ -59,7 +59,7 @@
     },
     
     {
-    "themeName":"Devil",
+    "themeName":"BIBLE",
     "gridValueIndexes":
     ["","","","","","","",
     "","","","","","","",
@@ -75,7 +75,7 @@
     },
 
     {
-    "themeName":"Body Parts",
+    "themeName":"Heaven",
     "gridValueIndexes":
     ["","","","","",
     "J","E","S","U","S",
@@ -90,22 +90,7 @@
     "gridWidth":5
     },
 
-    {
-    "themeName":"Body Parts",
-    "gridValueIndexes":
-    ["","","","","",
-    "D","R","E","D","A",
-    "E","","","","E",
-    "V","","","","L",
-    "I","","O","","A",
-    "","L","","Y",""],
-    "starSpotIndexes":[7,20,24],
-    "wordsCanBeFoundArray":["DEVIL","LOYAL","LEADER"],
-    "startPoint":5,
-    "stopPoint":6,
-    "gridHeight":6,
-    "gridWidth":5
-    },
+   
 
     {
     "themeName":"",
@@ -168,7 +153,7 @@
     },
 
     {
-    "themeName":"Fruits",
+    "themeName":"FRUITS",
     "gridValueIndexes":
     ["","","","","","","",
     "M","A","N","R","A","N","E",
@@ -183,7 +168,7 @@
     },
 
     {
-    "themeName":"Animals",
+    "themeName":"ANIMALS",
     "gridValueIndexes":
     ["","","","","","","","","",
     "P","I","G","I","R","A","F","A","Y",
@@ -199,7 +184,7 @@
     },
 
     {
-    "themeName":"Countries",
+    "themeName":"COUNTRIES",
     "gridValueIndexes":
     ["","","","","","","","","",
     "E","D","E","F","M","I","B","G","A",
@@ -209,7 +194,7 @@
     "E","W","T","H","E","L","A","N","U"],
     "starSpotIndexes":[39,33],
     "wordsCanBeFoundArray":["SWEDEN","NETHERLANDS","SOMALIA","NAMIBIA"],
-    "startPoint":1,
+    "startPoint":18,
     "stopPoint":24,
     "gridHeight":6,
     "gridWidth":9
@@ -251,7 +236,7 @@
     },
 
     {
-    "themeName":"Camping",
+    "themeName":"CAMPING",
     "gridValueIndexes":
     ["","","",
     "A","B","P",
@@ -300,7 +285,7 @@
     },
 
     {
-    "themeName":"Cinema",
+    "themeName":"CINEMA",
     "gridValueIndexes":
     ["","","","","",
     "D","I","R","E","C",
@@ -382,7 +367,7 @@
     },
 
     {
-    "themeName":"Family",
+    "themeName":"FAMILY",
     "gridValueIndexes":
     ["C","A","D","R","C","M","N",
     "I","H","A","U","H","A","T",
@@ -414,7 +399,7 @@
     },
 
     {
-    "themeName":"Birds",
+    "themeName":"BIRDS",
     "gridValueIndexes":
     ["","","","","",
     "C","R","O","E","L",
@@ -437,7 +422,7 @@
     "B","I","I","A","E","R","E",
     "B","N","W","N","D","T","E",
     "","O","","I","","R",""],
-    "starSpotIndexes":[3,24],
+    "starSpotIndexes":[19,24],
     "wordsCanBeFoundArray":["RIVER","RAINBOW","WIND","DESERT","TREE"],
     "startPoint":7,
     "stopPoint":20,
@@ -446,14 +431,14 @@
     },
 
     {
-    "themeName":"Animals",
+    "themeName":"ANIMALS",
     "gridValueIndexes":
     ["","","","","","","","","",
     "T","I","L","E","L","N","A","L","U",
     "E","G","E","I","E","U","T","T","N",
     "H","R","P","T","P","A","N","A","A",
     "","G","","R","","H","","R",""],
-    "starSpotIndexes":[3,9,11],
+    "starSpotIndexes":[43,9,11],
     "wordsCanBeFoundArray":["TIGER","REPTILE","TUNA","ELEPHANT","TARANTULA"],
     "startPoint":9,
     "stopPoint":15,
@@ -462,14 +447,14 @@
     },
 
     {
-    "themeName":"Education",
+    "themeName":"EDUCATION",
     "gridValueIndexes":
     ["","","","","","","","","",
     "L","E","C","T","R","E","N","T","",
     "","","A","U","E","D","","C","",
     "","M","A","X","T","U","T","E","J",
     "","","","S","E","R","S","U","B"],
-    "starSpotIndexes":[5],
+    "starSpotIndexes":[23],
     "wordsCanBeFoundArray":["LECTURE","EXAM","MASTERS","STUDENT","SUBJECT"],
     "startPoint":9,
     "stopPoint":16,
@@ -478,7 +463,7 @@
     },
     
     {
-    "themeName":"Music",
+    "themeName":"MUSIC",
     "gridValueIndexes":[
     "","","Y","R","I","","",
     "","","L","E","C","","",
@@ -488,7 +473,7 @@
     "","","","E","","",""],
     "starSpotIndexes":[17,24],
     "wordsCanBeFoundArray":["LYRIC","CELLO","OPUS","SAXOPHONE","OCTAVE"],
-    "startPoint":10,
+    "startPoint":9,
     "stopPoint":38,
     "gridHeight":6,
     "gridWidth":7
@@ -501,18 +486,17 @@
     "R","O","T","E","A","T","H",
     "L","E","P","E","C","U","B",
     "E","O","C","L","P","S","B",
-    "","A","V","","N","H","",
     "A","S","","I","","E","L"],
     "starSpotIndexes":[18,17,16],
     "wordsCanBeFoundArray":["ROCKET","TELESCOPE","EARTH","ECLIPSE","HUBBLE"],
     "startPoint":7,
-    "stopPoint":40,
-    "gridHeight":6,
+    "stopPoint":33,
+    "gridHeight":5,
     "gridWidth":7
     },
     
     {
-    "themeName":"History",
+    "themeName":"HISTORY",
     "gridValueIndexes":[
     "A","N","E","R","E","M","P",
     "","I","S","C","R","E","",
@@ -571,7 +555,7 @@
     "T","E","N","S","A","I","N","E","W",
     "M","S","E","A","U","S","E","A","Z",
     "A","I","M","Y","A","R","D","R","K"],
-    "starSpotIndexes":[1,2,3],
+    "starSpotIndexes":[29,56,59],
     "wordsCanBeFoundArray":["WATER","RAIN","NEW","RATE","ENEMY","YARD","DRAW","NERD"],
     "startPoint":9,
     "stopPoint":44,

@@ -8,6 +8,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class HexGrid : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class HexGrid : MonoBehaviour
     public List<GameObject> touchedHexes = new List<GameObject>();
 
     public GameObject prevTouchedHex;
-    
+
     public string _touchedLetters;
     public string touchedLetters   // property
     {
@@ -44,11 +45,15 @@ public class HexGrid : MonoBehaviour
     Camera cam;
     public static bool loadDeckDirectly;
 
-    private int comboCounter = 1;
+    public int comboCounter = 1;
 
     public GameObject clueFindStartObject;
     public string clueString;
     public List<GameObject> cluePointList;
+    public GameObject tutorialHandPrefab;
+    public GameObject tutorialHand;
+    public GameObject buttonPressTutorialPrefab;
+    public GameObject buttonPressTutorialHand;
     void Awake()
     {
         if (Instance == null)
@@ -70,6 +75,7 @@ public class HexGrid : MonoBehaviour
 
     void Update()
     {
+
         if (Input.touchCount > 0 && isGettingTouch)
         {
             Touch touch = Input.GetTouch(0);
@@ -156,7 +162,7 @@ public class HexGrid : MonoBehaviour
                                 {
                                     continue;
                                 }
-                                
+
                                 Vector3 originPos = touchedHexes[i].GetComponent<HexCell>().originPos;
                                 Vector3 originChildPos = touchedHexes[i].GetComponent<HexCell>().originChildPos;
                                 touchedHexes[i].transform.DOMove(new Vector3(originPos.x, originPos.y, originPos.z), 0.1f);
@@ -211,12 +217,22 @@ public class HexGrid : MonoBehaviour
                         if (englishWords.Contains(touchedLetters))
                         {
                             UIManager.Instance.hintButton.interactable = true;
-                            comboCounter++;
-                            UIManager.Instance.comboText.gameObject.SetActive(true);
-                            UIManager.Instance.comboText.text = comboCounter + " x!";
+                            UIManager.Instance.comboText.text = comboCounter + "x!";
+                            UIManager.Instance.comboText.gameObject.transform.parent.gameObject.SetActive(true);
                             StartCoroutine(CorrectFeel());
+                            comboCounter++;
 
-
+                            if (PlayerPrefs.GetInt("HaveEverPlayedLevel2", 0) == 0 && GameDataManager.Instance.currentlevel == 2)
+                            {
+                                tutorialHand.transform.DOKill();
+                                List<Vector3> moveList = new List<Vector3>();
+                                int[] indexes = new int[] { 9, 14, 18, 17, 16, 10 };
+                                foreach (int index in indexes)
+                                {
+                                    moveList.Add(new Vector3(gridList[index].transform.position.x, gridList[index].transform.position.y, -8));
+                                }
+                                tutorialHand.GetComponent<TutorialHandManager>().TutorialMove(moveList);
+                            }
 
                             for (int i = 0; i < touchedHexes.Count; i++)
                             {
@@ -242,7 +258,7 @@ public class HexGrid : MonoBehaviour
                                     touchedHexes[i].GetComponent<HexCell>().Colorize(1);
                                 }
                             }
-                            
+
                             touchedHexes.Clear();
                             touchedHexes.Add(touchedHexa);
 
@@ -255,6 +271,10 @@ public class HexGrid : MonoBehaviour
                                 }
                                 UIManager.Instance.winPanel.SetActive(true);
                                 UIManager.Instance.inGameScreen.SetActive(false);
+                                if (tutorialHand != null)
+                                {
+                                    Destroy(tutorialHand.gameObject);
+                                }
                                 if (GameDataManager.Instance.playSound == 1)
                                 {
                                     GameObject sound = new GameObject("sound");
@@ -288,7 +308,7 @@ public class HexGrid : MonoBehaviour
             if (touch.phase == TouchPhase.Ended)
             {
                 prevTouchedHex = null;
-                comboCounter = 0;
+                comboCounter = 1;
                 touchedLetters = "";
                 // Set the index of all other touched hexagons to 1
 
@@ -324,7 +344,7 @@ public class HexGrid : MonoBehaviour
                     }
                     touchedHexes[i].GetComponent<HexCell>().SetIndex(0);
                 }
-                if (touchedHexes.Count>1)
+                if (touchedHexes.Count > 1)
                 {
                     if (GameDataManager.Instance.playSound == 1)
                     {
@@ -338,7 +358,7 @@ public class HexGrid : MonoBehaviour
                 touchedHexes.Clear();
             }
         }
-       
+
     }
 
     public IEnumerator CorrectFeel()
@@ -358,6 +378,7 @@ public class HexGrid : MonoBehaviour
         gridHeight = GameDataManager.Instance.data.deckArray[levelNumber].gridHeight;
         isGettingTouch = true;
         CreateGrid(levelNumber);
+
     }
 
     GameObject GetHexAtPosition(Vector3 position)
@@ -443,8 +464,65 @@ public class HexGrid : MonoBehaviour
             .Colorize(3); //value of end point is 3;
         clueString = gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint].GetComponentInChildren<TextMeshPro>().text;
         clueFindStartObject = gridList[GameDataManager.Instance.data.deckArray[levelNumber].startPoint];
-    }
+        TutorialShow();
 
+    }
+    public void TutorialShow()
+    {
+        if (GameDataManager.Instance.currentlevel == 1)
+        {
+            if (PlayerPrefs.GetInt("HaveEverPlayedLevel1", 0) == 0)
+            {
+                GameObject tutorialHandObject = Instantiate(tutorialHandPrefab);
+                tutorialHand = tutorialHandObject;
+                List<Vector3> moveList = new List<Vector3>();
+                for (int i = 0; i < 3; i++)
+                {
+                    moveList.Add(new Vector3(gridList[i].transform.position.x, gridList[i].transform.position.y, -8));
+                }
+                tutorialHandObject.GetComponent<TutorialHandManager>().TutorialMove(moveList);
+            }
+        }
+        if (GameDataManager.Instance.currentlevel == 2)
+        {
+            if (PlayerPrefs.GetInt("HaveEverPlayedLevel2", 0) == 0)
+            {
+                GameObject tutorialHandObject = Instantiate(tutorialHandPrefab);
+                tutorialHand = tutorialHandObject;
+                List<Vector3> moveList = new List<Vector3>();
+                //first word
+                for (int i = 5; i < 10; i++)
+                {
+                    moveList.Add(new Vector3(gridList[i].transform.position.x, gridList[i].transform.position.y, -8));
+                }
+                tutorialHandObject.GetComponent<TutorialHandManager>().TutorialMove(moveList);
+            }
+        }
+
+        if (GameDataManager.Instance.currentlevel == 3)
+        {
+            if (PlayerPrefs.GetInt("HaveEverPlayedLevel3", 0) == 0)
+            {
+                GameObject tutorialHandObject = Instantiate(tutorialHandPrefab);
+                tutorialHand = tutorialHandObject;
+                List<Vector3> moveList = new List<Vector3>();
+                int[] indexes = new int[] { 3,4,5,8,11,14,13,12,9,6 };
+                foreach (int index in indexes)
+                {
+                    moveList.Add(new Vector3(gridList[index].transform.position.x, gridList[index].transform.position.y, -8));
+                }
+                tutorialHand.GetComponent<TutorialHandManager>().TutorialMove(moveList);
+            }
+        }
+        if (GameDataManager.Instance.currentlevel == 4)
+        {
+            if (PlayerPrefs.GetInt("HaveEverPlayedLevel4", 0) == 0)
+            {
+                buttonPressTutorialHand= Instantiate(buttonPressTutorialPrefab, UIManager.Instance.hintButton.transform);
+                buttonPressTutorialHand.AddComponent<ButtonPressTutorial>().MoveFunc();
+            }
+        }
+    }
     private void LoadEnglishWords(int levelNumber)
     {
         foreach (string word in GameDataManager.Instance.data.deckArray[levelNumber].wordsCanBeFoundArray)
@@ -476,18 +554,18 @@ public class HexGrid : MonoBehaviour
         {
             for (int i = -1; i < 2; i++)
             {
-               
+
                 int index = (gridWidth * (rowIndex - 1)) + columnIndex + i;
                 if (index < 0 || (gridList[index].IsDestroyed()) || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
                 {
                     continue;
                 }
-                Debug.Log("ust" +gridList[index].GetComponentInChildren<TextMeshPro>().text);
+                Debug.Log("ust" + gridList[index].GetComponentInChildren<TextMeshPro>().text);
                 foreach (string word in englishWords)
                 {
                     if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                     {
-                        
+
                         return index;
                     }
                 }
@@ -498,7 +576,7 @@ public class HexGrid : MonoBehaviour
         {
             int index = (gridWidth * (rowIndex)) + columnIndex + i;
 
-            if (  index < 0||(gridList[index].IsDestroyed())|| columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+            if (index < 0 || (gridList[index].IsDestroyed()) || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
             {
                 continue;
             }
@@ -507,7 +585,7 @@ public class HexGrid : MonoBehaviour
             {
                 if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                 {
-                   
+
                     return index;
                 }
             }
@@ -520,7 +598,7 @@ public class HexGrid : MonoBehaviour
 
                 int index = (gridWidth * (rowIndex + 1)) + columnIndex + i;
 
-                if (index < 0 || (gridList[index].IsDestroyed()) ||  columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
+                if (index < 0 || (gridList[index].IsDestroyed()) || columnIndex + i < 0 || columnIndex + i >= gridWidth || gridList[index].GetComponent<HexCell>().index == 1 || cluePointList.Contains(gridList[index]))
                 {
                     continue;
                 }
@@ -529,7 +607,7 @@ public class HexGrid : MonoBehaviour
                 {
                     if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
                     {
-                 
+
                         return index;
                     }
                 }

@@ -26,14 +26,8 @@ public class LevelSelectUIManager : MonoBehaviour
 
     void Start()
     {
-        if (buttonPerGrid == 0)
-        {
-            currentGridIndex = 0;
-        }
-        else
-        {
-            currentGridIndex = GameDataManager.Instance.levelToLoad / buttonPerGrid;
-        }
+        currentGridIndex = GameDataManager.Instance.levelToLoad / (buttonPerGrid + 1);
+        gridParent.transform.DOLocalMoveY(gridWidth * currentGridIndex, 0.4f);
         CreateLevelPanels();
         ControlRightLeftButton();
 
@@ -46,7 +40,7 @@ public class LevelSelectUIManager : MonoBehaviour
             leftArrow.SetActive(false);
             rightArrow.SetActive(true);
         }
-        else if (currentGridIndex == GameDataManager.Instance.totalLevelNumber / buttonPerGrid)
+        else if (currentGridIndex == GameDataManager.Instance.totalLevelNumber / buttonPerGrid-1)
         {
             leftArrow.SetActive(true);
             rightArrow.SetActive(false);
@@ -75,7 +69,7 @@ public class LevelSelectUIManager : MonoBehaviour
                 temp = 0;
             }
             GameObject grid = Instantiate(gridPrefab, gridParent.transform);
-            grid.transform.localPosition = new Vector3(gridWidth * gridCounter, 0, 0);
+            grid.transform.localPosition = new Vector3(0, -gridWidth * gridCounter, 0);
             gridList.Add(grid);
             gridCounter++;
             for (int i = 0; i < howManyToAdd; i++)
@@ -91,7 +85,7 @@ public class LevelSelectUIManager : MonoBehaviour
                     levelButton.GetComponent<Image>().sprite = notInteractableButtonSprite;
                     levelButton.GetComponent<Button>().interactable = false;
                 }
-                else if(index == GameDataManager.Instance.levelToLoad)
+                else if (index == GameDataManager.Instance.levelToLoad)
                 {
                     int starNumber = GameDataManager.Instance.data.deckArray[index - 1].starSpotIndexes.Count;
                     for (int starCounter = 0; starCounter < starNumber; starCounter++)
@@ -127,15 +121,16 @@ public class LevelSelectUIManager : MonoBehaviour
     public void SlideRight()
     {
         currentGridIndex++;
-        Debug.Log(-gridWidth * currentGridIndex);
-        gridParent.transform.DOLocalMoveX(-gridWidth * currentGridIndex, 0.4f);
+        gridParent.transform.DOLocalMoveY(gridWidth * currentGridIndex, 0.4f);
         ControlRightLeftButton();
+        UIManager.Instance.PlayUISound();
     }
     public void Slideleft()
     {
         currentGridIndex--;
-        gridParent.transform.DOLocalMoveX(-gridWidth * currentGridIndex, 0.4f);
+        gridParent.transform.DOLocalMoveY(gridWidth * currentGridIndex, 0.4f);
         ControlRightLeftButton();
+        UIManager.Instance.PlayUISound();
     }
 
 }

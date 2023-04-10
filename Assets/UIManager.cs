@@ -81,17 +81,22 @@ public class UIManager : MonoBehaviour
     {
         levelSelectionPanel.SetActive(true);
         startScreen.SetActive(false);
+        PlayUISound();
     }
 
     public void OnStartButtonClicked()
     {
         HexGrid.Instance.CreateLevelByIndex(GameDataManager.Instance.levelToLoad);
-
+        PlayUISound();
         StartInGameLevelUI();
     }
 
     public void OnNextLevelButtonClicked()
     {
+        if(GameDataManager.Instance.currentlevel < 5)
+        {
+            PlayerPrefs.SetInt("HaveEverPlayedLevel"+ GameDataManager.Instance.currentlevel, 1);
+        }
         GameDataManager.Instance.currentlevel++;
         if (GameDataManager.Instance.currentlevel >GameDataManager.Instance.levelToLoad)
         {
@@ -99,6 +104,7 @@ public class UIManager : MonoBehaviour
         }
         GameDataManager.Instance.hintAmount++;
         GameDataManager.Instance.SaveData();
+        PlayUISound();
         HexGrid.loadDeckDirectly = true;
         UIManager.goStartPage = false;
         SceneManager.LoadScene(0);
@@ -124,19 +130,27 @@ public class UIManager : MonoBehaviour
     {
         HexGrid.loadDeckDirectly = true;
         UIManager.goStartPage = false;
+        PlayUISound();
         SceneManager.LoadScene(0);
+
     }
     public void OnHomeButtonClicked()
     {
         HexGrid.loadDeckDirectly = false;
         UIManager.goStartPage = true;
+        PlayUISound();
         SceneManager.LoadScene(0);
     }
 
     public void GiveHint()
     {
+        if (HexGrid.Instance.buttonPressTutorialHand != null)
+        {
+            Destroy(HexGrid.Instance.buttonPressTutorialHand.gameObject);
+        }
         if (HexGrid.Instance.PaintHintHexa())
         {
+            Debug.Log("aasdasdasd");
             GameDataManager.Instance.hintAmount--;
             hintAmount.text = GameDataManager.Instance.hintAmount.ToString();
             GameDataManager.Instance.SaveData();
@@ -144,6 +158,7 @@ public class UIManager : MonoBehaviour
             {
                 hintButton.interactable = false;
             }
+            PlayUISound();
         }
         if (HexGrid.Instance.GetNextClueIndex()==-1)
         {
@@ -152,6 +167,18 @@ public class UIManager : MonoBehaviour
        
 
     }
+    public void PlayUISound()
+    {
+        if (GameDataManager.Instance.playSound == 1)
+        {
+            GameObject sound = new GameObject("sound");
+            sound.AddComponent<AudioSource>();
+            sound.GetComponent<AudioSource>().volume = 0.5f;
+            sound.GetComponent<AudioSource>().PlayOneShot(GameDataManager.Instance.clickSound);
+            Destroy(sound, GameDataManager.Instance.clickSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
+        }
+    }
+
     //DEFAULT UI FUNCTIONS
     public void UpdateSound()
     {
