@@ -52,7 +52,6 @@ public class HexGrid : MonoBehaviour
     public List<GameObject> cluePointList;
     public GameObject tutorialHandPrefab;
     public GameObject tutorialHand;
-    public GameObject buttonPressTutorialPrefab;
     public GameObject buttonPressTutorialHand;
     void Awake()
     {
@@ -480,6 +479,7 @@ public class HexGrid : MonoBehaviour
                 {
                     moveList.Add(new Vector3(gridList[i].transform.position.x, gridList[i].transform.position.y, -8));
                 }
+                tutorialHand.transform.position = moveList[0];
                 tutorialHandObject.GetComponent<TutorialHandManager>().TutorialMove(moveList);
             }
         }
@@ -495,6 +495,7 @@ public class HexGrid : MonoBehaviour
                 {
                     moveList.Add(new Vector3(gridList[i].transform.position.x, gridList[i].transform.position.y, -8));
                 }
+                tutorialHand.transform.position = moveList[0];
                 tutorialHandObject.GetComponent<TutorialHandManager>().TutorialMove(moveList);
             }
         }
@@ -510,6 +511,7 @@ public class HexGrid : MonoBehaviour
                 foreach (int index in indexes)
                 {
                     moveList.Add(new Vector3(gridList[index].transform.position.x, gridList[index].transform.position.y, -8));
+                    tutorialHand.transform.position = moveList[0];
                 }
                 tutorialHand.GetComponent<TutorialHandManager>().TutorialMove(moveList);
             }
@@ -518,7 +520,8 @@ public class HexGrid : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("HaveEverPlayedLevel4", 0) == 0)
             {
-                buttonPressTutorialHand= Instantiate(buttonPressTutorialPrefab, UIManager.Instance.hintButton.transform);
+                Debug.Log("AAAAAAAAALOOOOOOOOOOO");
+                buttonPressTutorialHand.SetActive(true);
                 buttonPressTutorialHand.AddComponent<ButtonPressTutorial>().MoveFunc();
             }
         }
@@ -533,16 +536,15 @@ public class HexGrid : MonoBehaviour
     public bool PaintHintHexa()
     {
         int clueHexIndex = GetNextClueIndex();
-        clueString += gridList[clueHexIndex].GetComponentInChildren<TextMeshPro>().text;
-        cluePointList.Add(gridList[clueHexIndex]);
-        clueFindStartObject = gridList[clueHexIndex];
         if (clueHexIndex != -1)
         {
-            //gridList[clueHexIndex].GetComponent<HexCell>().hintObject.SetActive(true);
             gridList[clueHexIndex].GetComponent<SpriteRenderer>().color = touchColor;
-            return false;
+            clueString += gridList[clueHexIndex].GetComponentInChildren<TextMeshPro>().text;
+            cluePointList.Add(gridList[clueHexIndex]);
+            clueFindStartObject = gridList[clueHexIndex];
+            return true;
         }
-        return true;
+        return false;
     }
 
     public int GetNextClueIndex()

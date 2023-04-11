@@ -40,7 +40,7 @@ public class LevelSelectUIManager : MonoBehaviour
             leftArrow.SetActive(false);
             rightArrow.SetActive(true);
         }
-        else if (currentGridIndex == GameDataManager.Instance.totalLevelNumber / buttonPerGrid-1)
+        else if (currentGridIndex == 3)
         {
             leftArrow.SetActive(true);
             rightArrow.SetActive(false);

@@ -21,6 +21,7 @@ public class GameDataManager : MonoBehaviour
     public AudioClip failSound;
     public AudioClip levelSuccessSound;
     public AudioClip clickSound;
+    public GameObject gameMusic;
     // Start is called before the first frame update
     void Awake()
     {
