@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 [System.Serializable]
 public class DataLists
@@ -16,7 +14,6 @@ public class DataLists
         public int stopPoint;
         public int gridHeight;
         public int gridWidth;
-
     }
 
     public GeneralDataStructure[] deckArray;

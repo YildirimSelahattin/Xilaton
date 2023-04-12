@@ -3,12 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class HexGrid : MonoBehaviour
 {
@@ -97,7 +95,6 @@ public class HexGrid : MonoBehaviour
                         {
                             touchedHexes.Add(touchedHexa);
                             touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
-                            Debug.Log("CCCC");
                             prevTouchedHex = touchedHexa;
                             Vector3 originPos = hexCell.originPos;
                             Vector3 originChildPos = hexCell.originChildPos;
@@ -114,8 +111,6 @@ public class HexGrid : MonoBehaviour
                     else if (touchedHexa != prevTouchedHex && prevTouchedHex != null && IsANeighbour(prevTouchedHex, touchedHexa)) // if it is different than the previous hex
                     {
                         prevTouchedHex = touchedHexa;
-                        Debug.Log("DDDD");
-                        Debug.Log(touchedLetters);
                         if (cellIndex == 0)
                         {
                             touchedLetters += letter;
@@ -179,7 +174,6 @@ public class HexGrid : MonoBehaviour
 
                             }
                             touchedLetters = string.Join("", touchedletterList.ToArray()); ;
-                            Debug.Log(touchedLetters);
 
                             if (GameDataManager.Instance.playSound == 1)
                             {
@@ -270,6 +264,7 @@ public class HexGrid : MonoBehaviour
                                 }
                                 UIManager.Instance.winPanel.SetActive(true);
                                 UIManager.Instance.inGameScreen.SetActive(false);
+                                TinySauce.OnGameFinished(true, 100);
                                 if (tutorialHand != null)
                                 {
                                     Destroy(tutorialHand.gameObject);
@@ -292,7 +287,6 @@ public class HexGrid : MonoBehaviour
                                 hexCell.SetIndex(2);
                                 hexCell.Colorize(2);
                                 touchedLetters = hexCell.GetComponentInChildren<TextMeshPro>().text;
-                                Debug.Log("WWWW");
                                 clueString = "";
                                 clueString += hexCell.GetComponentInChildren<TextMeshPro>().text;
                                 cluePointList.Clear();
@@ -376,8 +370,8 @@ public class HexGrid : MonoBehaviour
         gridWidth = GameDataManager.Instance.data.deckArray[levelNumber].gridWidth;
         gridHeight = GameDataManager.Instance.data.deckArray[levelNumber].gridHeight;
         isGettingTouch = true;
+        TinySauce.OnGameStarted(levelNumber.ToString());
         CreateGrid(levelNumber);
-
     }
 
     GameObject GetHexAtPosition(Vector3 position)
@@ -520,7 +514,6 @@ public class HexGrid : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("HaveEverPlayedLevel4", 0) == 0)
             {
-                Debug.Log("AAAAAAAAALOOOOOOOOOOO");
                 buttonPressTutorialHand.SetActive(true);
                 buttonPressTutorialHand.AddComponent<ButtonPressTutorial>().MoveFunc();
             }
@@ -562,7 +555,6 @@ public class HexGrid : MonoBehaviour
                 {
                     continue;
                 }
-                Debug.Log("ust" + gridList[index].GetComponentInChildren<TextMeshPro>().text);
                 foreach (string word in englishWords)
                 {
                     if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
@@ -582,7 +574,6 @@ public class HexGrid : MonoBehaviour
             {
                 continue;
             }
-            Debug.Log("ayni" + gridList[index].GetComponentInChildren<TextMeshPro>().text);
             foreach (string word in englishWords)
             {
                 if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))
@@ -604,7 +595,6 @@ public class HexGrid : MonoBehaviour
                 {
                     continue;
                 }
-                Debug.Log("alt" + gridList[index].GetComponentInChildren<TextMeshPro>().text);
                 foreach (string word in englishWords)
                 {
                     if (word.StartsWith(clueString + gridList[index].GetComponentInChildren<TextMeshPro>().text))

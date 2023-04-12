@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HexCell : MonoBehaviour
 {
@@ -45,11 +43,5 @@ public class HexCell : MonoBehaviour
         {
             gridCellSpriteRenderer.color = new Color(255/255f,104/255f,95/255f,1);
         }
-    }
-
-    
-    private void Update()
-    {
-        
     }
 }
