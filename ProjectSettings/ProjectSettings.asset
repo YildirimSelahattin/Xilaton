@@ -155,7 +155,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DMM.Hexawords
+    Android: com.DMM.HexaWords
     Standalone: com.DefaultCompany.2DProject
   buildNumber:
     Standalone: 0
