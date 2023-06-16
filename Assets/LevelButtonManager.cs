@@ -21,6 +21,7 @@ public class LevelButtonManager : MonoBehaviour
         UIManager.Instance.starParent.SetActive(true);
         UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[(levelIndex - 1)].themeName;
         UIManager.Instance.hintAmount.text = GameDataManager.Instance.hintAmount.ToString();
+        
         if (GameDataManager.Instance.hintAmount == 0)
         {
             UIManager.Instance.hintButton.interactable = false;

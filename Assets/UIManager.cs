@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,23 +23,24 @@ public class UIManager : MonoBehaviour
     public GameObject levelHeaderStar;
     public GameObject canvas;
 
-    
+
     public Sprite filledStar;
     public Sprite emptyStar;
     public GameObject optionsPanel;
     public TextMeshProUGUI hintAmount;
     public Button hintButton;
 
-
     public TextMeshProUGUI writenWordText;
-    
+
+    public GameObject HexGridParent;
+
     void Start()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
-        if(goStartPage == true)
+        if (goStartPage == true)
         {
             startScreen.SetActive(true);
         }
@@ -46,7 +48,8 @@ public class UIManager : MonoBehaviour
         {
             StartInGameLevelUI();
         }
-       
+
+
     }
 
     private void Update()
@@ -54,12 +57,16 @@ public class UIManager : MonoBehaviour
         if (optionsPanel.activeSelf)
         {
             // Make sure user is on Android platform
-            if (Application.platform == RuntimePlatform.Android) 
+            if (Application.platform == RuntimePlatform.Android)
             {
                 // Check if Back was pressed this frame
-                if (Input.GetKeyDown(KeyCode.Escape)) 
+                if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     optionsPanel.SetActive(false);
+                    for (int i = 0; i < HexGridParent.transform.childCount; i++)
+                    {
+                        HexGridParent.transform.GetChild(i).gameObject.SetActive(true);
+                    }
                 }
             }
         }
@@ -81,21 +88,22 @@ public class UIManager : MonoBehaviour
 
     public void OnNextLevelButtonClicked()
     {
-        if(GameDataManager.Instance.currentlevel < 5)
+        if (GameDataManager.Instance.currentlevel < 5)
         {
-            PlayerPrefs.SetInt("HaveEverPlayedLevel"+ GameDataManager.Instance.currentlevel, 1);
+            PlayerPrefs.SetInt("HaveEverPlayedLevel" + GameDataManager.Instance.currentlevel, 1);
         }
         GameDataManager.Instance.currentlevel++;
+
         if (GameDataManager.Instance.currentlevel > GameDataManager.Instance.totalLevelNumber)//if game has to go level 1
         {
             GameDataManager.Instance.currentlevel = 1;
             GameDataManager.Instance.levelToLoad = 1;
         }
-
-        else if (GameDataManager.Instance.currentlevel >GameDataManager.Instance.levelToLoad)
+        else if (GameDataManager.Instance.currentlevel > GameDataManager.Instance.levelToLoad)
         {
             GameDataManager.Instance.levelToLoad = GameDataManager.Instance.currentlevel;
         }
+
         GameDataManager.Instance.hintAmount++;
         GameDataManager.Instance.SaveData();
         PlayUISound();
@@ -114,7 +122,7 @@ public class UIManager : MonoBehaviour
         {
             hintButton.interactable = false;
         }
-        for (int i = 0; i < GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1 ].starSpotIndexes.Count; i++)
+        for (int i = 0; i < GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].starSpotIndexes.Count; i++)
         {
             Instantiate(UIManager.Instance.levelHeaderStar, UIManager.Instance.starParent.transform);
         }
@@ -154,13 +162,12 @@ public class UIManager : MonoBehaviour
             }
             PlayUISound();
         }
-        if (HexGrid.Instance.GetNextClueIndex()==-1)
+        if (HexGrid.Instance.GetNextClueIndex() == -1)
         {
             hintButton.interactable = false;
         }
-       
-
     }
+
     public void PlayUISound()
     {
         if (GameDataManager.Instance.playSound == 1)
@@ -173,20 +180,28 @@ public class UIManager : MonoBehaviour
         }
     }
 
-   
-
     public void OnClickOpenSettingButton()
     {
         optionsPanel.SetActive(true);
+
+        for (int i = 0; i < HexGridParent.transform.childCount; i++)
+        {
+            HexGridParent.transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 
     public void OnClickCloseSettingPanel()
     {
         optionsPanel.SetActive(false);
+
+        for (int i = 0; i < HexGridParent.transform.childCount; i++)
+        {
+            HexGridParent.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
-    
+
     public void OnLevelPageToHome()
-    { 
+    {
         levelSelectionPanel.SetActive(false);
         startScreen.SetActive(true);
     }

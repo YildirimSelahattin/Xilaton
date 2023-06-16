@@ -30,7 +30,6 @@ public class LevelSelectUIManager : MonoBehaviour
         gridParent.transform.DOLocalMoveY(gridWidth * currentGridIndex, 0.4f);
         CreateLevelPanels();
         ControlRightLeftButton();
-
     }
 
     public void ControlRightLeftButton()

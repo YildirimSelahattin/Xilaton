@@ -23,8 +23,8 @@ public class HexGrid : MonoBehaviour
     public List<GameObject> touchedHexes = new List<GameObject>();
 
     public GameObject prevTouchedHex;
-
     public string _touchedLetters;
+
     public string touchedLetters   // property
     {
         get { return _touchedLetters; }   // get method
@@ -37,23 +37,23 @@ public class HexGrid : MonoBehaviour
 
     private HashSet<string> englishWords = new HashSet<string>();
     public List<GameObject> gridList;
-
     public bool isGettingTouch = false;
     public float spacing = 0.1f;
-
     public static HexGrid Instance;
     Camera cam;
     public static bool loadDeckDirectly;
-
     public int comboCounter = 1;
-
     public GameObject clueFindStartObject;
     public string clueString;
     public List<GameObject> cluePointList;
     public GameObject tutorialHandPrefab;
     public GameObject tutorialHand;
     public GameObject buttonPressTutorialHand;
-    public GameObject BGImage;
+
+    public Sprite[] bgImages;
+    public GameObject[] bgEnv;
+    public GameObject bg;
+
     void Awake()
     {
         if (Instance == null)
@@ -104,6 +104,7 @@ public class HexGrid : MonoBehaviour
                             Vector3 originChildPos = hexCell.originChildPos;
                             hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y - 0.03f, originPos.z), 0.1f);
                             hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
+
                             if (GameDataManager.Instance.playSound == 1)
                             {
                                 GameObject sound = new GameObject("sound");
@@ -117,6 +118,7 @@ public class HexGrid : MonoBehaviour
                         prevTouchedHex = touchedHexa;
                         Debug.Log("DDDD");
                         Debug.Log(touchedLetters);
+
                         if (cellIndex == 0)
                         {
                             touchedLetters += letter;
@@ -128,6 +130,7 @@ public class HexGrid : MonoBehaviour
                             Vector3 originChildPos = hexCell.originChildPos;
                             hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y - 0.03f, originPos.z), 0.1f);
                             hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
+
                             if (GameDataManager.Instance.playSound == 1)
                             {
                                 GameObject sound = new GameObject("sound");
@@ -135,6 +138,7 @@ public class HexGrid : MonoBehaviour
                                 Destroy(sound, GameDataManager.Instance.forwardMoveSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
                             }
                         }
+
                         if (cellIndex == 3)
                         {
                             touchedLetters += letter;
@@ -145,8 +149,8 @@ public class HexGrid : MonoBehaviour
                             Vector3 originChildPos = hexCell.originChildPos;
                             hexCell.transform.DOMove(new Vector3(originPos.x, originPos.y - 0.03f, originPos.z), 0.1f);
                             hexCell.transform.GetChild(1).transform.DOMove(new Vector3(originChildPos.x, originChildPos.y + 0.03f, originChildPos.z), 0.1f);
-
                         }
+
                         if (cellIndex == 4)
                         {
                             /*List<char> touchedletterList = touchedLetters.ToList();
@@ -189,6 +193,7 @@ public class HexGrid : MonoBehaviour
                                 Destroy(sound, GameDataManager.Instance.backwardMoveSound.length); // Creates new object, add to it audio source, play sound, destroy this object after playing is done
                             }
                         }
+
                         if (cellIndex == 2)
                         {
                             for (int i = touchedHexes.Count - 1; i > 0; i--)
@@ -219,7 +224,7 @@ public class HexGrid : MonoBehaviour
                             UIManager.Instance.hintButton.interactable = true;
                             UIManager.Instance.comboText.text = comboCounter + "x!";
                             UIManager.Instance.comboText.gameObject.transform.parent.gameObject.SetActive(true);
-                            StartCoroutine(CorrectFeel());
+                            //StartCoroutine(CorrectFeel());
                             comboCounter++;
 
                             if (PlayerPrefs.GetInt("HaveEverPlayedLevel2", 0) == 0 && GameDataManager.Instance.currentlevel == 2)
@@ -270,6 +275,12 @@ public class HexGrid : MonoBehaviour
                                     PlayerPrefs.SetInt("LevelStar" + GameDataManager.Instance.currentlevel, GameManager.Instance.currentStarAmount);
                                 }
                                 UIManager.Instance.winPanel.SetActive(true);
+
+                                for (int i = 0; i < gameObject.transform.childCount; i++)
+                                {
+                                    gameObject.transform.GetChild(i).gameObject.SetActive(false);
+                                }
+
                                 UIManager.Instance.inGameScreen.SetActive(false);
                                 if (tutorialHand != null)
                                 {
@@ -302,7 +313,6 @@ public class HexGrid : MonoBehaviour
                         }
                     }
                 }
-
             }
 
             if (touch.phase == TouchPhase.Ended)
@@ -360,14 +370,14 @@ public class HexGrid : MonoBehaviour
         }
 
     }
-
-    public IEnumerator CorrectFeel()
-    {
-        cam.backgroundColor = new Color(153, 255, 110);
-        yield return new WaitForSeconds(0.2f);
-        cam.backgroundColor = new Color(233, 233, 233);
-    }
-
+    /*
+        public IEnumerator CorrectFeel()
+        {
+            cam.backgroundColor = new Color(153, 255, 110);
+            yield return new WaitForSeconds(0.2f);
+            cam.backgroundColor = new Color(233, 233, 233);
+        }
+    */
     public void CreateLevelByIndex(int levelNumber)
     {
         levelNumber--;
@@ -394,12 +404,36 @@ public class HexGrid : MonoBehaviour
                 return touchedObject;
             }
         }
-
         return null;
     }
 
     void CreateGrid(int levelNumber)
     {
+        if (GameDataManager.Instance.currentlevel <= 9)
+        {
+            bg.GetComponent<Image>().sprite = bgImages[0];
+            bg.transform.GetChild(0).gameObject.SetActive(true);
+            bg.transform.GetChild(1).gameObject.SetActive(false);
+            bg.transform.GetChild(2).gameObject.SetActive(false);
+            cam.backgroundColor = new Color(164 / 255f, 206 / 255f, 95 / 255f, 1);
+        }
+        else if (GameDataManager.Instance.currentlevel > 9 && GameDataManager.Instance.currentlevel <= 18)
+        {
+            bg.GetComponent<Image>().sprite = bgImages[1];
+            bg.transform.GetChild(0).gameObject.SetActive(false);
+            bg.transform.GetChild(1).gameObject.SetActive(true);
+            bg.transform.GetChild(2).gameObject.SetActive(false);
+            cam.backgroundColor = new Color(255 / 255f, 181 / 255f, 71 / 255f, 1);
+        }
+        else if (GameDataManager.Instance.currentlevel > 18 && GameDataManager.Instance.currentlevel <= 27)
+        {
+            bg.GetComponent<Image>().sprite = bgImages[2];
+            bg.transform.GetChild(0).gameObject.SetActive(false);
+            bg.transform.GetChild(1).gameObject.SetActive(false);
+            bg.transform.GetChild(2).gameObject.SetActive(true);
+            cam.backgroundColor = new Color(140 / 255f, 193 / 255f, 255 / 255f, 1);
+        }
+
         for (int y = 0; y < gridHeight; y++)
         {
             for (int x = 0; x < gridWidth; x++)
@@ -443,13 +477,14 @@ public class HexGrid : MonoBehaviour
                     if (gridWidth >= gridHeight)
                     {
                         cam.orthographicSize = gridWidth + 1;
-                        BGImage.transform.localScale = Vector3.one*gridWidth/45f;
-
+                        //BGImage.transform.localScale = 1.0f * Vector3.one * gridWidth / 45f;
+                        //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
                     }
                     else
                     {
                         cam.orthographicSize = gridHeight + 1;
-                        BGImage.transform.localScale = Vector3.one * gridHeight / 45f;
+                        //BGImage.transform.localScale = 1.0f * Vector3.one * gridHeight / 45f;
+                        //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
                     }
                 }
             }
@@ -511,7 +546,7 @@ public class HexGrid : MonoBehaviour
                 GameObject tutorialHandObject = Instantiate(tutorialHandPrefab);
                 tutorialHand = tutorialHandObject;
                 List<Vector3> moveList = new List<Vector3>();
-                int[] indexes = new int[] { 3,4,5,8,11,14,13,12,9,6 };
+                int[] indexes = new int[] { 3, 4, 5, 8, 11, 14, 13, 12, 9, 6 };
                 foreach (int index in indexes)
                 {
                     moveList.Add(new Vector3(gridList[index].transform.position.x, gridList[index].transform.position.y, -8));
@@ -619,9 +654,7 @@ public class HexGrid : MonoBehaviour
                 }
             }
         }
-
         return -1;
-
     }
 
     public bool IsANeighbour(GameObject prevTouchedHex, GameObject touchedHexa)
@@ -654,9 +687,7 @@ public class HexGrid : MonoBehaviour
                 return true;
             }
         }
-
         return false;
-
     }
 }
 

@@ -7,18 +7,13 @@ public class ButtonPressTutorial : MonoBehaviour
 {
     Vector3 originalScale;
     Vector3 originalPos;
-    // Start is called before the first frame update
+
     void Start()
     {
         originalScale = transform.localScale;
         originalPos = transform.localPosition;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void MoveFunc()
     {
         transform.DOLocalMoveY(-10, 1F).OnComplete(()=>{
