@@ -53,6 +53,7 @@ public class HexGrid : MonoBehaviour
     public GameObject tutorialHandPrefab;
     public GameObject tutorialHand;
     public GameObject buttonPressTutorialHand;
+    public GameObject BGImage;
     void Awake()
     {
         if (Instance == null)
@@ -442,10 +443,13 @@ public class HexGrid : MonoBehaviour
                     if (gridWidth >= gridHeight)
                     {
                         cam.orthographicSize = gridWidth + 1;
+                        BGImage.transform.localScale = Vector3.one*gridWidth/45f;
+
                     }
                     else
                     {
                         cam.orthographicSize = gridHeight + 1;
+                        BGImage.transform.localScale = Vector3.one * gridHeight / 45f;
                     }
                 }
             }
