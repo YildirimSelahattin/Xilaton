@@ -875,7 +875,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: fsdfasdfasdf
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d877023b2a105b24c939b9f4ce5e79ee, type: 2}
   m_sharedMaterial: {fileID: 19703372613043827, guid: d877023b2a105b24c939b9f4ce5e79ee, type: 2}
@@ -2541,7 +2541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: adsfasdfasdf
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f38800d6ca9acc46934c3fc875dc47a, type: 2}
   m_sharedMaterial: {fileID: -7319711724283148722, guid: 8f38800d6ca9acc46934c3fc875dc47a, type: 2}
@@ -3364,7 +3364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6790ac8eb08ae43aadd25f39a18fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexPrefab: {fileID: 3120872014597406882, guid: aba5f1fd2f0d50942aecc2872e2389d8, type: 3}
+  hexPrefab:
+  - {fileID: 3120872014597406882, guid: aba5f1fd2f0d50942aecc2872e2389d8, type: 3}
+  - {fileID: 3120872014597406882, guid: 1391f6561704da44f8a4bb65495fb192, type: 3}
+  - {fileID: 3120872014597406882, guid: 563f224b017ae54458664de36bff96e5, type: 3}
   gridWidth: 1
   gridHeight: 1
   touchColor: {r: 0.72075474, g: 0.9534591, b: 1, a: 1}

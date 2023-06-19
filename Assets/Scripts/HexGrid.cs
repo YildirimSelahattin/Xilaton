@@ -12,7 +12,7 @@ using UnityEngine.XR;
 
 public class HexGrid : MonoBehaviour
 {
-    public GameObject hexPrefab;
+    public GameObject[] hexPrefab;
     public int gridWidth = 10;
     public int gridHeight = 10;
 
@@ -382,8 +382,8 @@ public class HexGrid : MonoBehaviour
     {
         levelNumber--;
         LoadEnglishWords(levelNumber);
-        hexWidth = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
-        hexHeight = hexPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+        hexWidth = hexPrefab[0].GetComponent<SpriteRenderer>().bounds.size.x;
+        hexHeight = hexPrefab[0].GetComponent<SpriteRenderer>().bounds.size.y;
         gridWidth = GameDataManager.Instance.data.deckArray[levelNumber].gridWidth;
         gridHeight = GameDataManager.Instance.data.deckArray[levelNumber].gridHeight;
         isGettingTouch = true;
@@ -447,46 +447,181 @@ public class HexGrid : MonoBehaviour
                     yPos += (hexHeight * 0.5f + spacing / 2);
                 }
 
-                GameObject hex = Instantiate(hexPrefab, new Vector3(xPos, yPos - 0.5f, -y), Quaternion.identity);
-                hex.transform.parent = this.transform;
-                hex.name = "Hex_" + x + "_" + y;
-                TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
-                textMeshPro.text = GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index];
 
-                hex.GetComponent<HexCell>().SetIndex(0);
-                hex.GetComponent<HexCell>().columnIndex = x;
-                hex.GetComponent<HexCell>().rowIndex = y;
-                gridList.Add(hex);
 
-                if (GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index].Equals(""))
+                if (GameDataManager.Instance.currentlevel <= 9)
                 {
-                    Destroy(hex);
-                }
+                    GameObject hex = Instantiate(hexPrefab[0], new Vector3(xPos, yPos - 0.5f, -y), Quaternion.identity);
+                    hex.transform.parent = this.transform;
+                    hex.name = "Hex_" + x + "_" + y;
+                    TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
+                    textMeshPro.text = GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index];
 
-                if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
-                {
-                    hex.transform.GetChild(0).gameObject.SetActive(true);
-                    hex.transform.tag = "Star";
-                }
+                    hex.GetComponent<HexCell>().SetIndex(0);
+                    hex.GetComponent<HexCell>().columnIndex = x;
+                    hex.GetComponent<HexCell>().rowIndex = y;
+                    gridList.Add(hex);
 
-                if (x == gridWidth / 2 && y == gridHeight / 2)
-                {
-                    Vector3 posHex = hex.transform.position;
-                    cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
-
-                    if (gridWidth >= gridHeight)
+                    if (GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index].Equals(""))
                     {
-                        cam.orthographicSize = gridWidth + 1;
-                        //BGImage.transform.localScale = 1.0f * Vector3.one * gridWidth / 45f;
-                        //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        Destroy(hex);
                     }
-                    else
+
+                    if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
                     {
-                        cam.orthographicSize = gridHeight + 1;
-                        //BGImage.transform.localScale = 1.0f * Vector3.one * gridHeight / 45f;
-                        //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        hex.transform.GetChild(0).gameObject.SetActive(true);
+                        hex.transform.tag = "Star";
+                    }
+
+                    if (x == gridWidth / 2 && y == gridHeight / 2)
+                    {
+                        Vector3 posHex = hex.transform.position;
+                        cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
+
+                        if (gridWidth >= gridHeight)
+                        {
+                            cam.orthographicSize = gridWidth + 1;
+                            //BGImage.transform.localScale = 1.0f * Vector3.one * gridWidth / 45f;
+                            //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        }
+                        else
+                        {
+                            cam.orthographicSize = gridHeight + 1;
+                            //BGImage.transform.localScale = 1.0f * Vector3.one * gridHeight / 45f;
+                            //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        }
                     }
                 }
+                else if (GameDataManager.Instance.currentlevel > 9 && GameDataManager.Instance.currentlevel <= 18)
+                {
+                    GameObject hex = Instantiate(hexPrefab[1], new Vector3(xPos, yPos - 0.5f, -y), Quaternion.identity);
+                    hex.transform.parent = this.transform;
+                    hex.name = "Hex_" + x + "_" + y;
+                    TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
+                    textMeshPro.text = GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index];
+
+                    hex.GetComponent<HexCell>().SetIndex(0);
+                    hex.GetComponent<HexCell>().columnIndex = x;
+                    hex.GetComponent<HexCell>().rowIndex = y;
+                    gridList.Add(hex);
+
+                    if (GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index].Equals(""))
+                    {
+                        Destroy(hex);
+                    }
+
+                    if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
+                    {
+                        hex.transform.GetChild(0).gameObject.SetActive(true);
+                        hex.transform.tag = "Star";
+                    }
+
+                    if (x == gridWidth / 2 && y == gridHeight / 2)
+                    {
+                        Vector3 posHex = hex.transform.position;
+                        cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
+
+                        if (gridWidth >= gridHeight)
+                        {
+                            cam.orthographicSize = gridWidth + 1;
+                            //BGImage.transform.localScale = 1.0f * Vector3.one * gridWidth / 45f;
+                            //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        }
+                        else
+                        {
+                            cam.orthographicSize = gridHeight + 1;
+                            //BGImage.transform.localScale = 1.0f * Vector3.one * gridHeight / 45f;
+                            //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        }
+                    }
+                }
+                else if (GameDataManager.Instance.currentlevel > 18 && GameDataManager.Instance.currentlevel <= 27)
+                {
+                    GameObject hex = Instantiate(hexPrefab[2], new Vector3(xPos, yPos - 0.5f, -y), Quaternion.identity);
+                    hex.transform.parent = this.transform;
+                    hex.name = "Hex_" + x + "_" + y;
+                    TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
+                    textMeshPro.text = GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index];
+
+                    hex.GetComponent<HexCell>().SetIndex(0);
+                    hex.GetComponent<HexCell>().columnIndex = x;
+                    hex.GetComponent<HexCell>().rowIndex = y;
+                    gridList.Add(hex);
+
+                    if (GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index].Equals(""))
+                    {
+                        Destroy(hex);
+                    }
+
+                    if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
+                    {
+                        hex.transform.GetChild(0).gameObject.SetActive(true);
+                        hex.transform.tag = "Star";
+                    }
+
+                    if (x == gridWidth / 2 && y == gridHeight / 2)
+                    {
+                        Vector3 posHex = hex.transform.position;
+                        cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
+
+                        if (gridWidth >= gridHeight)
+                        {
+                            cam.orthographicSize = gridWidth + 1;
+                            //BGImage.transform.localScale = 1.0f * Vector3.one * gridWidth / 45f;
+                            //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        }
+                        else
+                        {
+                            cam.orthographicSize = gridHeight + 1;
+                            //BGImage.transform.localScale = 1.0f * Vector3.one * gridHeight / 45f;
+                            //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        }
+                    }
+                }
+                else
+                {
+                    GameObject hex = Instantiate(hexPrefab[0], new Vector3(xPos, yPos - 0.5f, -y), Quaternion.identity);
+                    hex.transform.parent = this.transform;
+                    hex.name = "Hex_" + x + "_" + y;
+                    TextMeshPro textMeshPro = hex.GetComponentInChildren<TextMeshPro>();
+                    textMeshPro.text = GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index];
+
+                    hex.GetComponent<HexCell>().SetIndex(0);
+                    hex.GetComponent<HexCell>().columnIndex = x;
+                    hex.GetComponent<HexCell>().rowIndex = y;
+                    gridList.Add(hex);
+
+                    if (GameDataManager.Instance.data.deckArray[levelNumber].gridValueIndexes[index].Equals(""))
+                    {
+                        Destroy(hex);
+                    }
+
+                    if (GameDataManager.Instance.data.deckArray[levelNumber].starSpotIndexes.Contains(index))
+                    {
+                        hex.transform.GetChild(0).gameObject.SetActive(true);
+                        hex.transform.tag = "Star";
+                    }
+
+                    if (x == gridWidth / 2 && y == gridHeight / 2)
+                    {
+                        Vector3 posHex = hex.transform.position;
+                        cam.transform.position = new Vector3(posHex.x, posHex.y, cam.transform.position.z);
+
+                        if (gridWidth >= gridHeight)
+                        {
+                            cam.orthographicSize = gridWidth + 1;
+                            //BGImage.transform.localScale = 1.0f * Vector3.one * gridWidth / 45f;
+                            //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        }
+                        else
+                        {
+                            cam.orthographicSize = gridHeight + 1;
+                            //BGImage.transform.localScale = 1.0f * Vector3.one * gridHeight / 45f;
+                            //BGImage.transform.localPosition = new Vector3(0, -1.5f, 10);
+                        }
+                    }
+                }
+
             }
 
         }

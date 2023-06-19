@@ -67,14 +67,14 @@ public class LevelSelectUIManager : MonoBehaviour
                 howManyToAdd = temp;
                 temp = 0;
             }
-            GameObject grid = Instantiate(gridPrefab, gridParent.transform);
+            GameObject grid = Instantiate(gridPrefab, gridParent.transform); //bg
             grid.transform.localPosition = new Vector3(0, -gridWidth * gridCounter, 0);
             gridList.Add(grid);
-            gridCounter++;
+            gridCounter++; //gird counter
             for (int i = 0; i < howManyToAdd; i++)
             {
                 int index = (gridCounter - 1) * 9 + i + 1;
-                GameObject levelButton = Instantiate(levelButtonPrefab, grid.transform);
+                GameObject levelButton = Instantiate(levelButtonPrefab, grid.transform); //button
                 LevelButtonManager buttonScript = levelButton.GetComponent<LevelButtonManager>();
                 buttonScript.levelIndex = index;
                 buttonScript.levelNumberText.text = index.ToString();
