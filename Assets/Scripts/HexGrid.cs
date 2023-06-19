@@ -433,6 +433,14 @@ public class HexGrid : MonoBehaviour
             bg.transform.GetChild(2).gameObject.SetActive(true);
             cam.backgroundColor = new Color(140 / 255f, 193 / 255f, 255 / 255f, 1);
         }
+        else
+        {
+            bg.GetComponent<Image>().sprite = bgImages[0];
+            bg.transform.GetChild(0).gameObject.SetActive(true);
+            bg.transform.GetChild(1).gameObject.SetActive(false);
+            bg.transform.GetChild(2).gameObject.SetActive(false);
+            cam.backgroundColor = new Color(164 / 255f, 206 / 255f, 95 / 255f, 1);
+        }
 
         for (int y = 0; y < gridHeight; y++)
         {
