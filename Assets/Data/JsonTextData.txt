@@ -386,7 +386,7 @@
     "themeName":"HOUSE",
     "gridValueIndexes":
     ["D","B","Y","A","E","N","E",
-    "R","E","A","F","M","C","N",
+    "R","E","A","F","X","C","N",
     "Z","O","O","O","O","L","E",
     "D","M","R","R","R","E","D",
     "","I","","O","","A",""],
