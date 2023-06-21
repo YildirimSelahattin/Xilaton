@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class GettingTouch : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public GameObject tutorialHand;
+    public RectTransform m_parent;
+
+    public Camera m_uiCamera;
+
+    public RectTransform m_image;
+
+    public Canvas m_canvas;
+
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -21,11 +26,11 @@ public class GettingTouch : MonoBehaviour
             // Move the cube if the screen has the finger moving.
             if (touch.phase == TouchPhase.Moved)
             {
-                Vector3 temp = touch.position /300;
-                temp.y -= 4.5f;
-                temp.x -= 2f;
-                temp.z = 0.9f;
-                tutorialHand.transform.localPosition = temp;
+                var pos = Camera.main.ScreenToWorldPoint(touch.position);
+                pos.x += 0.25f;
+                pos.y -= 0.5f;
+                pos.z = m_image.transform.position.z;
+                m_image.transform.position = pos;
             }
         }
     }
