@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedAppIndex: 0
   clientTokens:
-  - 
+  - 14368ece4b0bb144896db152cafb241f
   appIds:
-  - 0
+  - 616181033345618
   appLabels:
-  - App Name
+  - HexaWords
   cookie: 1
   logging: 1
   status: 1
