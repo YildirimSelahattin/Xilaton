@@ -13,12 +13,14 @@ public class LevelButtonManager : MonoBehaviour
     
     public void OnButtonClicked()
     {
+        UIManager.goStartPage = true;
         UIManager.Instance.PlayUISound();
         GameDataManager.Instance.currentlevel = levelIndex;
         HexGrid.Instance.CreateLevelByIndex(levelIndex);
         UIManager.Instance.levelSelectionPanel.SetActive(false);
         UIManager.Instance.inGameScreen.SetActive(true);
         UIManager.Instance.starParent.SetActive(true);
+  
         UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[(levelIndex - 1)].themeName;
         UIManager.Instance.hintAmount.text = GameDataManager.Instance.hintAmount.ToString();
         

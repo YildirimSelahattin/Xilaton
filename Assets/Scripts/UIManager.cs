@@ -23,7 +23,6 @@ public class UIManager : MonoBehaviour
     public GameObject levelHeaderStar;
     public GameObject canvas;
 
-
     public Sprite filledStar;
     public Sprite emptyStar;
     public GameObject optionsPanel;
@@ -48,8 +47,6 @@ public class UIManager : MonoBehaviour
         {
             StartInGameLevelUI();
         }
-
-
     }
 
     private void Update()
@@ -116,13 +113,13 @@ public class UIManager : MonoBehaviour
         startScreen.SetActive(false);
         inGameScreen.SetActive(true);
         starParent.SetActive(true);
-        UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].themeName;
+        UIManager.Instance.themeText.text = GameDataManager.Instance.data.deckArray[GameDataManager.Instance.currentlevel - 1].themeName;
         hintAmount.text = GameDataManager.Instance.hintAmount.ToString();
         if (GameDataManager.Instance.hintAmount == 0)
         {
             hintButton.interactable = false;
         }
-        for (int i = 0; i < GameDataManager.Instance.data.deckArray[GameDataManager.Instance.levelToLoad - 1].starSpotIndexes.Count; i++)
+        for (int i = 0; i < GameDataManager.Instance.data.deckArray[GameDataManager.Instance.currentlevel - 1].starSpotIndexes.Count; i++)
         {
             Instantiate(UIManager.Instance.levelHeaderStar, UIManager.Instance.starParent.transform);
         }
